@@ -3,1369 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI - Votre Compagnon Pédagogique</title>
+    <title>EduSmart.AI v3.0 - Plateforme d'Apprentissage Complète</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /*=============================================
-        =            EduSmart.AI Stylesheet           =
+        =         EduSmart.AI Stylesheet v3.0         =
         =============================================*/
 
         /*------------------------------------*\
-          #ROOT & FONT VARIABLES
+          #ROOT, BASE & AUTHENTIFICATION
         \*------------------------------------*/
-
         :root {
-          /* Colors */
-          --primary-color: #4A90E2;       /* Un bleu technologique et amical */
-          --primary-color-dark: #357ABD;
-          --secondary-color: #50E3C2;     /* Un vert menthe pour les accents et succès */
-          --background-color: #F4F7FC;    /* Un fond gris très clair, doux pour les yeux */
-          --surface-color: #FFFFFF;       /* Pour les cartes et les surfaces principales */
-          --text-color: #333333;
-          --text-color-light: #667085;
-          --border-color: #E2E8F0;
-          --error-color: #E53E3E;
-          --success-color: #38A169;
-          --warning-color: #DD6B20;
-          --info-color: #3182CE;
-
-          /* Typography */
-          --font-primary: 'Poppins', sans-serif;
-          --font-secondary: 'Roboto', sans-serif;
-          --h1-size: 2.75rem;
-          --h2-size: 2rem;
-          --h3-size: 1.25rem;
-          --p-size: 1rem;
-          --small-text: 0.875rem;
-
-          /* Spacing & Sizing */
-          --spacing-unit: 1rem;
-          --border-radius-sm: 4px;
-          --border-radius-md: 8px;
-          --border-radius-lg: 16px;
-          --max-width: 1200px;
-          --header-height: 70px;
-
-          /* Shadows & Transitions */
-          --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.06);
-          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-          --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-          --transition-fast: all 0.2s ease-in-out;
-          --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+          --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
+          --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
+          --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
+          --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
+          --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+          --transition-fast: all 0.2s ease-in-out; --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+          --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-primary); color: var(--text-color); background-color: var(--background-color); }
+        .hidden { display: none !important; }
+        .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
+        h2 { font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.25rem; }
+        .page-section { animation: fadeIn 0.5s forwards ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
+        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; transition: var(--transition-fast); }
+        .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
+
+        /* Auth Page */
+        #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
+        .auth-container { width: 400px; padding: 40px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); text-align: center; }
+        .auth-container h1 { color: var(--primary-color); font-size: 2rem; margin-bottom: 10px; }
+        .auth-form-group { margin-bottom: 20px; text-align: left; }
+        .auth-form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        .auth-btn { width: 100%; padding: 15px; border: none; background: var(--primary-color); color: white; font-size: 1rem; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
 
         /*------------------------------------*\
-          #BASE & RESET STYLES
+          #MAIN APP LAYOUT & HEADER
         \*------------------------------------*/
-
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-
-        html {
-          scroll-behavior: smooth;
-          font-size: 16px;
-        }
-
-        body {
-          font-family: var(--font-primary);
-          color: var(--text-color);
-          background-color: var(--background-color);
-          line-height: 1.6;
-        }
-
-        a {
-          text-decoration: none;
-          color: var(--primary-color);
-          transition: var(--transition-fast);
-        }
-
-        a:hover {
-          color: var(--primary-color-dark);
-        }
-
-        ul {
-          list-style: none;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-          font-weight: 600;
-          line-height: 1.2;
-        }
-
-        h1 { font-size: var(--h1-size); }
-        h2 { font-size: var(--h2-size); color: var(--primary-color-dark); margin-bottom: calc(var(--spacing-unit) * 1.5); }
-        h3 { font-size: var(--h3-size); }
-
-        p {
-          font-size: var(--p-size);
-          color: var(--text-color-light);
-          margin-bottom: var(--spacing-unit);
-        }
-
-        img, video {
-          max-width: 100%;
-          height: auto;
-        }
+        #main-header { background-color: var(--surface-color); box-shadow: var(--shadow-md); position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 1000; display: flex; align-items: center; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
+        #main-header nav ul { display: flex; gap: 1rem; list-style: none; }
+        #main-header nav a { display: flex; align-items: center; gap: 8px; padding: 10px 15px; color: var(--text-color-light); font-weight: 500; border-radius: var(--border-radius-md); text-decoration: none; position: relative; }
+        #main-header nav a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--primary-color); transition: width 0.3s ease; }
+        #main-header nav a.active, #main-header nav a:hover { color: var(--primary-color); background-color: var(--background-color); }
+        #main-header nav a.active::after { width: 80%; }
+        .user-actions { display: flex; align-items: center; gap: 1rem; }
+        .user-actions a { text-decoration: none; }
+        .profile-link { font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .profile-link i { font-size: 1.5rem; }
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        main { padding-top: var(--header-height); }
+        .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
 
         /*------------------------------------*\
-          #UTILITY CLASSES
+          #DASHBOARD & WIDGETS
         \*------------------------------------*/
-
-        .container {
-          width: 90%;
-          max-width: var(--max-width);
-          margin: 0 auto;
-        }
-
-        .content-wrapper {
-          padding-top: calc(var(--header-height) + var(--spacing-unit) * 2);
-          padding-bottom: calc(var(--spacing-unit) * 2);
-          min-height: calc(100vh - var(--header-height));
-        }
-
-        .btn-primary {
-          display: inline-block;
-          background-color: var(--primary-color);
-          color: #fff;
-          padding: 12px 24px;
-          border-radius: var(--border-radius-md);
-          font-weight: 600;
-          border: none;
-          cursor: pointer;
-          transition: var(--transition-fast);
-          box-shadow: var(--shadow-sm);
-        }
-
-        .btn-primary:hover {
-          background-color: var(--primary-color-dark);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-md);
-          color: #fff;
-        }
-
-        .btn-secondary {
-          display: inline-block;
-          background-color: var(--surface-color);
-          color: var(--primary-color);
-          padding: 10px 20px;
-          border-radius: var(--border-radius-md);
-          font-weight: 500;
-          border: 1px solid var(--border-color);
-          cursor: pointer;
-          transition: var(--transition-fast);
-        }
-
-        .btn-secondary:hover {
-          background-color: #f8f9fa;
-          border-color: var(--primary-color);
-          color: var(--primary-color-dark);
-        }
-
-        .hidden {
-          display: none !important;
-        }
+        #dashboard .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .dashboard-main-column { display: flex; flex-direction: column; gap: 2rem; }
+        .calendar-body { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+        .calendar-day-name { font-weight: 600; font-size: 0.8rem; color: var(--text-color-light); }
+        .calendar-date { padding: 10px; border-radius: 50%; cursor: pointer; }
+        .calendar-date.today { background: var(--primary-color); color: white; font-weight: 600; }
+        .calendar-date.event::after { content: ''; display: block; margin: 2px auto 0; width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; }
+        .homework-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+        .homework-grade { font-weight: 600; padding: 5px 10px; border-radius: var(--border-radius-md); }
+        .grade-good { background: #d4edda; color: #155724; } .grade-avg { background: #fff3cd; color: #856404; }
 
         /*------------------------------------*\
-          #HEADER
+          #COURSES & FILTERS
         \*------------------------------------*/
-
-        #main-header {
-          background-color: var(--surface-color);
-          box-shadow: var(--shadow-md);
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: var(--header-height);
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-        }
-
-        .header-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .logo a {
-          font-size: 1.8rem;
-          font-weight: 700;
-          color: var(--primary-color);
-        }
-
-        #main-header nav ul {
-          display: flex;
-          gap: var(--spacing-unit);
-        }
-
-        #main-header nav a {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 10px 15px;
-          color: var(--text-color-light);
-          font-weight: 500;
-          border-radius: var(--border-radius-md);
-          position: relative;
-        }
-
-        #main-header nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        #main-header nav a.active,
-        #main-header nav a:hover {
-          color: var(--primary-color);
-          background-color: var(--background-color);
-        }
-        #main-header nav a.active::after {
-            width: 80%;
-        }
-
-
-        .user-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-unit);
-        }
-
-        .profile-link {
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .profile-link i {
-          font-size: 1.5rem;
-        }
-
-        .menu-toggle {
-          display: none;
-          background: none;
-          border: none;
-          font-size: 1.5rem;
-          color: var(--text-color);
-          cursor: pointer;
-        }
-
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
+        .filter-btn { background: var(--surface-color); border: 1px solid var(--border-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: var(--transition-fast); }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .course-card { background-color: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); transition: var(--transition-smooth); display: flex; flex-direction: column; }
+        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .course-card-banner { height: 150px; background-size: cover; background-position: center; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; }
+        .course-card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .progress-bar-container { background-color: var(--border-color); border-radius: 99px; height: 8px; margin: 10px 0; }
+        .progress-bar { background: var(--secondary-color); height: 100%; border-radius: 99px; }
+        .course-card-footer { margin-top: auto; padding-top: 1rem; }
+        
+        /*------------------------------------*\
+          #TABS (Médiathèque, Profile)
+        \*------------------------------------*/
+        .tabs { display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); margin-bottom: 2rem; }
+        .tab-btn { padding: 10px 20px; font-weight: 600; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; font-size: 1rem; }
+        .tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+        .tab-content { display: none; animation: fadeIn 0.4s; }
+        .tab-content.active { display: block; }
 
         /*------------------------------------*\
-          #PAGE SECTIONS
+          #PROFILE PAGE
         \*------------------------------------*/
-
-        .page-section {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.5s forwards ease-out;
-        }
-        
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Home Section */
-        .home-section h1 {
-          text-align: center;
-          margin-bottom: var(--spacing-unit);
-          font-weight: 700;
-        }
-
-        .home-section > .content-wrapper > p {
-          text-align: center;
-          font-size: 1.2rem;
-          margin-bottom: calc(var(--spacing-unit) * 3);
-        }
-
-        .courses-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: calc(var(--spacing-unit) * 2);
-          margin-bottom: calc(var(--spacing-unit) * 3);
-        }
-
-        .course-card {
-          background-color: var(--surface-color);
-          padding: calc(var(--spacing-unit) * 1.5);
-          border-radius: var(--border-radius-lg);
-          box-shadow: var(--shadow-md);
-          transition: var(--transition-smooth);
-        }
-
-        .course-card:hover {
-          transform: translateY(-5px);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .course-card h3 {
-          color: var(--primary-color-dark);
-          margin-bottom: var(--spacing-unit);
-        }
-
-        .course-card p {
-            margin-bottom: calc(var(--spacing-unit) * 1.5);
-        }
-
-        .latest-achievements {
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          color: #fff;
-          padding: calc(var(--spacing-unit) * 2);
-          border-radius: var(--border-radius-lg);
-          text-align: center;
-          box-shadow: var(--shadow-lg);
-        }
-        .latest-achievements h2 {
-            color: #fff;
-            margin-bottom: var(--spacing-unit);
-        }
-        .latest-achievements p {
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin: 0;
-        }
-
-
-        /* Gamification Section */
-        .gamification-dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: calc(var(--spacing-unit) * 2.5);
-            align-items: flex-start;
-        }
-
-        .level-progress, .badges-rewards, .leaderboards {
-            background: var(--surface-color);
-            padding: calc(var(--spacing-unit) * 2);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .level-progress h3, .badges-rewards h3, .leaderboards h3 {
-            margin-bottom: var(--spacing-unit) * 1.5;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: var(--spacing-unit);
-        }
-
-        .progress-bar-container {
-            background-color: var(--border-color);
-            border-radius: 99px;
-            height: 25px;
-            width: 100%;
-            margin-block: var(--spacing-unit);
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-            height: 100%;
-            border-radius: 99px;
-            transition: width 0.5s ease-in-out;
-        }
-
-        .badge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: var(--spacing-unit);
-            text-align: center;
-        }
-        .badge-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            font-size: var(--small-text);
-            color: var(--text-color-light);
-        }
-        .badge-item i {
-            font-size: 2.5rem;
-            color: var(--warning-color);
-        }
-
-        .leaderboards ul li {
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-        }
-        .leaderboards ul li:last-child {
-            border-bottom: none;
-        }
-        .leaderboards ul li:first-child {
-            font-weight: 700;
-            color: var(--primary-color);
-            background: var(--background-color);
-            border-radius: var(--border-radius-md);
-        }
-
-        /* Chatbot Section */
-        .chatbot-interface, .teacher-chatbot-interface {
-            background: var(--surface-color);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-md);
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-display {
-            flex-grow: 1;
-            padding: calc(var(--spacing-unit) * 1.5);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-unit);
-        }
-
-        .message {
-            padding: 12px 18px;
-            border-radius: var(--border-radius-lg);
-            max-width: 75%;
-            line-height: 1.5;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .bot-message {
-            background-color: var(--border-color);
-            color: var(--text-color);
-            border-bottom-left-radius: var(--border-radius-sm);
-            align-self: flex-start;
-        }
-        .user-message {
-            background-color: var(--primary-color);
-            color: #fff;
-            border-bottom-right-radius: var(--border-radius-sm);
-            align-self: flex-end;
-        }
-        
-        .bot-typing {
-            align-self: flex-start;
-            padding: 12px 18px;
-        }
-        .bot-typing span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--text-color-light);
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typing 1.4s infinite;
-        }
-        .bot-typing span:nth-child(2) { animation-delay: 0.2s; }
-        .bot-typing span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-
-        .chat-controls {
-            display: flex;
-            gap: 10px;
-            padding: var(--spacing-unit);
-            border-top: 1px solid var(--border-color);
-        }
-
-        #chat-input, #teacher-chat-input {
-            flex-grow: 1;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            font-size: 1rem;
-            transition: var(--transition-fast);
-        }
-        #chat-input:focus, #teacher-chat-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-        }
-        
-        .chat-controls button, .chat-controls select {
-            padding: 0 15px;
-            font-size: 1.2rem;
-            background: none;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-
-        .chat-controls button:hover, .chat-controls select:hover {
-            background-color: var(--background-color);
-            color: var(--primary-color);
-        }
-
-        /* Content Creation Section */
-        .content-generator {
-            background: var(--surface-color);
-            padding: calc(var(--spacing-unit) * 2);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            gap: calc(var(--spacing-unit) * 1.5);
-        }
-
-        .content-generator input[type="text"],
-        .content-generator select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            font-size: 1rem;
-        }
-
-        .generation-options, .multimedia-options {
-            display: flex;
-            gap: var(--spacing-unit);
-            flex-wrap: wrap;
-        }
-        .generation-options > *, .multimedia-options > * {
-            flex-grow: 1;
-        }
-
-        #generate-content-btn {
-            align-self: flex-start;
-        }
-
-        .generated-content-preview {
-            margin-top: var(--spacing-unit);
-            border: 2px dashed var(--border-color);
-            border-radius: var(--border-radius-lg);
-            padding: calc(var(--spacing-unit) * 2);
-            min-height: 200px;
-            transition: all 0.3s;
-            background: #fafbff;
-        }
-        .generated-content-preview:empty {
-            display: none;
-        }
-        .generated-content-preview h4 {
-            margin-bottom: var(--spacing-unit);
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .generated-content-preview ul {
-            list-style: disc;
-            padding-left: 20px;
-        }
-
-        /* Collaboration Section */
-        .qa-forum {
-          background: var(--surface-color);
-          padding: calc(var(--spacing-unit) * 2);
-          border-radius: var(--border-radius-lg);
-          box-shadow: var(--shadow-md);
-        }
-        .question-item {
-            padding: var(--spacing-unit);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .question-item:last-child {
-            border: none;
-        }
-        .question-item h3 {
-            margin-bottom: 8px;
-        }
-        .question-item p {
-            font-size: var(--small-text);
-            margin-bottom: 8px;
-        }
-        .view-thread {
-            font-weight: 600;
-            font-size: var(--small-text);
-        }
-
-        .shared-resources {
-            margin-top: calc(var(--spacing-unit) * 2);
-        }
-        .shared-resources h3 {
-            margin-bottom: var(--spacing-unit);
-        }
-        .shared-resources ul li a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: var(--border-radius-md);
-            transition: var(--transition-fast);
-        }
-        .shared-resources ul li a:hover {
-            background-color: var(--background-color);
-        }
-
-        /* Parents Section */
-        .parent-dashboard {
-          background: var(--surface-color);
-          padding: calc(var(--spacing-unit) * 2);
-          border-radius: var(--border-radius-lg);
-          box-shadow: var(--shadow-md);
-        }
-
-        .alerts-recommendations {
-            margin-top: calc(var(--spacing-unit) * 2);
-            margin-bottom: calc(var(--spacing-unit) * 2);
-        }
-
-        .alert-item {
-            padding: var(--spacing-unit);
-            border-radius: var(--border-radius-md);
-            display: flex;
-            align-items: flex-start;
-            gap: var(--spacing-unit);
-            margin-bottom: var(--spacing-unit);
-            border-left: 5px solid;
-        }
-        .alert-item i {
-            font-size: 1.5rem;
-            margin-top: 4px;
-        }
-        .alert-item.error {
-            background-color: #FFF5F5;
-            border-color: var(--error-color);
-            color: #C53030;
-        }
-        .alert-item.info {
-            background-color: #EBF8FF;
-            border-color: var(--info-color);
-            color: #2B6CB0;
-        }
-        .alert-item p {
-            font-size: var(--small-text);
-            color: inherit;
-            margin-top: 4px;
-            margin-bottom: 0;
-        }
-
-        /* Impact Section */
-        .impact-content {
-            background: var(--surface-color);
-            padding: calc(var(--spacing-unit) * 2.5);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-md);
-            text-align: center;
-        }
-        .eco-stats, .social-initiatives {
-            margin-block: calc(var(--spacing-unit) * 2);
-            padding: calc(var(--spacing-unit) * 1.5);
-            border-radius: var(--border-radius-md);
-            background: var(--background-color);
-            border: 1px solid var(--border-color);
-        }
-        .eco-stats i {
-            font-size: 3rem;
-            color: var(--success-color);
-            margin-bottom: var(--spacing-unit);
-        }
-
-        /* Teachers AI Section */
-        .teacher-chatbot-interface .chat-controls {
-            flex-direction: column;
-            gap: var(--spacing-unit);
-        }
-        
-        .teacher-chatbot-interface .chat-controls > div {
-             display: flex;
-             gap: 10px;
-        }
-        
-        .ai-tools-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            padding: var(--spacing-unit);
-            border-top: 1px solid var(--border-color);
-        }
-        .ai-tools-buttons .btn-secondary {
-            width: 100%;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .profile-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; }
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-color); box-shadow: var(--shadow-md); }
+        .profile-info h2 { margin-bottom: 0.5rem; }
+        .profile-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); }
+        .stat-card i { font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .stat-card .stat-value { font-size: 1.5rem; font-weight: 600; }
+        .badge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem; text-align: center; }
+        .badge-item i { font-size: 3.5rem; color: var(--warning-color); transition: var(--transition-fast); }
+        .badge-item:hover i { transform: scale(1.1); }
+        .badge-item p { font-weight: 500; margin-top: 0.5rem; }
 
         /*------------------------------------*\
-          #FOOTER
+          #GAMIFICATION PAGE
         \*------------------------------------*/
+        .gamification-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: flex-start; }
+        .leaderboards ul li { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--border-color); }
+        .leaderboards ul li:first-child { font-weight: 700; color: var(--primary-color); }
 
-        footer {
-          background-color: var(--primary-color-dark);
-          color: #fff;
-          padding: calc(var(--spacing-unit) * 2) 0;
-          margin-top: calc(var(--spacing-unit) * 3);
-        }
+        /*------------------------------------*\
+          #COLLABORATION PAGE (FORUM)
+        \*------------------------------------*/
+        .collaboration-layout { display: grid; grid-template-columns: 300px 1fr 2fr; gap: 1rem; height: 75vh; }
+        .groups-column, .threads-column, .chat-column { background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+        .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; }
+        .groups-list, .threads-list { list-style: none; overflow-y: auto; }
+        .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+        .groups-list li.active, .threads-list li.active { background-color: var(--primary-color); color: white; }
+        .groups-list li:hover, .threads-list li:hover { background-color: var(--background-color); }
+        .thread-message { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+        .thread-message-author { font-weight: 600; }
+        .thread-message-content { flex-grow: 1; overflow-y: auto; }
 
-        footer .container {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: var(--spacing-unit);
-        }
-
-        footer a {
-          color: var(--secondary-color);
-          font-weight: 500;
-        }
-
-        footer a:hover {
-          color: #fff;
-        }
-
-        .footer-links {
-          display: flex;
-          gap: calc(var(--spacing-unit) * 1.5);
-        }
+        /*------------------------------------*\
+          #TEACHER'S ASSISTANT
+        \*------------------------------------*/
+        .teacher-dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
+        .chart-container { position: relative; height: 250px; }
+        .chart-bar { position: absolute; bottom: 0; width: 40px; background-color: var(--primary-color); border-radius: 4px 4px 0 0; text-align: center; color: white; font-size: 0.8rem; padding-top: 5px; transition: height 0.5s ease-out; }
 
         /*------------------------------------*\
           #RESPONSIVE DESIGN
         \*------------------------------------*/
-        @media (max-width: 1024px) {
-            #main-header nav {
-                display: flex;
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                height: calc(100vh - var(--header-height));
-                background-color: var(--surface-color);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: calc(var(--spacing-unit) * 2);
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
-                z-index: 999;
-                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-            }
-            
-            #main-header nav.active {
-                transform: translateX(0);
-            }
-            
-            #main-header nav ul {
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                gap: 0;
-            }
-            
-            #main-header nav a {
-                padding: 20px;
-                border-radius: 0;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .gamification-dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .ai-tools-buttons {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 1200px) {
+            .collaboration-layout { grid-template-columns: 250px 1fr 2fr; }
         }
-
-
+        @media (max-width: 1024px) {
+            #main-header nav { display: flex; position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: var(--surface-color); flex-direction: column; padding-top: 2rem; transform: translateX(-100%); transition: transform 0.3s ease-in-out; z-index: 999; box-shadow: 5px 0 15px rgba(0,0,0,0.1); }
+            #main-header nav.active { transform: translateX(0); }
+            #main-header nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
+            #main-header nav a { padding: 20px; border-radius: 0; width: 100%; justify-content: center; }
+            .menu-toggle { display: block; }
+            .collaboration-layout { grid-template-columns: 1fr; height: auto; }
+            .threads-column, .chat-column { display: none; } /* On mobile, show only groups first */
+            .gamification-grid { grid-template-columns: 1fr; }
+        }
         @media (max-width: 768px) {
-            :root {
-              --h1-size: 2rem;
-              --h2-size: 1.75rem;
-              --h3-size: 1.1rem;
-            }
-
-            .header-content {
-                width: 100%;
-                padding: 0 var(--spacing-unit);
-            }
-            
-            .generation-options, .multimedia-options {
-                flex-direction: column;
-            }
-
-            footer .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .chatbot-interface, .teacher-chatbot-interface {
-                height: 80vh;
-            }
+            h2 { font-size: 1.75rem; }
+            .dashboard-grid, .teacher-dashboard-grid { grid-template-columns: 1fr; }
+            .profile-header { flex-direction: column; text-align: center; }
+            .auth-container { width: 90%; padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <header id="main-header">
-        <div class="container header-content">
-            <div class="logo">
-                <a href="#home">EduSmart.AI</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a></li>
-                    <li><a href="#chatbot" class="nav-link"><i class="fas fa-robot"></i> Mon Assistant IA</a></li>
-                    <li><a href="#content-creation" class="nav-link"><i class="fas fa-lightbulb"></i> Fabrique de Savoir</a></li>
-                    <li><a href="#collaboration" class="nav-link"><i class="fas fa-users"></i> Espace Dialogue</a></li>
-                    <li><a href="#parents" class="nav-link"><i class="fas fa-user-friends"></i> Suivi Parental</a></li>
-                    <li><a href="#impact" class="nav-link"><i class="fas fa-globe-americas"></i> Notre Engagement</a></li>
-                    <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Assistant Profs</a></li>
-                </ul>
-            </nav>
-            <div class="user-actions">
-                <a href="#" class="profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
-                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-            </div>
+    <section id="auth-page">
+        <div class="auth-container">
+            <h1>Bienvenue sur EduSmart.AI</h1>
+            <p>Connectez-vous pour commencer votre aventure.</p>
+            <form id="login-form">
+                <div class="auth-form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" value="etudiant@edusmart.ai" required></div>
+                <div class="auth-form-group"><label for="password">Mot de passe</label><input type="password" id="password" value="password" required></div>
+                <button type="submit" class="auth-btn">Se Connecter</button>
+            </form>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <section id="home" class="page-section home-section">
-            <div class="container content-wrapper">
-                <h1>Apprenez, Grandissez, Réussissez avec EduSmart.AI</h1>
-                <p>Votre plateforme d'apprentissage intelligente et personnalisée.</p>
-                <div class="course-overview">
-                    <h2>Mes Cours Actuels</h2>
+    <div id="main-app" class="hidden">
+        <header id="main-header">
+            <div class="container header-content">
+                <div class="logo"><a href="#dashboard">EduSmart.AI</a></div>
+                <nav>
+                    <ul>
+                        <li><a href="#dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="#courses" class="nav-link"><i class="fas fa-book"></i> Mes Cours</a></li>
+                        <li><a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a></li>
+                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-users"></i> Dialogue</a></li>
+                        <li><a href="#content-creation" class="nav-link"><i class="fas fa-lightbulb"></i> Fabrique de Savoir</a></li>
+                        <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a></li>
+                    </ul>
+                </nav>
+                <div class="user-actions">
+                    <a href="#profile" class="nav-link profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="dashboard" class="page-section">
+                <div class="container content-wrapper">
+                    <h2>Tableau de Bord</h2>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-main-column">
+                            <div class="widget"><div class="widget-header"><h3>Prochains Cours en Direct</h3></div><p>Votre prochain cours de <strong>Mathématiques - Analyse</strong> commence à <strong>10:00</strong>.</p><a href="#live-class" class="btn-primary" style="margin-top: 1rem;">Rejoindre la salle</a></div>
+                            <div class="widget"><div class="widget-header"><h3>Devoirs Récents et Notes</h3></div><div class="homework-item"><div><p style="font-weight: 500; margin:0;">Exposé d'Histoire</p><small>Rendu le 05/06/2025</small></div><span class="homework-grade grade-good">16/20</span></div><div class="homework-item"><div><p style="font-weight: 500; margin:0;">Exercices de Physique</p><small>Échéance: 08/06/2025</small></div><span class="homework-grade grade-avg">En cours</span></div></div>
+                        </div>
+                        <div class="widget"><div class="widget-header"><h3>Mon Agenda - Juin 2025</h3></div><div class="calendar-body"><div class="calendar-day-name">Lun</div><div class="calendar-day-name">Mar</div><div class="calendar-day-name">Mer</div><div class="calendar-day-name">Jeu</div><div class="calendar-day-name">Ven</div><div class="calendar-day-name">Sam</div><div class="calendar-day-name">Dim</div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date today">7</div><div class="calendar-date">8</div><div class="calendar-date event">9</div><div class="calendar-date">10</div><div class="calendar-date">11</div><div class="calendar-date">12</div><div class="calendar-date event">13</div><div class="calendar-date">14</div><div class="calendar-date">15</div></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="courses" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2>Mes Cours</h2>
+                    <div class="filters"><button class="filter-btn active" data-filter="all">Tous</button><button class="filter-btn" data-filter="collège">Collège</button><button class="filter-btn" data-filter="lycée">Lycée (Bac)</button><button class="filter-btn" data-filter="prépa">Classes Prépa</button></div>
                     <div class="courses-grid">
-                        <div class="course-card">
-                            <h3>Mathématiques - Algèbre</h3>
-                            <p>Progression: 75%</p>
-                            <a href="#" class="btn-primary">Continuer</a>
-                        </div>
-                        <div class="course-card">
-                            <h3>Français - Grammaire</h3>
-                            <p>Progression: 50%</p>
-                            <a href="#" class="btn-primary">Continuer</a>
-                        </div>
-                         <div class="course-card">
-                            <h3>Physique - Mécanique</h3>
-                            <p>Progression: 30%</p>
-                            <a href="#" class="btn-primary">Commencer</a>
-                        </div>
+                         <div class="course-card" data-level="lycée"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/4A90E2/FFFFFF?text=Maths');"></div><div class="course-card-content"><h3>Mathématiques - Analyse</h3><p>Avec M. Diallo</p><p>Progression: 75%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
+                        <div class="course-card" data-level="prépa"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/50E3C2/FFFFFF?text=Physique');"></div><div class="course-card-content"><h3>Physique - Électromagnétisme</h3><p>Avec Mme. Traoré</p><p>Progression: 40%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
+                        <div class="course-card" data-level="collège"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/E2B44A/FFFFFF?text=Histoire');"></div><div class="course-card-content"><h3>Histoire-Géographie</h3><p>Avec M. Ndiaye</p><p>Progression: 90%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
                     </div>
                 </div>
-                <div class="latest-achievements">
-                    <h2>Dernières Réalisations</h2>
-                    <p><i class="fas fa-trophy"></i> Bravo ! Vous avez obtenu le badge "Maître des Bases" !</p>
-                </div>
-            </div>
-        </section>
+            </section>
+            
+            <section id="gamification" class="page-section hidden">
+                 <div class="container content-wrapper">
+                    <h2>Ma Progression</h2>
+                    <div class="gamification-grid">
+                        <div class="widget"><h3>Niveau Actuel: Virtuose II</h3><p>Vous êtes sur la bonne voie, continuez comme ça !</p><div class="progress-bar-container" style="height:25px;"><div class="progress-bar" style="width: 80%;"></div></div><p>8200 / 10000 points pour le niveau suivant</p></div>
+                        <div class="widget leaderboards"><h3>Classements</h3><ul><li><span>1. Vous</span><span>12500 pts</span></li><li><span>2. Ami_X</span><span>11000 pts</span></li><li><span>3. Ami_Y</span><span>9800 pts</span></li></ul></div>
+                    </div>
+                 </div>
+            </section>
 
-        <section id="gamification" class="page-section gamification-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Aventure d'Apprentissage</h2>
-                <div class="gamification-dashboard">
-                    <div class="level-progress">
-                        <h3>Niveau Actuel: Explorateur I</h3>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: 60%;"></div>
-                        </div>
-                        <p>600/1000 points pour le prochain niveau</p>
-                    </div>
-                    <div class="leaderboards">
-                        <h3>Classements Amicaux</h3>
-                        <ul>
-                            <li><span>1. Votre Nom</span> <span>1250 pts</span></li>
-                            <li><span>2. Ami_X</span> <span>1100 pts</span></li>
-                            <li><span>3. Ami_Y</span> <span>980 pts</span></li>
-                        </ul>
-                    </div>
-                    <div class="badges-rewards">
-                        <h3>Mes Badges & Récompenses</h3>
-                        <div class="badge-grid">
-                            <div class="badge-item"><i class="fas fa-medal"></i> Maître des Bases</div>
-                            <div class="badge-item"><i class="fas fa-star"></i> Esprit Curieux</div>
-                            <div class="badge-item"><i class="fas fa-brain"></i> Problème Résolu</div>
-                            <div class="badge-item"><i class="fas fa-fire"></i> Série de 5 jours</div>
-                        </div>
+            <section id="collaboration" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2>Espace de Dialogue</h2>
+                    <div class="collaboration-layout">
+                        <div class="groups-column"><div class="column-header">Groupes</div><ul class="groups-list"></ul></div>
+                        <div class="threads-column"><div class="column-header">Discussions</div><ul class="threads-list"></ul></div>
+                        <div class="chat-column"><div class="column-header">Conversation</div><div class="thread-message-content"></div></div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="chatbot" class="page-section chatbot-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Assistant IA</h2>
-                <div class="chatbot-interface">
-                    <div class="chat-display">
-                        <div class="message bot-message">Bonjour ! Je suis EduBot. Comment puis-je vous aider à apprendre aujourd'hui ? Posez-moi une question sur les maths, le français, l'histoire...</div>
-                    </div>
-                    <div class="chat-controls">
-                        <select id="language-select" title="Choisir la langue">
-                            <option value="fr">Français</option>
-                            <option value="en">Anglais</option>
-                            <option value="wolof">Wolof</option>
-                        </select>
-                        <input type="text" id="chat-input" placeholder="Tapez votre message ou utilisez le micro...">
-                        <button id="voice-input-btn" title="Entrée vocale"><i class="fas fa-microphone"></i></button>
-                        <button id="send-message-btn" title="Envoyer"><i class="fas fa-paper-plane"></i></button>
-                        <button id="text-to-speech-btn" title="Lire le dernier message"><i class="fas fa-volume-up"></i></button>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <section id="content-creation" class="page-section hidden">
+                 <div class="container content-wrapper">
+                    <h2>Fabrique de Savoir</h2>
+                    <div class="widget"><p>Générez du contenu personnalisé pour vous aider à réviser.</p><input type="text" id="content-topic" placeholder="Sujet (ex: La mitose)" style="width:100%; padding:10px; margin-bottom:1rem;"><button id="generate-content-btn" class="btn-primary">Générer une Fiche</button><div class="generated-content-preview" style="margin-top:1rem; padding:1rem; border:1px dashed var(--border-color); border-radius:var(--border-radius-md);"></div></div>
+                 </div>
+            </section>
 
-        <section id="content-creation" class="page-section content-creation-section hidden">
-            <div class="container content-wrapper">
-                <h2>Ma Fabrique de Savoir</h2>
-                <div class="content-generator">
-                    <input type="text" id="content-topic" placeholder="Sujet ou concept à générer (ex: La photosynthèse)">
-                    <div class="generation-options">
-                        <select id="content-type">
-                            <option value="fiche">Fiche de Révision</option>
-                            <option value="carte">Carte Mémoire</option>
-                            <option value="quiz">Quiz</option>
-                        </select>
-                        <select id="difficulty-level">
-                            <option value="facile">Facile</option>
-                            <option value="moyen">Moyen</option>
-                            <option value="difficile">Difficile</option>
-                        </select>
+            <section id="teachers-ai" class="page-section hidden">
+                 <div class="container content-wrapper">
+                    <h2>Espace Professeur</h2>
+                    <div class="teacher-dashboard-grid">
+                        <div class="widget"><h3>Classes à Gérer</h3><p>Vous avez 3 classes actives.</p></div>
+                        <div class="widget"><h3>Devoirs à Corriger</h3><p>5 devoirs en attente pour la classe de <strong>Terminale S1</strong>.</p><a href="#" class="btn-primary">Voir les devoirs</a></div>
+                        <div class="widget"><h3>Analyse de Performance: Théorème de Pythagore</h3><div class="chart-container"><div class="chart-bar" style="left: 20px; height: 75%;"><small>Terminale S1</small></div><div class="chart-bar" style="left: 80px; height: 50%;"><small>Terminale S2</small></div><div class="chart-bar" style="left: 140px; height: 90%;"><small>Seconde C</small></div></div></div>
                     </div>
-                    <div class="multimedia-options">
-                        <input type="text" id="youtube-url" placeholder="URL YouTube pour enrichir (facultatif)">
-                        <button class="btn-secondary"><i class="fas fa-image"></i> Ajouter Image</button>
-                        <button class="btn-secondary"><i class="fas fa-flask"></i> Ajouter Simulation</button>
-                    </div>
-                    <button id="generate-content-btn" class="btn-primary">Générer le Contenu</button>
-                    <div class="generated-content-preview">
-                        </div>
-                    <div class="content-library">
-                        <h3>Ma Bibliothèque de Contenu</h3>
-                        </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="collaboration" class="page-section collaboration-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Espace de Dialogue</h2>
-                <div class="qa-forum">
-                    <button class="btn-primary">Poser une nouvelle question</button>
-                    <div class="questions-list">
-                        <div class="question-item">
-                            <h3>Question sur les équations du second degré</h3>
-                            <p>Par: Élève A - Il y a 2 heures</p>
-                            <a href="#" class="view-thread">Voir la discussion (3 réponses)</a>
-                        </div>
-                        <div class="question-item">
-                            <h3>Ressources pour la physique nucléaire</h3>
-                            <p>Par: Élève B - Hier</p>
-                            <a href="#" class="view-thread">Voir la discussion (1 réponse)</a>
+                 </div>
+            </section>
+            
+            <section id="profile" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <div class="profile-header">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="profile-avatar">
+                        <div class="profile-info">
+                            <h2>Jean Dupont</h2>
+                            <p>Étudiant en Classes Prépa</p>
                         </div>
                     </div>
-                    <div class="shared-resources">
-                        <h3>Ressources Partagées par les Profs</h3>
-                        <ul>
-                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche de Révision - Les Verbes Irréguliers</a></li>
-                            <li><a href="#"><i class="fas fa-file-pdf"></i> Correction Exercice 5 - Chapitre 3</a></li>
-                        </ul>
+                    <div class="profile-stats">
+                        <div class="stat-card"><i class="fas fa-book-open"></i><div class="stat-value">12</div><p>Cours terminés</p></div>
+                        <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-value">142</div><p>Heures d'étude</p></div>
+                        <div class="stat-card"><i class="fas fa-medal"></i><div class="stat-value">25</div><p>Badges obtenus</p></div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="parents" class="page-section parents-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Suivi Parental</h2>
-                <div class="parent-dashboard">
-                    <div class="child-progress-summary">
-                        <h3>Progression de [Nom de l'enfant]</h3>
-                        <p><strong>Mathématiques:</strong> Bon progrès, maîtrise des concepts d'algèbre.</p>
-                        <p><strong>Français:</strong> Difficultés détectées sur les accords du participe passé.</p>
-                    </div>
-                    <div class="alerts-recommendations">
-                        <h3>Alertes & Recommandations</h3>
-                        <div class="alert-item error">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <div>
-                                <strong>Difficulté détectée en Français.</strong>
-                                <p>Suggestion: Revoir les conjugaisons des verbes du 3ème groupe. Accédez à notre module de création de fiches pour générer des exercices ciblés.</p>
+                    <div class="widget">
+                        <div class="tabs profile-tabs">
+                           <button class="tab-btn active" data-tab="badges">Mes Badges</button>
+                           <button class="tab-btn" data-tab="settings">Paramètres</button>
+                        </div>
+                        <div id="badges" class="tab-content active" style="padding-top:2rem;">
+                            <div class="badge-grid">
+                                <div class="badge-item"><i class="fas fa-medal"></i><p>Maître des Bases</p></div>
+                                <div class="badge-item"><i class="fas fa-star"></i><p>Esprit Curieux</p></div>
+                                <div class="badge-item"><i class="fas fa-brain"></i><p>Problème Résolu</p></div>
+                                <div class="badge-item"><i class="fas fa-fire"></i><p>Série de 5 jours</p></div>
                             </div>
                         </div>
-                        <div class="alert-item info">
-                             <i class="fas fa-info-circle"></i>
-                             <div>
-                                <strong>Félicitations !</strong>
-                                <p>[Nom de l'enfant] a obtenu le badge "Problème Résolu" en mathématiques.</p>
-                             </div>
-                        </div>
-                    </div>
-                    <button class="btn-secondary">Paramètres de Notification</button>
-                    <button class="btn-secondary">Contacter l'Enseignant</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="impact" class="page-section impact-section hidden">
-            <div class="container content-wrapper">
-                <h2>Notre Engagement pour un Avenir Meilleur</h2>
-                <div class="impact-content">
-                    <h3>Notre Mission</h3>
-                    <p>EduSmart.AI s'engage à rendre l'éducation de qualité accessible et durable pour tous, en réduisant l'empreinte écologique de l'apprentissage et en favorisant l'inclusion numérique.</p>
-                    <div class="eco-stats">
-                        <i class="fas fa-leaf"></i>
-                        <p><strong>Économie de Papier:</strong> Plus de 100 000 feuilles de papier économisées cette année grâce à nos supports numériques !</p>
-                    </div>
-                    <div class="social-initiatives">
-                        <h3>Nos Initiatives Sociales</h3>
-                        <p>Nous collaborons avec des écoles en zones rurales pour fournir un accès gratuit à notre plateforme et des formations complètes aux enseignants, réduisant ainsi la fracture numérique.</p>
-                    </div>
-                    <button class="btn-primary">En savoir plus sur nos rapports d'impact</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="teachers-ai" class="page-section teachers-ai-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Assistant Pédagogique IA (Pour Enseignants)</h2>
-                <div class="teacher-chatbot-interface">
-                    <div class="chat-display">
-                        <div class="message bot-message">Bonjour Professeur ! Comment puis-je vous assister aujourd'hui ? Je peux générer des plans de cours, analyser les performances de vos élèves, ou trouver des ressources adaptées.</div>
-                    </div>
-                    <div class="chat-controls">
-                        <div>
-                           <input type="text" id="teacher-chat-input" placeholder="Demandez à l'IA (ex: Génère un quiz sur les volcans)">
-                           <button id="teacher-send-message-btn" title="Envoyer"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                    <div class="ai-tools-buttons">
-                        <button class="btn-secondary"><i class="fas fa-book-open"></i> Générateur de Plan de Cours</button>
-                        <button class="btn-secondary"><i class="fas fa-chart-line"></i> Analyse de Données Élèves</button>
-                        <button class="btn-secondary"><i class="fas fa-tasks"></i> Plans d'Action Personnalisés</button>
-                        <button class="btn-secondary"><i class="fas fa-search"></i> Banque de Ressources</button>
+                        <div id="settings" class="tab-content" style="padding-top:2rem;"><p>Ici se trouveront les options pour changer de mot de passe, gérer les notifications, etc.</p></div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
-            <div class="footer-links">
-                <a href="#">Politique de Confidentialité</a>
-                <a href="#">Conditions d'Utilisation</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
-    </footer>
-
+            </section>
+        </main>
+    </div>
 
     <script>
-    /*================================================
-    =            EduSmart.AI Main Script             =
-    ================================================*/
-
     document.addEventListener('DOMContentLoaded', () => {
 
-        /*------------------------------------*\
-          # CORE APP LOGIC
-        \*------------------------------------*/
+        // --- AUTHENTIFICATION LOGIC ---
+        const authPage = document.getElementById('auth-page');
+        const mainApp = document.getElementById('main-app');
+        const loginForm = document.getElementById('login-form');
 
-        // --- Element Selection ---
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            authPage.style.transition = 'opacity 0.5s ease-out';
+            authPage.style.opacity = '0';
+            setTimeout(() => {
+                authPage.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+                mainApp.style.opacity = '0';
+                setTimeout(() => { mainApp.style.opacity = '1'; }, 50);
+                navigateTo(window.location.hash || '#dashboard');
+            }, 500);
+        });
+
+        // --- CORE APP LOGIC & NAVIGATION ---
         const navLinks = document.querySelectorAll('.nav-link');
         const pageSections = document.querySelectorAll('.page-section');
-        const headerNav = document.querySelector('#main-header nav');
         const menuToggle = document.querySelector('.menu-toggle');
-        const menuIcon = document.querySelector('.menu-toggle i');
-
-        // --- Initial State ---
-        // Affiche la page d'accueil par défaut et masque les autres
-        const initialHash = window.location.hash || '#home';
-        navigateTo(initialHash);
-
-        // --- Navigation (Single Page App style) ---
+        const headerNav = document.querySelector('#main-header nav');
+        
         function navigateTo(hash) {
-            // Cacher toutes les sections
-            pageSections.forEach(section => {
-                section.classList.add('hidden');
-                section.classList.remove('active');
-            });
-
-            // Mettre à jour les liens de navigation
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === hash) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-
-            // Afficher la section cible
+            if (!hash || hash === '#') hash = '#dashboard';
+            pageSections.forEach(section => section.classList.add('hidden'));
+            
             const targetSection = document.querySelector(hash);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-                // Ajouter la classe 'active' pour déclencher l'animation
-                setTimeout(() => targetSection.classList.add('active'), 10);
-            }
+            if (targetSection) targetSection.classList.remove('hidden');
             
-            // Ferme le menu mobile après la navigation
-            if (headerNav.classList.contains('active')) {
-                toggleMobileMenu();
-            }
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+            if (headerNav.classList.contains('active')) menuToggle.click();
         }
 
-        // --- Event Listeners for Navigation ---
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
+        document.body.addEventListener('click', (e) => {
+            if (e.target.closest('.nav-link')) {
                 e.preventDefault();
-                const hash = e.currentTarget.getAttribute('href');
-                window.location.hash = hash; // Met à jour l'URL pour un meilleur historique
-                navigateTo(hash);
+                const link = e.target.closest('.nav-link');
+                const hash = link.getAttribute('href');
+                if (window.location.hash !== hash) window.location.hash = hash;
+                else navigateTo(hash);
+            }
+        });
+        
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        menuToggle.addEventListener('click', () => headerNav.classList.toggle('active'));
+
+        // --- COURSES FILTERING LOGIC ---
+        document.querySelectorAll('.filters .filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                document.querySelectorAll('.filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                document.querySelectorAll('.courses-grid .course-card').forEach(card => {
+                    card.classList.toggle('hidden', filter !== 'all' && card.dataset.level !== filter);
+                });
             });
         });
-        
-        // Gère les changements de hash (ex: boutons précédent/suivant du navigateur)
-        window.addEventListener('hashchange', () => {
-            navigateTo(window.location.hash || '#home');
-        });
 
-
-        // --- Mobile Menu Toggle ---
-        function toggleMobileMenu() {
-            headerNav.classList.toggle('active');
-            // Change l'icône du menu
-            if (headerNav.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        }
-        
-        menuToggle.addEventListener('click', toggleMobileMenu);
-
-        
-        /*------------------------------------*\
-          # CHATBOT SIMULATION
-        \*------------------------------------*/
-        
-        const chatDisplay = document.querySelector('#chatbot .chat-display');
-        const chatInput = document.getElementById('chat-input');
-        const sendMessageBtn = document.getElementById('send-message-btn');
-
-        function addUserMessage(message) {
-            if (!message.trim()) return; // N'ajoute pas de messages vides
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', 'user-message');
-            messageElement.textContent = message;
-            chatDisplay.appendChild(messageElement);
-            chatInput.value = '';
-            chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll
-            return message;
-        }
-
-        function addBotMessage(message) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', 'bot-message');
-            messageElement.innerHTML = message; // Utilise innerHTML pour pouvoir ajouter des balises si besoin
-            chatDisplay.appendChild(messageElement);
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-        }
-
-        function showTypingIndicator() {
-            const typingElement = document.createElement('div');
-            typingElement.classList.add('message', 'bot-typing');
-            typingElement.innerHTML = '<span></span><span></span><span></span>';
-            chatDisplay.appendChild(typingElement);
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-        }
-
-        function hideTypingIndicator() {
-            const typingElement = document.querySelector('.bot-typing');
-            if (typingElement) {
-                typingElement.remove();
-            }
-        }
-        
-        function getBotResponse(userMessage) {
-            const msg = userMessage.toLowerCase();
-            // Réponses simulées basées sur des mots-clés
-            if (msg.includes('bonjour') || msg.includes('salut')) {
-                return "Bonjour ! En quoi puis-je vous aider aujourd'hui ?";
-            }
-            if (msg.includes('équation')) {
-                return "Bien sûr ! Une équation du second degré est de la forme $ax^2 + bx + c = 0$. On calcule le discriminant $\\Delta = b^2 - 4ac$ pour trouver les solutions. Voulez-vous un exemple ?";
-            }
-            if (msg.includes('photosynthèse')) {
-                return "La photosynthèse est le processus par lequel les plantes vertes utilisent la lumière du soleil pour synthétiser des aliments à partir du dioxyde de carbone et de l'eau. C'est fascinant !";
-            }
-            if (msg.includes('capitale') && msg.includes('sénégal')) {
-                 return "La capitale du Sénégal est Dakar. C'est une ville dynamique et un pôle culturel important en Afrique de l'Ouest.";
-            }
-            if (msg.includes('merci')) {
-                return "De rien ! N'hésitez pas si vous avez d'autres questions.";
-            }
+        // --- DYNAMIC TABS LOGIC ---
+        function setupTabs(containerSelector) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+            const tabButtons = container.querySelectorAll('.tab-btn');
+            const tabContents = container.querySelectorAll('.tab-content');
             
-            return "Je suis encore en apprentissage, mais je fais de mon mieux. Pouvez-vous reformuler votre question ? Ou essayez un autre sujet comme 'théorème de Pythagore' ou 'Révolution française'.";
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+                });
+            });
         }
+        setupTabs('.profile-tabs');
+
+        // --- COLLABORATION SPACE LOGIC ---
+        const collaborationData = {
+            'general': { name: 'Forum Général', threads: [ {id: 1, title: 'Ressources pour le BAC', author: 'Élève A'}, {id: 2, title: 'Comment gérer son stress ?', author: 'Élève B'} ] },
+            'maths-lycee': { name: 'Maths - Lycée', threads: [ {id: 3, title: 'Problème sur les intégrales', author: 'Élève C'} ] },
+        };
+        const messagesData = { 1: [{author: 'Élève A', text: 'Salut, quelqu\'un a des bons sites pour réviser le BAC S ?'}], 3: [{author: 'Élève C', text: 'Je bloque sur cet exercice...'}] };
+        const groupsList = document.querySelector('.groups-list');
+        const threadsList = document.querySelector('.threads-list');
+        const chatContent = document.querySelector('.thread-message-content');
         
-        async function handleSendMessage() {
-            const message = addUserMessage(chatInput.value);
-            if (message) {
-                showTypingIndicator();
-                // Simuler une réponse de l'IA après un court délai
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    const botResponse = getBotResponse(message);
-                    addBotMessage(botResponse);
-                    // Si la réponse contient du LaTeX, le rendre
-                    if (typeof MathJax !== 'undefined') {
-                         MathJax.typesetPromise();
-                    }
-                }, 1500);
-            }
-        }
-        
-        sendMessageBtn.addEventListener('click', handleSendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSendMessage();
-            }
-        });
-
-
-        /*------------------------------------*\
-          # CONTENT CREATION SIMULATION
-        \*------------------------------------*/
-
-        const generateContentBtn = document.getElementById('generate-content-btn');
-        const contentPreview = document.querySelector('.generated-content-preview');
-        const contentTopicInput = document.getElementById('content-topic');
-        const contentTypeSelect = document.getElementById('content-type');
-        const difficultyLevelSelect = document.getElementById('difficulty-level');
-
-        function generateSimulatedContent() {
-            const topic = contentTopicInput.value || "le sujet de votre choix";
-            const type = contentTypeSelect.options[contentTypeSelect.selectedIndex].text;
-            const difficulty = difficultyLevelSelect.value;
-            
-            contentPreview.innerHTML = `
-                <div class="bot-typing"><span></span><span></span><span></span></div>
-                <p style="text-align: center; color: var(--text-color-light);">Génération du contenu en cours...</p>
-            `;
-            contentPreview.style.display = 'block';
-
-            // Simuler la génération de contenu
-            setTimeout(() => {
-                let contentHTML = `<h4>${type} sur : ${topic} (Niveau : ${difficulty})</h4>`;
-                
-                switch (contentTypeSelect.value) {
-                    case 'fiche':
-                        contentHTML += `
-                            <p>Voici une fiche de révision synthétique. Elle couvre les points clés du sujet.</p>
-                            <ul>
-                                <li><strong>Définition :</strong> Une brève explication du concept central de "${topic}".</li>
-                                <li><strong>Points Clés :</strong>
-                                    <ul>
-                                        <li>Aspect important 1, adapté au niveau ${difficulty}.</li>
-                                        <li>Aspect important 2, avec des détails pertinents.</li>
-                                        <li>Aspect important 3, pour une compréhension complète.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Exemple Concret :</strong> Une illustration pratique pour mieux comprendre.</li>
-                            </ul>
-                        `;
-                        break;
-                    case 'carte':
-                         contentHTML += `
-                            <div style="border: 2px solid var(--primary-color); border-radius: 8px; padding: 1rem; text-align: center;">
-                                <p style="font-weight: 600; font-size: 1.2rem;">Question :</p>
-                                <p>Quelle est la définition principale de "${topic}" ?</p>
-                                <hr style="margin: 1rem 0;">
-                                <p style="font-weight: 600; font-size: 1.2rem;">Réponse (à cacher) :</p>
-                                <p>Ceci est la réponse détaillée pour la carte mémoire sur le sujet "${topic}".</p>
-                            </div>
-                        `;
-                        break;
-                    case 'quiz':
-                        contentHTML += `
-                            <p>Testez vos connaissances avec ce mini-quiz !</p>
-                            <ol>
-                                <li>Question 1 sur "${topic}" (difficulté ${difficulty}) ?
-                                    <ul><li><input type="radio" name="q1"> Option A</li><li><input type="radio" name="q1"> Option B</li></ul>
-                                </li>
-                                <li>Question 2 sur "${topic}" ?
-                                    <ul><li><input type="radio" name="q2"> Option A</li><li><input type="radio" name="q2"> Option B</li></ul>
-                                </li>
-                            </ol>
-                        `;
-                        break;
+        if (groupsList) {
+            groupsList.innerHTML = Object.keys(collaborationData).map(key => `<li data-group="${key}">${collaborationData[key].name}</li>`).join('');
+            groupsList.addEventListener('click', e => {
+                if(e.target.tagName === 'LI') {
+                    const groupId = e.target.dataset.group;
+                    document.querySelectorAll('.groups-list li').forEach(li => li.classList.remove('active'));
+                    e.target.classList.add('active');
+                    threadsList.innerHTML = collaborationData[groupId].threads.map(t => `<li data-thread="${t.id}">${t.title}</li>`).join('');
+                    chatContent.innerHTML = '<p style="text-align:center; padding: 2rem;">Sélectionnez une discussion.</p>';
                 }
-                
-                contentPreview.innerHTML = contentHTML;
-
-            }, 2000);
+            });
+            threadsList.addEventListener('click', e => {
+                if(e.target.tagName === 'LI') {
+                    const threadId = e.target.dataset.thread;
+                    document.querySelectorAll('.threads-list li').forEach(li => li.classList.remove('active'));
+                    e.target.classList.add('active');
+                    chatContent.innerHTML = (messagesData[threadId] || []).map(m => `<div class="thread-message"><p class="thread-message-author">${m.author}</p><p>${m.text}</p></div>`).join('');
+                }
+            });
         }
-
-        generateContentBtn.addEventListener('click', generateSimulatedContent);
-        
-        
-        /*------------------------------------*\
-          # DYNAMIC LaTeX RENDERING (MathJax)
-        \*------------------------------------*/
-        // Dynamically load MathJax script for rendering mathematical formulas
-        function loadMathJax() {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-            script.async = true;
-            script.id = 'MathJax-script';
-            document.head.appendChild(script);
-            window.MathJax = {
-              tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-              }
-            };
-        }
-
-        loadMathJax();
-
     });
-
     </script>
 </body>
 </html>
