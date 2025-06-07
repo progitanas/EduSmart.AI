@@ -3,144 +3,921 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI - Révolutionnez Votre Apprentissage</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>EduSmart.AI - Votre Compagnon Pédagogique</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /*=============================================
+        =            EduSmart.AI Stylesheet           =
+        =============================================*/
+
+        /*------------------------------------*\
+          #ROOT & FONT VARIABLES
+        \*------------------------------------*/
+
+        :root {
+          /* Colors */
+          --primary-color: #4A90E2;       /* Un bleu technologique et amical */
+          --primary-color-dark: #357ABD;
+          --secondary-color: #50E3C2;     /* Un vert menthe pour les accents et succès */
+          --background-color: #F4F7FC;    /* Un fond gris très clair, doux pour les yeux */
+          --surface-color: #FFFFFF;       /* Pour les cartes et les surfaces principales */
+          --text-color: #333333;
+          --text-color-light: #667085;
+          --border-color: #E2E8F0;
+          --error-color: #E53E3E;
+          --success-color: #38A169;
+          --warning-color: #DD6B20;
+          --info-color: #3182CE;
+
+          /* Typography */
+          --font-primary: 'Poppins', sans-serif;
+          --font-secondary: 'Roboto', sans-serif;
+          --h1-size: 2.75rem;
+          --h2-size: 2rem;
+          --h3-size: 1.25rem;
+          --p-size: 1rem;
+          --small-text: 0.875rem;
+
+          /* Spacing & Sizing */
+          --spacing-unit: 1rem;
+          --border-radius-sm: 4px;
+          --border-radius-md: 8px;
+          --border-radius-lg: 16px;
+          --max-width: 1200px;
+          --header-height: 70px;
+
+          /* Shadows & Transitions */
+          --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.06);
+          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+          --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+          --transition-fast: all 0.2s ease-in-out;
+          --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /*------------------------------------*\
+          #BASE & RESET STYLES
+        \*------------------------------------*/
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        html {
+          scroll-behavior: smooth;
+          font-size: 16px;
+        }
+
+        body {
+          font-family: var(--font-primary);
+          color: var(--text-color);
+          background-color: var(--background-color);
+          line-height: 1.6;
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--primary-color);
+          transition: var(--transition-fast);
+        }
+
+        a:hover {
+          color: var(--primary-color-dark);
+        }
+
+        ul {
+          list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          font-weight: 600;
+          line-height: 1.2;
+        }
+
+        h1 { font-size: var(--h1-size); }
+        h2 { font-size: var(--h2-size); color: var(--primary-color-dark); margin-bottom: calc(var(--spacing-unit) * 1.5); }
+        h3 { font-size: var(--h3-size); }
+
+        p {
+          font-size: var(--p-size);
+          color: var(--text-color-light);
+          margin-bottom: var(--spacing-unit);
+        }
+
+        img, video {
+          max-width: 100%;
+          height: auto;
+        }
+
+        /*------------------------------------*\
+          #UTILITY CLASSES
+        \*------------------------------------*/
+
+        .container {
+          width: 90%;
+          max-width: var(--max-width);
+          margin: 0 auto;
+        }
+
+        .content-wrapper {
+          padding-top: calc(var(--header-height) + var(--spacing-unit) * 2);
+          padding-bottom: calc(var(--spacing-unit) * 2);
+          min-height: calc(100vh - var(--header-height));
+        }
+
+        .btn-primary {
+          display: inline-block;
+          background-color: var(--primary-color);
+          color: #fff;
+          padding: 12px 24px;
+          border-radius: var(--border-radius-md);
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          transition: var(--transition-fast);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+          background-color: var(--primary-color-dark);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+          color: #fff;
+        }
+
+        .btn-secondary {
+          display: inline-block;
+          background-color: var(--surface-color);
+          color: var(--primary-color);
+          padding: 10px 20px;
+          border-radius: var(--border-radius-md);
+          font-weight: 500;
+          border: 1px solid var(--border-color);
+          cursor: pointer;
+          transition: var(--transition-fast);
+        }
+
+        .btn-secondary:hover {
+          background-color: #f8f9fa;
+          border-color: var(--primary-color);
+          color: var(--primary-color-dark);
+        }
+
+        .hidden {
+          display: none !important;
+        }
+
+        /*------------------------------------*\
+          #HEADER
+        \*------------------------------------*/
+
+        #main-header {
+          background-color: var(--surface-color);
+          box-shadow: var(--shadow-md);
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: var(--header-height);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+        }
+
+        .header-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo a {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--primary-color);
+        }
+
+        #main-header nav ul {
+          display: flex;
+          gap: var(--spacing-unit);
+        }
+
+        #main-header nav a {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 15px;
+          color: var(--text-color-light);
+          font-weight: 500;
+          border-radius: var(--border-radius-md);
+          position: relative;
+        }
+
+        #main-header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        #main-header nav a.active,
+        #main-header nav a:hover {
+          color: var(--primary-color);
+          background-color: var(--background-color);
+        }
+        #main-header nav a.active::after {
+            width: 80%;
+        }
+
+
+        .user-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-unit);
+        }
+
+        .profile-link {
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .profile-link i {
+          font-size: 1.5rem;
+        }
+
+        .menu-toggle {
+          display: none;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          color: var(--text-color);
+          cursor: pointer;
+        }
+
+
+        /*------------------------------------*\
+          #PAGE SECTIONS
+        \*------------------------------------*/
+
+        .page-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards ease-out;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Home Section */
+        .home-section h1 {
+          text-align: center;
+          margin-bottom: var(--spacing-unit);
+          font-weight: 700;
+        }
+
+        .home-section > .content-wrapper > p {
+          text-align: center;
+          font-size: 1.2rem;
+          margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .courses-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: calc(var(--spacing-unit) * 2);
+          margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .course-card {
+          background-color: var(--surface-color);
+          padding: calc(var(--spacing-unit) * 1.5);
+          border-radius: var(--border-radius-lg);
+          box-shadow: var(--shadow-md);
+          transition: var(--transition-smooth);
+        }
+
+        .course-card:hover {
+          transform: translateY(-5px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .course-card h3 {
+          color: var(--primary-color-dark);
+          margin-bottom: var(--spacing-unit);
+        }
+
+        .course-card p {
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .latest-achievements {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: #fff;
+          padding: calc(var(--spacing-unit) * 2);
+          border-radius: var(--border-radius-lg);
+          text-align: center;
+          box-shadow: var(--shadow-lg);
+        }
+        .latest-achievements h2 {
+            color: #fff;
+            margin-bottom: var(--spacing-unit);
+        }
+        .latest-achievements p {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+
+        /* Gamification Section */
+        .gamification-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(var(--spacing-unit) * 2.5);
+            align-items: flex-start;
+        }
+
+        .level-progress, .badges-rewards, .leaderboards {
+            background: var(--surface-color);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .level-progress h3, .badges-rewards h3, .leaderboards h3 {
+            margin-bottom: var(--spacing-unit) * 1.5;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: var(--spacing-unit);
+        }
+
+        .progress-bar-container {
+            background-color: var(--border-color);
+            border-radius: 99px;
+            height: 25px;
+            width: 100%;
+            margin-block: var(--spacing-unit);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            height: 100%;
+            border-radius: 99px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--spacing-unit);
+            text-align: center;
+        }
+        .badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--small-text);
+            color: var(--text-color-light);
+        }
+        .badge-item i {
+            font-size: 2.5rem;
+            color: var(--warning-color);
+        }
+
+        .leaderboards ul li {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+        }
+        .leaderboards ul li:last-child {
+            border-bottom: none;
+        }
+        .leaderboards ul li:first-child {
+            font-weight: 700;
+            color: var(--primary-color);
+            background: var(--background-color);
+            border-radius: var(--border-radius-md);
+        }
+
+        /* Chatbot Section */
+        .chatbot-interface, .teacher-chatbot-interface {
+            background: var(--surface-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-display {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 1.5);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+
+        .message {
+            padding: 12px 18px;
+            border-radius: var(--border-radius-lg);
+            max-width: 75%;
+            line-height: 1.5;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bot-message {
+            background-color: var(--border-color);
+            color: var(--text-color);
+            border-bottom-left-radius: var(--border-radius-sm);
+            align-self: flex-start;
+        }
+        .user-message {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-bottom-right-radius: var(--border-radius-sm);
+            align-self: flex-end;
+        }
+        
+        .bot-typing {
+            align-self: flex-start;
+            padding: 12px 18px;
+        }
+        .bot-typing span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-color-light);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+        .bot-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .bot-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 10px;
+            padding: var(--spacing-unit);
+            border-top: 1px solid var(--border-color);
+        }
+
+        #chat-input, #teacher-chat-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+        #chat-input:focus, #teacher-chat-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+        
+        .chat-controls button, .chat-controls select {
+            padding: 0 15px;
+            font-size: 1.2rem;
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .chat-controls button:hover, .chat-controls select:hover {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+        }
+
+        /* Content Creation Section */
+        .content-generator {
+            background: var(--surface-color);
+            padding: calc(var(--spacing-unit) * 2);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .content-generator input[type="text"],
+        .content-generator select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+        }
+
+        .generation-options, .multimedia-options {
+            display: flex;
+            gap: var(--spacing-unit);
+            flex-wrap: wrap;
+        }
+        .generation-options > *, .multimedia-options > * {
+            flex-grow: 1;
+        }
+
+        #generate-content-btn {
+            align-self: flex-start;
+        }
+
+        .generated-content-preview {
+            margin-top: var(--spacing-unit);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: calc(var(--spacing-unit) * 2);
+            min-height: 200px;
+            transition: all 0.3s;
+            background: #fafbff;
+        }
+        .generated-content-preview:empty {
+            display: none;
+        }
+        .generated-content-preview h4 {
+            margin-bottom: var(--spacing-unit);
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .generated-content-preview ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        /* Collaboration Section */
+        .qa-forum {
+          background: var(--surface-color);
+          padding: calc(var(--spacing-unit) * 2);
+          border-radius: var(--border-radius-lg);
+          box-shadow: var(--shadow-md);
+        }
+        .question-item {
+            padding: var(--spacing-unit);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .question-item:last-child {
+            border: none;
+        }
+        .question-item h3 {
+            margin-bottom: 8px;
+        }
+        .question-item p {
+            font-size: var(--small-text);
+            margin-bottom: 8px;
+        }
+        .view-thread {
+            font-weight: 600;
+            font-size: var(--small-text);
+        }
+
+        .shared-resources {
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+        .shared-resources h3 {
+            margin-bottom: var(--spacing-unit);
+        }
+        .shared-resources ul li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition-fast);
+        }
+        .shared-resources ul li a:hover {
+            background-color: var(--background-color);
+        }
+
+        /* Parents Section */
+        .parent-dashboard {
+          background: var(--surface-color);
+          padding: calc(var(--spacing-unit) * 2);
+          border-radius: var(--border-radius-lg);
+          box-shadow: var(--shadow-md);
+        }
+
+        .alerts-recommendations {
+            margin-top: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .alert-item {
+            padding: var(--spacing-unit);
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-unit);
+            margin-bottom: var(--spacing-unit);
+            border-left: 5px solid;
+        }
+        .alert-item i {
+            font-size: 1.5rem;
+            margin-top: 4px;
+        }
+        .alert-item.error {
+            background-color: #FFF5F5;
+            border-color: var(--error-color);
+            color: #C53030;
+        }
+        .alert-item.info {
+            background-color: #EBF8FF;
+            border-color: var(--info-color);
+            color: #2B6CB0;
+        }
+        .alert-item p {
+            font-size: var(--small-text);
+            color: inherit;
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+
+        /* Impact Section */
+        .impact-content {
+            background: var(--surface-color);
+            padding: calc(var(--spacing-unit) * 2.5);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+        .eco-stats, .social-initiatives {
+            margin-block: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: var(--border-radius-md);
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+        }
+        .eco-stats i {
+            font-size: 3rem;
+            color: var(--success-color);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        /* Teachers AI Section */
+        .teacher-chatbot-interface .chat-controls {
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+        
+        .teacher-chatbot-interface .chat-controls > div {
+             display: flex;
+             gap: 10px;
+        }
+        
+        .ai-tools-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: var(--spacing-unit);
+            border-top: 1px solid var(--border-color);
+        }
+        .ai-tools-buttons .btn-secondary {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /*------------------------------------*\
+          #FOOTER
+        \*------------------------------------*/
+
+        footer {
+          background-color: var(--primary-color-dark);
+          color: #fff;
+          padding: calc(var(--spacing-unit) * 2) 0;
+          margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        footer .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: var(--spacing-unit);
+        }
+
+        footer a {
+          color: var(--secondary-color);
+          font-weight: 500;
+        }
+
+        footer a:hover {
+          color: #fff;
+        }
+
+        .footer-links {
+          display: flex;
+          gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        /*------------------------------------*\
+          #RESPONSIVE DESIGN
+        \*------------------------------------*/
+        @media (max-width: 1024px) {
+            #main-header nav {
+                display: flex;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                height: calc(100vh - var(--header-height));
+                background-color: var(--surface-color);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: calc(var(--spacing-unit) * 2);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 999;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            #main-header nav.active {
+                transform: translateX(0);
+            }
+            
+            #main-header nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                gap: 0;
+            }
+            
+            #main-header nav a {
+                padding: 20px;
+                border-radius: 0;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .gamification-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-tools-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            :root {
+              --h1-size: 2rem;
+              --h2-size: 1.75rem;
+              --h3-size: 1.1rem;
+            }
+
+            .header-content {
+                width: 100%;
+                padding: 0 var(--spacing-unit);
+            }
+            
+            .generation-options, .multimedia-options {
+                flex-direction: column;
+            }
+
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .chatbot-interface, .teacher-chatbot-interface {
+                height: 80vh;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <header id="main-header">
         <div class="container header-content">
             <div class="logo">
-                <a href="#home">
-                    <img src="https://via.placeholder.com/40x40/6a11cb/ffffff?text=E" alt="EduSmart.AI Logo" class="logo-icon">
-                    EduSmart.AI
-                </a>
+                <a href="#home">EduSmart.AI</a>
             </div>
             <nav>
-                <ul class="nav-links">
-                    <li><a href="#home" data-section="home"><i class="fas fa-home icon-glow"></i> Accueil</a></li>
-                    <li><a href="#gamification" data-section="gamification"><i class="fas fa-medal icon-glow"></i> Gamification</a></li>
-                    <li><a href="#chatbot" data-section="chatbot"><i class="fas fa-comment-dots icon-glow"></i> Mon Assistant IA</a></li>
-                    <li><a href="#content-creation" data-section="content-creation"><i class="fas fa-magic icon-glow"></i> Fabrique de Savoir</a></li>
-                    <li><a href="#collaboration" data-section="collaboration"><i class="fas fa-hands-helping icon-glow"></i> Espace Dialogue</a></li>
-                    <li><a href="#parents" data-section="parents"><i class="fas fa-users-cog icon-glow"></i> Suivi Parental</a></li>
-                    <li><a href="#impact" data-section="impact"><i class="fas fa-leaf icon-glow"></i> Notre Engagement</a></li>
-                    <li><a href="#teachers-ai" data-section="teachers-ai"><i class="fas fa-robot icon-glow"></i> Assistant Profs</a></li>
+                <ul>
+                    <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a></li>
+                    <li><a href="#chatbot" class="nav-link"><i class="fas fa-robot"></i> Mon Assistant IA</a></li>
+                    <li><a href="#content-creation" class="nav-link"><i class="fas fa-lightbulb"></i> Fabrique de Savoir</a></li>
+                    <li><a href="#collaboration" class="nav-link"><i class="fas fa-users"></i> Espace Dialogue</a></li>
+                    <li><a href="#parents" class="nav-link"><i class="fas fa-user-friends"></i> Suivi Parental</a></li>
+                    <li><a href="#impact" class="nav-link"><i class="fas fa-globe-americas"></i> Notre Engagement</a></li>
+                    <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Assistant Profs</a></li>
                 </ul>
             </nav>
             <div class="user-actions">
-                <a href="#" class="profile-link btn-secondary-outline"><i class="fas fa-user-circle"></i> Mon Profil</a>
-                <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+                <a href="#" class="profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="home" class="page-section home-section active">
-            <div class="container content-wrapper hero-content">
-                <div class="hero-text">
-                    <h1>Révolutionnez Votre Apprentissage avec <span class="highlight">EduSmart.AI</span></h1>
-                    <p class="subtitle">Votre compagnon éducatif intelligent, interactif et inspirant pour réussir.</p>
-                    <div class="hero-buttons">
-                        <a href="#gamification" class="btn-primary-hero">Commencer l'Aventure <i class="fas fa-arrow-right"></i></a>
-                        <a href="#content-creation" class="btn-secondary-hero">Créer du Contenu <i class="fas fa-plus"></i></a>
+        <section id="home" class="page-section home-section">
+            <div class="container content-wrapper">
+                <h1>Apprenez, Grandissez, Réussissez avec EduSmart.AI</h1>
+                <p>Votre plateforme d'apprentissage intelligente et personnalisée.</p>
+                <div class="course-overview">
+                    <h2>Mes Cours Actuels</h2>
+                    <div class="courses-grid">
+                        <div class="course-card">
+                            <h3>Mathématiques - Algèbre</h3>
+                            <p>Progression: 75%</p>
+                            <a href="#" class="btn-primary">Continuer</a>
+                        </div>
+                        <div class="course-card">
+                            <h3>Français - Grammaire</h3>
+                            <p>Progression: 50%</p>
+                            <a href="#" class="btn-primary">Continuer</a>
+                        </div>
+                         <div class="course-card">
+                            <h3>Physique - Mécanique</h3>
+                            <p>Progression: 30%</p>
+                            <a href="#" class="btn-primary">Commencer</a>
+                        </div>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <img src="https://via.placeholder.com/500x350/a1c4fd/ffffff?text=Apprentissage+Intelligent" alt="Illustration d'apprentissage intelligent" class="floating-image">
-                </div>
-            </div>
-            <div class="container course-overview-home">
-                <h2 class="section-title">Vos Progrès Récents</h2>
-                <div class="courses-grid">
-                    <div class="course-card">
-                        <i class="fas fa-calculator course-icon"></i>
-                        <h3>Mathématiques - Algèbre</h3>
-                        <div class="progress-container"><div class="progress-bar" style="width: 75%;"></div></div>
-                        <p>75% Terminé</p>
-                        <a href="#" class="btn-small">Continuer <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div class="course-card">
-                        <i class="fas fa-book course-icon"></i>
-                        <h3>Français - Grammaire</h3>
-                        <div class="progress-container"><div class="progress-bar" style="width: 50%;"></div></div>
-                        <p>50% Terminé</p>
-                        <a href="#" class="btn-small">Continuer <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div class="course-card">
-                        <i class="fas fa-atom course-icon"></i>
-                        <h3>Sciences - Physique</h3>
-                        <div class="progress-container"><div class="progress-bar" style="width: 90%;"></div></div>
-                        <p>90% Terminé</p>
-                        <a href="#" class="btn-small">Réviser <i class="fas fa-chevron-right"></i></a>
-                    </div>
+                <div class="latest-achievements">
+                    <h2>Dernières Réalisations</h2>
+                    <p><i class="fas fa-trophy"></i> Bravo ! Vous avez obtenu le badge "Maître des Bases" !</p>
                 </div>
             </div>
         </section>
 
         <section id="gamification" class="page-section gamification-section hidden">
             <div class="container content-wrapper">
-                <h2 class="section-title">Mon Aventure d'Apprentissage Gamifiée</h2>
+                <h2>Mon Aventure d'Apprentissage</h2>
                 <div class="gamification-dashboard">
-                    <div class="level-card glassmorphism-card">
-                        <i class="fas fa-trophy level-icon"></i>
-                        <h3>Niveau Actuel: <span class="highlight-level">Maître des Connaissances I</span></h3>
-                        <div class="progress-bar-container-lg">
-                            <div class="progress-bar-lg" style="width: 85%;"></div>
+                    <div class="level-progress">
+                        <h3>Niveau Actuel: Explorateur I</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 60%;"></div>
                         </div>
-                        <p>Prochain niveau dans 150 points !</p>
-                        <button class="btn-primary-small">Voir les objectifs <i class="fas fa-arrow-right"></i></button>
+                        <p>600/1000 points pour le prochain niveau</p>
                     </div>
-
-                    <div class="badges-rewards">
-                        <h3 class="subsection-title"><i class="fas fa-star-half-alt"></i> Mes Badges & Récompenses</h3>
-                        <div class="badge-grid">
-                            <div class="badge-item tooltipped" data-tooltip="Débloqué pour 10 heures d'étude">
-                                <i class="fas fa-brain badge-icon unlocked"></i>
-                                <p>Esprit Curieux</p>
-                            </div>
-                            <div class="badge-item tooltipped" data-tooltip="Débloqué après 5 cours complétés">
-                                <i class="fas fa-graduation-cap badge-icon unlocked"></i>
-                                <p>Diplômé du Savoir</p>
-                            </div>
-                            <div class="badge-item tooltipped" data-tooltip="Débloquez ce badge en participant à 3 défis">
-                                <i class="fas fa-rocket badge-icon locked"></i>
-                                <p>Pionnier</p>
-                            </div>
-                            <div class="badge-item tooltipped" data-tooltip="Débloquez ce badge en aidant 5 camarades sur le forum">
-                                <i class="fas fa-hands-helping badge-icon locked"></i>
-                                <p>Mentor</p>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="leaderboards">
-                        <h3 class="subsection-title"><i class="fas fa-chart-line"></i> Classements Amicaux</h3>
-                        <div class="leaderboard-options">
-                            <button class="btn-secondary-outline active">Mes Amis</button>
-                            <button class="btn-secondary-outline">Ma Classe</button>
-                            <button class="btn-secondary-outline">Global</button>
-                        </div>
-                        <ul class="leaderboard-list">
-                            <li class="current-user-rank">
-                                <span class="rank">#1</span>
-                                <span class="name">Vous</span>
-                                <span class="points">1250 pts <i class="fas fa-crown gold"></i></span>
-                            </li>
-                            <li><span class="rank">#2</span><span class="name">Ami_X</span><span class="points">1100 pts</span></li>
-                            <li><span class="rank">#3</span><span class="name">Ami_Y</span><span class="points">980 pts</span></li>
-                            <li><span class="rank">#4</span><span class="name">Ami_Z</span><span class="points">850 pts</span></li>
+                        <h3>Classements Amicaux</h3>
+                        <ul>
+                            <li><span>1. Votre Nom</span> <span>1250 pts</span></li>
+                            <li><span>2. Ami_X</span> <span>1100 pts</span></li>
+                            <li><span>3. Ami_Y</span> <span>980 pts</span></li>
                         </ul>
                     </div>
-
-                    <div class="challenges-section">
-                        <h3 class="subsection-title"><i class="fas fa-bolt"></i> Défis Actuels</h3>
-                        <div class="challenge-card">
-                            <h4>Défi de la Semaine : Maîtrise des Fonctions</h4>
-                            <p>Complétez 3 exercices avancés sur les fonctions mathématiques avant dimanche soir.</p>
-                            <button class="btn-primary-small">Participer <i class="fas fa-trophy"></i></button>
+                    <div class="badges-rewards">
+                        <h3>Mes Badges & Récompenses</h3>
+                        <div class="badge-grid">
+                            <div class="badge-item"><i class="fas fa-medal"></i> Maître des Bases</div>
+                            <div class="badge-item"><i class="fas fa-star"></i> Esprit Curieux</div>
+                            <div class="badge-item"><i class="fas fa-brain"></i> Problème Résolu</div>
+                            <div class="badge-item"><i class="fas fa-fire"></i> Série de 5 jours</div>
                         </div>
                     </div>
                 </div>
@@ -148,133 +925,82 @@
         </section>
 
         <section id="chatbot" class="page-section chatbot-section hidden">
-            <div class="container content-wrapper chatbot-container">
-                <h2 class="section-title">Mon Assistant IA <span class="subtitle-chat">(Votre guide personnel 24/7)</span></h2>
-                <div class="chatbot-interface glassmorphism-card">
-                    <div class="chat-header">
-                        <span class="status-indicator online"></span>
-                        <span>EduSmart.AI Assistant</span>
-                        <div class="chat-settings">
-                            <select id="language-select" aria-label="Sélectionner la langue">
-                                <option value="fr-FR">Français</option>
-                                <option value="en-US">English</option>
-                                <option value="wo-SN">Wolof</option>
-                                <option value="ha-NG">Haoussa</option>
-                                <option value="sw-KE">Swahili</option>
-                                </select>
-                            <button id="text-to-speech-btn" class="icon-btn tooltipped" data-tooltip="Activer la lecture vocale"><i class="fas fa-volume-up"></i></button>
-                        </div>
-                    </div>
-                    <div class="chat-display custom-scrollbar">
-                        <div class="message bot-message">Bonjour ! Comment puis-je vous aider à explorer le monde du savoir ?</div>
-                        <div class="message user-message">J'ai des difficultés avec la physique quantique.</div>
-                        <div class="message bot-message">Absolument ! La physique quantique est fascinante. Quel aspect souhaitez-vous explorer en particulier ?</div>
+            <div class="container content-wrapper">
+                <h2>Mon Assistant IA</h2>
+                <div class="chatbot-interface">
+                    <div class="chat-display">
+                        <div class="message bot-message">Bonjour ! Je suis EduBot. Comment puis-je vous aider à apprendre aujourd'hui ? Posez-moi une question sur les maths, le français, l'histoire...</div>
                     </div>
                     <div class="chat-controls">
-                        <input type="text" id="chat-input" placeholder="Tapez votre message ou utilisez le micro..." aria-label="Champ de saisie du message">
-                        <button id="voice-input-btn" class="icon-btn tooltipped" data-tooltip="Saisie vocale"><i class="fas fa-microphone"></i></button>
-                        <button id="send-message-btn" class="icon-btn send-btn tooltipped" data-tooltip="Envoyer"><i class="fas fa-paper-plane"></i></button>
+                        <select id="language-select" title="Choisir la langue">
+                            <option value="fr">Français</option>
+                            <option value="en">Anglais</option>
+                            <option value="wolof">Wolof</option>
+                        </select>
+                        <input type="text" id="chat-input" placeholder="Tapez votre message ou utilisez le micro...">
+                        <button id="voice-input-btn" title="Entrée vocale"><i class="fas fa-microphone"></i></button>
+                        <button id="send-message-btn" title="Envoyer"><i class="fas fa-paper-plane"></i></button>
+                        <button id="text-to-speech-btn" title="Lire le dernier message"><i class="fas fa-volume-up"></i></button>
                     </div>
-                </div>
-                <div class="suggestion-chips">
-                    <span class="chip">Qu'est-ce que la relativité ?</span>
-                    <span class="chip">Donne-moi un exercice sur les fractions</span>
-                    <span class="chip">Explique le cycle de l'eau</span>
                 </div>
             </div>
         </section>
 
         <section id="content-creation" class="page-section content-creation-section hidden">
             <div class="container content-wrapper">
-                <h2 class="section-title">Ma Fabrique de Savoir <span class="subtitle-content">(Créez vos ressources personnalisées en un clic)</span></h2>
-                <div class="content-generator glassmorphism-card">
-                    <div class="input-group">
-                        <label for="content-topic">Sujet / Concept :</label>
-                        <input type="text" id="content-topic" placeholder="Ex: Révolution Française, Théorème de Pythagore...">
-                    </div>
-
+                <h2>Ma Fabrique de Savoir</h2>
+                <div class="content-generator">
+                    <input type="text" id="content-topic" placeholder="Sujet ou concept à générer (ex: La photosynthèse)">
                     <div class="generation-options">
-                        <div class="input-group">
-                            <label for="content-type">Format :</label>
-                            <select id="content-type">
-                                <option value="fiche">Fiche de Révision</option>
-                                <option value="carte">Carte Mémoire</option>
-                                <option value="video">Vidéo Courte Expliquée</option>
-                                <option value="quiz">Quiz Interactif</option>
-                                <option value="resume">Résumé Détaillé</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="difficulty-level">Niveau de Difficulté :</label>
-                            <select id="difficulty-level">
-                                <option value="debutant">Débutant</option>
-                                <option value="intermediaire">Intermédiaire</option>
-                                <option value="avance">Avancé</option>
-                            </select>
-                        </div>
+                        <select id="content-type">
+                            <option value="fiche">Fiche de Révision</option>
+                            <option value="carte">Carte Mémoire</option>
+                            <option value="quiz">Quiz</option>
+                        </select>
+                        <select id="difficulty-level">
+                            <option value="facile">Facile</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="difficile">Difficile</option>
+                        </select>
                     </div>
-
                     <div class="multimedia-options">
-                        <div class="input-group">
-                            <label for="youtube-url">Intégrer Vidéo YouTube (URL) :</label>
-                            <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." class="full-width-input">
-                        </div>
-                        <div class="multimedia-buttons">
-                            <button class="btn-secondary-outline"><i class="fas fa-image"></i> Ajouter Image</button>
-                            <button class="btn-secondary-outline"><i class="fas fa-flask"></i> Ajouter Simulation</button>
-                        </div>
+                        <input type="text" id="youtube-url" placeholder="URL YouTube pour enrichir (facultatif)">
+                        <button class="btn-secondary"><i class="fas fa-image"></i> Ajouter Image</button>
+                        <button class="btn-secondary"><i class="fas fa-flask"></i> Ajouter Simulation</button>
                     </div>
-                    <button id="generate-content-btn" class="btn-primary-large"><i class="fas fa-cogs"></i> Générer le Contenu</button>
-
-                    <div class="generated-content-preview loading-state">
-                        <p><i class="fas fa-rocket fa-bounce"></i> Votre contenu apparaîtra ici après génération.</p>
+                    <button id="generate-content-btn" class="btn-primary">Générer le Contenu</button>
+                    <div class="generated-content-preview">
                         </div>
-
                     <div class="content-library">
-                        <h3 class="subsection-title"><i class="fas fa-folder-open"></i> Ma Bibliothèque de Contenu</h3>
-                        <ul class="library-list">
-                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche : Photosynthèse (Générée le 01/06)</a></li>
-                            <li><a href="#"><i class="fas fa-clipboard-question"></i> Quiz : Histoire de France (Généré le 28/05)</a></li>
-                            </ul>
-                    </div>
+                        <h3>Ma Bibliothèque de Contenu</h3>
+                        </div>
                 </div>
             </div>
         </section>
 
         <section id="collaboration" class="page-section collaboration-section hidden">
             <div class="container content-wrapper">
-                <h2 class="section-title">Mon Espace de Dialogue <span class="subtitle-collaboration">(Échangez avec vos professeurs et camarades)</span></h2>
-                <div class="collaboration-dashboard">
-                    <div class="qa-forum glassmorphism-card">
-                        <h3 class="subsection-title"><i class="fas fa-comments"></i> Questions & Réponses</h3>
-                        <button class="btn-primary-small mb-3"><i class="fas fa-plus-circle"></i> Poser une nouvelle question</button>
-                        <div class="questions-list custom-scrollbar">
-                            <div class="question-item">
-                                <div class="q-header">
-                                    <h4>Question sur les équations du second degré</h4>
-                                    <span class="q-meta"><i class="fas fa-user-circle"></i> Élève A - <i class="fas fa-clock"></i> Il y a 2 heures</span>
-                                </div>
-                                <p class="q-excerpt">Bonjour, je bloque sur la méthode de résolution de l'équation x² + 3x - 4 = 0. Pouvez-vous m'aider ?</p>
-                                <a href="#" class="view-thread">Voir la discussion (3 réponses) <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="question-item">
-                                <div class="q-header">
-                                    <h4>Besoin de ressources pour la physique nucléaire</h4>
-                                    <span class="q-meta"><i class="fas fa-user-circle"></i> Élève B - <i class="fas fa-clock"></i> Hier</span>
-                                </div>
-                                <p class="q-excerpt">Notre cours de physique parle de radioactivité. Y a-t-il des vidéos ou des articles pour approfondir ?</p>
-                                <a href="#" class="view-thread">Voir la discussion (1 réponse) <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            </div>
+                <h2>Mon Espace de Dialogue</h2>
+                <div class="qa-forum">
+                    <button class="btn-primary">Poser une nouvelle question</button>
+                    <div class="questions-list">
+                        <div class="question-item">
+                            <h3>Question sur les équations du second degré</h3>
+                            <p>Par: Élève A - Il y a 2 heures</p>
+                            <a href="#" class="view-thread">Voir la discussion (3 réponses)</a>
+                        </div>
+                        <div class="question-item">
+                            <h3>Ressources pour la physique nucléaire</h3>
+                            <p>Par: Élève B - Hier</p>
+                            <a href="#" class="view-thread">Voir la discussion (1 réponse)</a>
+                        </div>
                     </div>
-
-                    <div class="shared-resources glassmorphism-card">
-                        <h3 class="subsection-title"><i class="fas fa-share-alt"></i> Ressources Partagées par les Profs</h3>
-                        <ul class="resources-list custom-scrollbar">
-                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche de Révision - Les Verbes Irréguliers (Français)</a></li>
-                            <li><a href="#"><i class="fas fa-file-pdf"></i> Correction Exercice 5 - Chapitre 3 (Maths)</a></li>
-                            <li><a href="#"><i class="fas fa-video"></i> Vidéo : Le cycle de l'eau expliqué (Sciences)</a></li>
-                            </ul>
+                    <div class="shared-resources">
+                        <h3>Ressources Partagées par les Profs</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche de Révision - Les Verbes Irréguliers</a></li>
+                            <li><a href="#"><i class="fas fa-file-pdf"></i> Correction Exercice 5 - Chapitre 3</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -282,123 +1008,74 @@
 
         <section id="parents" class="page-section parents-section hidden">
             <div class="container content-wrapper">
-                <h2 class="section-title">Mon Suivi Parental <span class="subtitle-parent">(Restez informés sur la progression de votre enfant)</span></h2>
+                <h2>Mon Suivi Parental</h2>
                 <div class="parent-dashboard">
-                    <div class="child-overview glassmorphism-card">
-                        <div class="child-avatar">
-                            <img src="https://via.placeholder.com/80x80/007bff/ffffff?text=E" alt="Avatar Enfant">
-                            <h3>Progression de [Nom de l'enfant]</h3>
-                        </div>
-                        <div class="progress-charts">
-                            <div class="chart-item">
-                                <i class="fas fa-chart-pie chart-icon"></i>
-                                <h4>Performance Générale</h4>
-                                <p>Bonne performance globale.</p>
-                            </div>
-                            <div class="chart-item">
-                                <i class="fas fa-chart-bar chart-icon"></i>
-                                <h4>Matières Fortes/Faibles</h4>
-                                <p><span class="strong">Maths: Excellente</span> | <span class="weak">Français: Difficultés</span></p>
-                            </div>
-                        </div>
-                        <button class="btn-primary-small"><i class="fas fa-file-export"></i> Télécharger Rapport Complet</button>
+                    <div class="child-progress-summary">
+                        <h3>Progression de [Nom de l'enfant]</h3>
+                        <p><strong>Mathématiques:</strong> Bon progrès, maîtrise des concepts d'algèbre.</p>
+                        <p><strong>Français:</strong> Difficultés détectées sur les accords du participe passé.</p>
                     </div>
-
-                    <div class="alerts-recommendations glassmorphism-card">
-                        <h3 class="subsection-title"><i class="fas fa-bell"></i> Alertes & Recommandations</h3>
-                        <div class="alert-list">
-                            <div class="alert-item danger">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <div>
-                                    <h4>Difficulté détectée en Français (Conjugaison)</h4>
-                                    <p>Suggestion: Proposez à votre enfant de revoir le module "Temps et Modes des Verbes" sur EduSmart.AI.</p>
-                                    <button class="btn-small-outline">Accéder aux Ressources <i class="fas fa-arrow-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="alert-item success">
-                                <i class="fas fa-check-circle"></i>
-                                <div>
-                                    <h4>Félicitations ! Votre enfant a débloqué un nouveau badge !</h4>
-                                    <p>"Maître des Expressions" - pour sa participation active aux discussions.</p>
-                                    <button class="btn-small-outline">Voir les Réalisations <i class="fas fa-arrow-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="alert-item info">
-                                <i class="fas fa-info-circle"></i>
-                                <div>
-                                    <h4>Nouvelle ressource disponible sur le volcanisme</h4>
-                                    <p>Un article interactif pour approfondir le sujet.</p>
-                                    <button class="btn-small-outline">Découvrir la Ressource <i class="fas fa-arrow-right"></i></button>
-                                </div>
+                    <div class="alerts-recommendations">
+                        <h3>Alertes & Recommandations</h3>
+                        <div class="alert-item error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <strong>Difficulté détectée en Français.</strong>
+                                <p>Suggestion: Revoir les conjugaisons des verbes du 3ème groupe. Accédez à notre module de création de fiches pour générer des exercices ciblés.</p>
                             </div>
                         </div>
-                        <div class="parent-actions">
-                            <button class="btn-secondary-outline"><i class="fas fa-cogs"></i> Paramètres de Notification</button>
-                            <button class="btn-secondary-outline"><i class="fas fa-envelope"></i> Contacter l'Enseignant</button>
+                        <div class="alert-item info">
+                             <i class="fas fa-info-circle"></i>
+                             <div>
+                                <strong>Félicitations !</strong>
+                                <p>[Nom de l'enfant] a obtenu le badge "Problème Résolu" en mathématiques.</p>
+                             </div>
                         </div>
                     </div>
+                    <button class="btn-secondary">Paramètres de Notification</button>
+                    <button class="btn-secondary">Contacter l'Enseignant</button>
                 </div>
             </div>
         </section>
 
         <section id="impact" class="page-section impact-section hidden">
             <div class="container content-wrapper">
-                <h2 class="section-title">Notre Engagement <span class="subtitle-impact">(Éducation Durable & Inclusion Sociale)</span></h2>
-                <div class="impact-grid">
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-globe-americas impact-icon primary-color"></i>
-                        <h3>Accès Équitable à l'Éducation</h3>
-                        <p>Nous nous engageons à briser les barrières géographiques et économiques en offrant un accès à distance de qualité.</p>
+                <h2>Notre Engagement pour un Avenir Meilleur</h2>
+                <div class="impact-content">
+                    <h3>Notre Mission</h3>
+                    <p>EduSmart.AI s'engage à rendre l'éducation de qualité accessible et durable pour tous, en réduisant l'empreinte écologique de l'apprentissage et en favorisant l'inclusion numérique.</p>
+                    <div class="eco-stats">
+                        <i class="fas fa-leaf"></i>
+                        <p><strong>Économie de Papier:</strong> Plus de 100 000 feuilles de papier économisées cette année grâce à nos supports numériques !</p>
                     </div>
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-recycle impact-icon secondary-color"></i>
-                        <h3>Réduction de l'Empreinte Écologique</h3>
-                        <p>En digitalisant les supports d'apprentissage, nous contribuons activement à la réduction de la consommation de papier.</p>
-                        <p class="statistic">**Plus de 200 000 feuilles économisées annuellement !**</p>
+                    <div class="social-initiatives">
+                        <h3>Nos Initiatives Sociales</h3>
+                        <p>Nous collaborons avec des écoles en zones rurales pour fournir un accès gratuit à notre plateforme et des formations complètes aux enseignants, réduisant ainsi la fracture numérique.</p>
                     </div>
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-hands-holding impact-icon tertiary-color"></i>
-                        <h3>Soutien aux Écoles Défavorisées</h3>
-                        <p>Nous mettons en place des partenariats et des initiatives de formation pour les écoles en zones rurales et défavorisées.</p>
-                        <button class="btn-primary-small">Découvrir nos partenariats <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-lightbulb impact-icon accent-color"></i>
-                        <h3>Innovation Pédagogique Inclusive</h3>
-                        <p>Nos outils IA et vocaux rendent l'apprentissage accessible à tous, y compris les élèves ayant des difficultés de lecture.</p>
-                    </div>
-                </div>
-                <div class="impact-cta">
-                    <p>Votre engagement avec EduSmart.AI contribue directement à ces initiatives. Merci de faire partie du changement !</p>
-                    <button class="btn-primary-large"><i class="fas fa-hand-holding-heart"></i> Faire un Don ou Devenir Partenaire</button>
+                    <button class="btn-primary">En savoir plus sur nos rapports d'impact</button>
                 </div>
             </div>
         </section>
 
         <section id="teachers-ai" class="page-section teachers-ai-section hidden">
-            <div class="container content-wrapper teachers-ai-container">
-                <h2 class="section-title">Mon Assistant Pédagogique IA <span class="subtitle-teachers">(L'IA au service de l'excellence éducative)</span></h2>
-                <div class="teacher-chatbot-interface glassmorphism-card">
-                    <div class="chat-header">
-                        <span class="status-indicator online"></span>
-                        <span>Assistant Enseignant AI</span>
-                    </div>
-                    <div class="chat-display custom-scrollbar">
-                        <div class="message bot-message">Bonjour Professeur ! Je suis là pour optimiser votre temps et enrichir votre pédagogie. Comment puis-je vous aider ?</div>
-                        <div class="message user-message">Génère un plan de cours sur la Seconde Guerre Mondiale pour des élèves de 3ème.</div>
-                        <div class="message bot-message">Bien sûr ! Voici une proposition de plan de cours détaillé... (plan généré par l'IA)</div>
+            <div class="container content-wrapper">
+                <h2>Mon Assistant Pédagogique IA (Pour Enseignants)</h2>
+                <div class="teacher-chatbot-interface">
+                    <div class="chat-display">
+                        <div class="message bot-message">Bonjour Professeur ! Comment puis-je vous assister aujourd'hui ? Je peux générer des plans de cours, analyser les performances de vos élèves, ou trouver des ressources adaptées.</div>
                     </div>
                     <div class="chat-controls">
-                        <input type="text" id="teacher-chat-input" placeholder="Demandez à l'IA (ex: Analyser les données des élèves...)" aria-label="Champ de saisie pour l'IA enseignant">
-                        <button id="teacher-send-message-btn" class="icon-btn send-btn"><i class="fas fa-paper-plane"></i></button>
+                        <div>
+                           <input type="text" id="teacher-chat-input" placeholder="Demandez à l'IA (ex: Génère un quiz sur les volcans)">
+                           <button id="teacher-send-message-btn" title="Envoyer"><i class="fas fa-paper-plane"></i></button>
+                        </div>
                     </div>
-                </div>
-                <div class="ai-tools-buttons">
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-book-open"></i> Générateur de Plan de Cours</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-chart-bar"></i> Analyse de Données Élèves</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-cogs"></i> Plans d'Action Personnalisés</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-database"></i> Banque de Ressources Pédagogiques</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-marker"></i> Aide à l'Évaluation</button>
+                    <div class="ai-tools-buttons">
+                        <button class="btn-secondary"><i class="fas fa-book-open"></i> Générateur de Plan de Cours</button>
+                        <button class="btn-secondary"><i class="fas fa-chart-line"></i> Analyse de Données Élèves</button>
+                        <button class="btn-secondary"><i class="fas fa-tasks"></i> Plans d'Action Personnalisés</button>
+                        <button class="btn-secondary"><i class="fas fa-search"></i> Banque de Ressources</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -406,49 +1083,289 @@
 
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col logo-col">
-                    <a href="#home" class="footer-logo">EduSmart.AI</a>
-                    <p>Révolutionnons l'éducation ensemble.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Fonctionnalités</h4>
-                    <ul>
-                        <li><a href="#gamification">Gamification</a></li>
-                        <li><a href="#chatbot">Chatbot IA</a></li>
-                        <li><a href="#content-creation">Création de Contenu</a></li>
-                        <li><a href="#collaboration">Collaboration</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Ressources</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Témoignages</a></li>
-                        <li><a href="#impact">Impact Social</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact & Légal</h4>
-                    <ul>
-                        <li><a href="#">Contactez-nous</a></li>
-                        <li><a href="#">Politique de Confidentialité</a></li>
-                        <li><a href="#">Conditions d'Utilisation</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
+            <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Contact</a>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+
+    <script>
+    /*================================================
+    =            EduSmart.AI Main Script             =
+    ================================================*/
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        /*------------------------------------*\
+          # CORE APP LOGIC
+        \*------------------------------------*/
+
+        // --- Element Selection ---
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const headerNav = document.querySelector('#main-header nav');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menuIcon = document.querySelector('.menu-toggle i');
+
+        // --- Initial State ---
+        // Affiche la page d'accueil par défaut et masque les autres
+        const initialHash = window.location.hash || '#home';
+        navigateTo(initialHash);
+
+        // --- Navigation (Single Page App style) ---
+        function navigateTo(hash) {
+            // Cacher toutes les sections
+            pageSections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('active');
+            });
+
+            // Mettre à jour les liens de navigation
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Afficher la section cible
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                // Ajouter la classe 'active' pour déclencher l'animation
+                setTimeout(() => targetSection.classList.add('active'), 10);
+            }
+            
+            // Ferme le menu mobile après la navigation
+            if (headerNav.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        }
+
+        // --- Event Listeners for Navigation ---
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const hash = e.currentTarget.getAttribute('href');
+                window.location.hash = hash; // Met à jour l'URL pour un meilleur historique
+                navigateTo(hash);
+            });
+        });
+        
+        // Gère les changements de hash (ex: boutons précédent/suivant du navigateur)
+        window.addEventListener('hashchange', () => {
+            navigateTo(window.location.hash || '#home');
+        });
+
+
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu() {
+            headerNav.classList.toggle('active');
+            // Change l'icône du menu
+            if (headerNav.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+        
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        
+        /*------------------------------------*\
+          # CHATBOT SIMULATION
+        \*------------------------------------*/
+        
+        const chatDisplay = document.querySelector('#chatbot .chat-display');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessageBtn = document.getElementById('send-message-btn');
+
+        function addUserMessage(message) {
+            if (!message.trim()) return; // N'ajoute pas de messages vides
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'user-message');
+            messageElement.textContent = message;
+            chatDisplay.appendChild(messageElement);
+            chatInput.value = '';
+            chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll
+            return message;
+        }
+
+        function addBotMessage(message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'bot-message');
+            messageElement.innerHTML = message; // Utilise innerHTML pour pouvoir ajouter des balises si besoin
+            chatDisplay.appendChild(messageElement);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.classList.add('message', 'bot-typing');
+            typingElement.innerHTML = '<span></span><span></span><span></span>';
+            chatDisplay.appendChild(typingElement);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingElement = document.querySelector('.bot-typing');
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+        
+        function getBotResponse(userMessage) {
+            const msg = userMessage.toLowerCase();
+            // Réponses simulées basées sur des mots-clés
+            if (msg.includes('bonjour') || msg.includes('salut')) {
+                return "Bonjour ! En quoi puis-je vous aider aujourd'hui ?";
+            }
+            if (msg.includes('équation')) {
+                return "Bien sûr ! Une équation du second degré est de la forme $ax^2 + bx + c = 0$. On calcule le discriminant $\\Delta = b^2 - 4ac$ pour trouver les solutions. Voulez-vous un exemple ?";
+            }
+            if (msg.includes('photosynthèse')) {
+                return "La photosynthèse est le processus par lequel les plantes vertes utilisent la lumière du soleil pour synthétiser des aliments à partir du dioxyde de carbone et de l'eau. C'est fascinant !";
+            }
+            if (msg.includes('capitale') && msg.includes('sénégal')) {
+                 return "La capitale du Sénégal est Dakar. C'est une ville dynamique et un pôle culturel important en Afrique de l'Ouest.";
+            }
+            if (msg.includes('merci')) {
+                return "De rien ! N'hésitez pas si vous avez d'autres questions.";
+            }
+            
+            return "Je suis encore en apprentissage, mais je fais de mon mieux. Pouvez-vous reformuler votre question ? Ou essayez un autre sujet comme 'théorème de Pythagore' ou 'Révolution française'.";
+        }
+        
+        async function handleSendMessage() {
+            const message = addUserMessage(chatInput.value);
+            if (message) {
+                showTypingIndicator();
+                // Simuler une réponse de l'IA après un court délai
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const botResponse = getBotResponse(message);
+                    addBotMessage(botResponse);
+                    // Si la réponse contient du LaTeX, le rendre
+                    if (typeof MathJax !== 'undefined') {
+                         MathJax.typesetPromise();
+                    }
+                }, 1500);
+            }
+        }
+        
+        sendMessageBtn.addEventListener('click', handleSendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+
+
+        /*------------------------------------*\
+          # CONTENT CREATION SIMULATION
+        \*------------------------------------*/
+
+        const generateContentBtn = document.getElementById('generate-content-btn');
+        const contentPreview = document.querySelector('.generated-content-preview');
+        const contentTopicInput = document.getElementById('content-topic');
+        const contentTypeSelect = document.getElementById('content-type');
+        const difficultyLevelSelect = document.getElementById('difficulty-level');
+
+        function generateSimulatedContent() {
+            const topic = contentTopicInput.value || "le sujet de votre choix";
+            const type = contentTypeSelect.options[contentTypeSelect.selectedIndex].text;
+            const difficulty = difficultyLevelSelect.value;
+            
+            contentPreview.innerHTML = `
+                <div class="bot-typing"><span></span><span></span><span></span></div>
+                <p style="text-align: center; color: var(--text-color-light);">Génération du contenu en cours...</p>
+            `;
+            contentPreview.style.display = 'block';
+
+            // Simuler la génération de contenu
+            setTimeout(() => {
+                let contentHTML = `<h4>${type} sur : ${topic} (Niveau : ${difficulty})</h4>`;
+                
+                switch (contentTypeSelect.value) {
+                    case 'fiche':
+                        contentHTML += `
+                            <p>Voici une fiche de révision synthétique. Elle couvre les points clés du sujet.</p>
+                            <ul>
+                                <li><strong>Définition :</strong> Une brève explication du concept central de "${topic}".</li>
+                                <li><strong>Points Clés :</strong>
+                                    <ul>
+                                        <li>Aspect important 1, adapté au niveau ${difficulty}.</li>
+                                        <li>Aspect important 2, avec des détails pertinents.</li>
+                                        <li>Aspect important 3, pour une compréhension complète.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Exemple Concret :</strong> Une illustration pratique pour mieux comprendre.</li>
+                            </ul>
+                        `;
+                        break;
+                    case 'carte':
+                         contentHTML += `
+                            <div style="border: 2px solid var(--primary-color); border-radius: 8px; padding: 1rem; text-align: center;">
+                                <p style="font-weight: 600; font-size: 1.2rem;">Question :</p>
+                                <p>Quelle est la définition principale de "${topic}" ?</p>
+                                <hr style="margin: 1rem 0;">
+                                <p style="font-weight: 600; font-size: 1.2rem;">Réponse (à cacher) :</p>
+                                <p>Ceci est la réponse détaillée pour la carte mémoire sur le sujet "${topic}".</p>
+                            </div>
+                        `;
+                        break;
+                    case 'quiz':
+                        contentHTML += `
+                            <p>Testez vos connaissances avec ce mini-quiz !</p>
+                            <ol>
+                                <li>Question 1 sur "${topic}" (difficulté ${difficulty}) ?
+                                    <ul><li><input type="radio" name="q1"> Option A</li><li><input type="radio" name="q1"> Option B</li></ul>
+                                </li>
+                                <li>Question 2 sur "${topic}" ?
+                                    <ul><li><input type="radio" name="q2"> Option A</li><li><input type="radio" name="q2"> Option B</li></ul>
+                                </li>
+                            </ol>
+                        `;
+                        break;
+                }
+                
+                contentPreview.innerHTML = contentHTML;
+
+            }, 2000);
+        }
+
+        generateContentBtn.addEventListener('click', generateSimulatedContent);
+        
+        
+        /*------------------------------------*\
+          # DYNAMIC LaTeX RENDERING (MathJax)
+        \*------------------------------------*/
+        // Dynamically load MathJax script for rendering mathematical formulas
+        function loadMathJax() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+            script.async = true;
+            script.id = 'MathJax-script';
+            document.head.appendChild(script);
+            window.MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+              }
+            };
+        }
+
+        loadMathJax();
+
+    });
+
+    </script>
 </body>
 </html>
