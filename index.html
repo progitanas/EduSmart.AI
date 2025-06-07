@@ -10,9 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* [Le CSS original est conservé ici, il est suffisamment flexible] */
         /*=============================================
-        =         EduSmart.AI Stylesheet v3.0         =
+        =         EduSmart.AI Stylesheet v4.0         =
         =============================================*/
 
         /*------------------------------------*\
@@ -39,7 +38,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
         .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; transition: var(--transition-fast); }
+        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; transition: var(--transition-fast); text-decoration: none; }
         .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
         .btn-secondary { background-color: var(--secondary-color); color: var(--primary-color-dark); }
         .btn-secondary:hover { background-color: #45D1B3; }
@@ -74,7 +73,6 @@
         main { padding-top: var(--header-height); }
         .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
 
-        /* NOUVEAUTÉ : Styles pour les nouvelles icônes du header */
         .header-icon-group { display: flex; align-items: center; gap: 1.5rem; }
         .language-selector select { border: none; background: transparent; font-family: var(--font-primary); font-weight: 500; color: var(--text-color-light); }
         .language-selector select:hover { color: var(--primary-color); }
@@ -136,7 +134,7 @@
         .collaboration-layout { display: grid; grid-template-columns: 300px 1fr 2fr; gap: 1rem; height: 75vh; }
         .groups-column, .threads-column, .chat-column { background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
         .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; display: flex; justify-content: space-between; align-items: center;}
-        .groups-list, .threads-list { list-style: none; overflow-y: auto; }
+        .groups-list, .threads-list { list-style: none; overflow-y: auto; padding: 0;}
         .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
         .groups-list li.active, .threads-list li.active { background-color: var(--primary-color); color: white; }
         .groups-list li:hover, .threads-list li:hover { background-color: var(--background-color); }
@@ -153,6 +151,7 @@
         \*------------------------------------*/
         .teacher-dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
         .chart-container { position: relative; height: 250px; width: 100%;}
+        #at-risk-list { list-style: none; padding: 0; }
         #at-risk-list li { display:flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid var(--border-color); }
         #at-risk-list li .reason { font-size: 0.8rem; color: var(--error-color); }
         
@@ -185,8 +184,17 @@
 </head>
 <body>
 
-    <section id="auth-page">
-        </section>
+    <section id="auth-page" class="hidden">
+        <div class="auth-container">
+            <h1>Bienvenue sur EduSmart.AI</h1>
+            <p>Connectez-vous pour commencer votre aventure.</p>
+            <form id="login-form">
+                <div class="auth-form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" value="etudiant@edusmart.ai" required></div>
+                <div class="auth-form-group"><label for="password">Mot de passe</label><input type="password" id="password" value="password" required></div>
+                <button type="submit" class="auth-btn">Se Connecter</button>
+            </form>
+        </div>
+    </section>
 
     <div id="main-app" class="hidden">
         <header id="main-header">
@@ -287,7 +295,8 @@
                     <div class="filters"><button class="filter-btn active" data-filter="all">Tous</button><button class="filter-btn" data-filter="collège">Collège</button><button class="filter-btn" data-filter="lycée">Lycée (Bac)</button><button class="filter-btn" data-filter="prépa">Classes Prépa</button></div>
                     <div class="courses-grid">
                         <div class="course-card" data-level="lycée"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/4A90E2/FFFFFF?text=Maths');"></div><div class="course-card-content"><h3>Mathématiques - Analyse</h3><p>Avec M. Diallo</p><p>Progression: 75%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer le parcours</a></div></div></div>
-                        </div>
+                        <div class="course-card" data-level="prépa"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/50E3C2/FFFFFF?text=Physique');"></div><div class="course-card-content"><h3>Physique - Électromagnétisme</h3><p>Avec Mme. Traoré</p><p>Progression: 40%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer le parcours</a></div></div></div>
+                    </div>
                 </div>
             </section>
             
@@ -308,7 +317,7 @@
                 </div>
             </section>
             
-             <section id="study-rooms" class="page-section hidden">
+            <section id="study-rooms" class="page-section hidden">
                  <div class="container content-wrapper">
                      <div class="widget-header">
                         <h2><i class="fas fa-users-rays"></i> Salles d'étude</h2>
@@ -353,12 +362,12 @@
                     <h2>Ma Progression</h2>
                     <div class="gamification-grid">
                         <div class="widget"><h3>Niveau Actuel: Virtuose II</h3><p>Vous êtes sur la bonne voie, continuez comme ça !</p><div class="progress-bar-container" style="height:25px;"><div class="progress-bar" style="width: 80%;"></div></div><p>8200 / 10000 points pour le niveau suivant</p></div>
-                        <div class="widget leaderboards"><h3>Classements</h3><ul><li><span>1. Vous</span><span>12500 pts</span></li><li><span>2. Ami_X</span><span>11000 pts</span></li><li><span>3. Ami_Y</span><span>9800 pts</span></li></ul></div>
+                        <div class="widget leaderboards"><h3>Classements</h3><ul style="list-style: none; padding: 0;"><li><span>1. Vous</span><span>12500 pts</span></li><li><span>2. Ami_X</span><span>11000 pts</span></li><li><span>3. Ami_Y</span><span>9800 pts</span></li></ul></div>
                     </div>
                  </div>
             </section>
 
-             <section id="teachers-ai" class="page-section hidden">
+            <section id="teachers-ai" class="page-section hidden">
                 <div class="container content-wrapper">
                      <div class="widget-header">
                         <h2><i class="fas fa-chalkboard-teacher"></i> Espace Professeur</h2>
@@ -368,7 +377,7 @@
                         <div class="widget">
                             <h3><i class="fas fa-users"></i> Mes Classes</h3>
                             <p>Vous gérez <strong>3 classes</strong>. Sélectionnez une classe pour voir les détails.</p>
-                            </div>
+                        </div>
                          <div class="widget">
                             <h3><i class="fas fa-tasks"></i> Actions Rapides</h3>
                             <a href="#" class="btn-primary" style="display:block; margin-bottom: 1rem;">Créer un quiz</a>
@@ -386,7 +395,7 @@
                         </div>
                         <div class="widget">
                            <h3><i class="fas fa-chart-line"></i> Performance de la classe "Terminale S1"</h3>
-                           <p>Rapport sur le dernier chapitre : 85% de réussite moyenne.</p>
+                            <p>Rapport sur le dernier chapitre : 85% de réussite moyenne.</p>
                              <a href="#">Générer un rapport détaillé PDF</a>
                         </div>
                     </div>
@@ -424,7 +433,8 @@
                                     <h3>Analyse des compétences</h3>
                                      <a href="#" class="btn-primary"><i class="fas fa-file-pdf"></i> Exporter en PDF</a>
                                 </div>
-                                <canvas id="skills-chart"></canvas> <div style="margin-top: 2rem;">
+                                <canvas id="skills-chart"></canvas>
+                                <div style="margin-top: 2rem;">
                                     <h4>Feedback de l'IA :</h4>
                                     <p><strong>Points forts :</strong> Excellente résolution de problèmes en Algèbre.</p>
                                     <p><strong>Axes d'amélioration :</strong> La créativité et la collaboration pourraient être renforcées. Participez à une salle d'étude pour progresser !</p>
@@ -456,16 +466,46 @@
     </div>
 
     <script>
-    // [Le JavaScript de base est conservé ici]
-    // Il faudrait y ajouter la logique pour les nouveaux éléments.
     document.addEventListener('DOMContentLoaded', () => {
 
-        // ... (logique d'authentification, navigation, filtres, etc. existante)
-        
-        // --- AUTHENTIFICATION LOGIC ---
         const authPage = document.getElementById('auth-page');
         const mainApp = document.getElementById('main-app');
         const loginForm = document.getElementById('login-form');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const headerNav = document.querySelector('#main-header nav');
+
+        function navigateTo(hash) {
+            if (!hash || hash === '#') {
+                authPage.classList.remove('hidden');
+                mainApp.classList.add('hidden');
+                return;
+            }
+            
+            authPage.classList.add('hidden');
+            mainApp.classList.remove('hidden');
+            mainApp.style.opacity = '1';
+
+            pageSections.forEach(section => section.classList.add('hidden'));
+            
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                 targetSection.classList.remove('hidden');
+            } else {
+                 document.querySelector('#dashboard').classList.remove('hidden');
+            }
+            
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+            
+            if (headerNav.classList.contains('active')) {
+                headerNav.classList.remove('active');
+            }
+
+            if (hash === '#profile') {
+                renderSkillsChart();
+            }
+        }
 
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -473,49 +513,36 @@
             authPage.style.opacity = '0';
             setTimeout(() => {
                 authPage.classList.add('hidden');
+                authPage.style.opacity = '1';
+                
                 mainApp.classList.remove('hidden');
                 mainApp.style.opacity = '0';
-                setTimeout(() => { mainApp.style.opacity = '1'; }, 50);
-                navigateTo(window.location.hash || '#dashboard');
+                
+                setTimeout(() => { 
+                    mainApp.style.opacity = '1'; 
+                }, 50);
+
+                window.location.hash = '#dashboard';
             }, 500);
         });
-        
-        // --- CORE APP LOGIC & NAVIGATION ---
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pageSections = document.querySelectorAll('.page-section');
-        const menuToggle = document.querySelector('.menu-toggle');
-        const headerNav = document.querySelector('#main-header nav');
-        
-        function navigateTo(hash) {
-            if (!hash || hash === '#') hash = '#dashboard';
-            pageSections.forEach(section => section.classList.add('hidden'));
-            
-            const targetSection = document.querySelector(hash);
-            if (targetSection) targetSection.classList.remove('hidden');
-            
-            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
-            if (headerNav.classList.contains('active')) menuToggle.click();
-
-            // NOUVEAUTÉ : Lancer le graphique quand la page profil est visible
-            if (hash === '#profile') {
-                renderSkillsChart();
-            }
-        }
 
         document.body.addEventListener('click', (e) => {
-            if (e.target.closest('.nav-link')) {
+            const link = e.target.closest('.nav-link');
+            if (link) {
                 e.preventDefault();
-                const link = e.target.closest('.nav-link');
                 const hash = link.getAttribute('href');
-                if (window.location.hash !== hash) window.location.hash = hash;
-                else navigateTo(hash);
+                if (window.location.hash !== hash) {
+                    window.location.hash = hash;
+                } else {
+                    navigateTo(hash);
+                }
             }
         });
         
         window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        
         menuToggle.addEventListener('click', () => headerNav.classList.toggle('active'));
         
-        // --- DYNAMIC TABS LOGIC ---
         function setupTabs(containerSelector) {
             const container = document.querySelector(containerSelector);
             if (!container) return;
@@ -533,11 +560,9 @@
         }
         setupTabs('.profile-tabs');
 
-
-        // NOUVEAUTÉ : Logique pour le graphique de compétences
         function renderSkillsChart() {
              const ctx = document.getElementById('skills-chart');
-             if (ctx && !Chart.getChart(ctx)) { // Pour éviter de redessiner par-dessus
+             if (ctx && !Chart.getChart(ctx)) {
                 new Chart(ctx, {
                     type: 'radar',
                     data: {
@@ -561,6 +586,9 @@
                 });
              }
         }
+
+        // Gérer le chargement initial
+        navigateTo(window.location.hash);
     });
     </script>
 </body>
