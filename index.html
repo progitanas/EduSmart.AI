@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI - Votre Compagnon Pédagogique</title>
+    <title>EduSmart.AI - Révolutionnez Votre Apprentissage</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -13,163 +13,268 @@
     <header id="main-header">
         <div class="container header-content">
             <div class="logo">
-                <a href="#home">EduSmart.AI</a>
+                <a href="#home">
+                    <img src="https://via.placeholder.com/40x40/6a11cb/ffffff?text=E" alt="EduSmart.AI Logo" class="logo-icon">
+                    EduSmart.AI
+                </a>
             </div>
             <nav>
-                <ul>
-                    <li><a href="#home"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="#gamification"><i class="fas fa-gamepad"></i> Gamification</a></li>
-                    <li><a href="#chatbot"><i class="fas fa-robot"></i> Mon Assistant IA</a></li>
-                    <li><a href="#content-creation"><i class="fas fa-lightbulb"></i> Fabrique de Savoir</a></li>
-                    <li><a href="#collaboration"><i class="fas fa-users"></i> Espace Dialogue</a></li>
-                    <li><a href="#parents"><i class="fas fa-user-friends"></i> Suivi Parental</a></li>
-                    <li><a href="#impact"><i class="fas fa-globe-americas"></i> Notre Engagement</a></li>
-                    <li><a href="#teachers-ai"><i class="fas fa-chalkboard-teacher"></i> Assistant Profs</a></li>
+                <ul class="nav-links">
+                    <li><a href="#home" data-section="home"><i class="fas fa-home icon-glow"></i> Accueil</a></li>
+                    <li><a href="#gamification" data-section="gamification"><i class="fas fa-medal icon-glow"></i> Gamification</a></li>
+                    <li><a href="#chatbot" data-section="chatbot"><i class="fas fa-comment-dots icon-glow"></i> Mon Assistant IA</a></li>
+                    <li><a href="#content-creation" data-section="content-creation"><i class="fas fa-magic icon-glow"></i> Fabrique de Savoir</a></li>
+                    <li><a href="#collaboration" data-section="collaboration"><i class="fas fa-hands-helping icon-glow"></i> Espace Dialogue</a></li>
+                    <li><a href="#parents" data-section="parents"><i class="fas fa-users-cog icon-glow"></i> Suivi Parental</a></li>
+                    <li><a href="#impact" data-section="impact"><i class="fas fa-leaf icon-glow"></i> Notre Engagement</a></li>
+                    <li><a href="#teachers-ai" data-section="teachers-ai"><i class="fas fa-robot icon-glow"></i> Assistant Profs</a></li>
                 </ul>
             </nav>
             <div class="user-actions">
-                <a href="#" class="profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
-                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <a href="#" class="profile-link btn-secondary-outline"><i class="fas fa-user-circle"></i> Mon Profil</a>
+                <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="home" class="page-section home-section">
-            <div class="container content-wrapper">
-                <h1>Apprenez, Grandissez, Réussissez avec EduSmart.AI</h1>
-                <p>Votre plateforme d'apprentissage intelligente et personnalisée.</p>
-                <div class="course-overview">
-                    <h2>Mes Cours Actuels</h2>
-                    <div class="courses-grid">
-                        <div class="course-card">
-                            <h3>Mathématiques - Algèbre</h3>
-                            <p>Progression: 75%</p>
-                            <a href="#" class="btn-primary">Continuer</a>
-                        </div>
-                        <div class="course-card">
-                            <h3>Français - Grammaire</h3>
-                            <p>Progression: 50%</p>
-                            <a href="#" class="btn-primary">Continuer</a>
-                        </div>
-                        </div>
+        <section id="home" class="page-section home-section active">
+            <div class="container content-wrapper hero-content">
+                <div class="hero-text">
+                    <h1>Révolutionnez Votre Apprentissage avec <span class="highlight">EduSmart.AI</span></h1>
+                    <p class="subtitle">Votre compagnon éducatif intelligent, interactif et inspirant pour réussir.</p>
+                    <div class="hero-buttons">
+                        <a href="#gamification" class="btn-primary-hero">Commencer l'Aventure <i class="fas fa-arrow-right"></i></a>
+                        <a href="#content-creation" class="btn-secondary-hero">Créer du Contenu <i class="fas fa-plus"></i></a>
+                    </div>
                 </div>
-                <div class="latest-achievements">
-                    <h2>Dernières Réalisations</h2>
-                    <p>Bravo ! Vous avez obtenu le badge "Maître des Bases" !</p>
+                <div class="hero-image">
+                    <img src="https://via.placeholder.com/500x350/a1c4fd/ffffff?text=Apprentissage+Intelligent" alt="Illustration d'apprentissage intelligent" class="floating-image">
+                </div>
+            </div>
+            <div class="container course-overview-home">
+                <h2 class="section-title">Vos Progrès Récents</h2>
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <i class="fas fa-calculator course-icon"></i>
+                        <h3>Mathématiques - Algèbre</h3>
+                        <div class="progress-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                        <p>75% Terminé</p>
+                        <a href="#" class="btn-small">Continuer <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="course-card">
+                        <i class="fas fa-book course-icon"></i>
+                        <h3>Français - Grammaire</h3>
+                        <div class="progress-container"><div class="progress-bar" style="width: 50%;"></div></div>
+                        <p>50% Terminé</p>
+                        <a href="#" class="btn-small">Continuer <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="course-card">
+                        <i class="fas fa-atom course-icon"></i>
+                        <h3>Sciences - Physique</h3>
+                        <div class="progress-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                        <p>90% Terminé</p>
+                        <a href="#" class="btn-small">Réviser <i class="fas fa-chevron-right"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="gamification" class="page-section gamification-section hidden">
             <div class="container content-wrapper">
-                <h2>Mon Aventure d'Apprentissage</h2>
+                <h2 class="section-title">Mon Aventure d'Apprentissage Gamifiée</h2>
                 <div class="gamification-dashboard">
-                    <div class="level-progress">
-                        <h3>Niveau Actuel: Explorateur I</h3>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: 60%;"></div>
+                    <div class="level-card glassmorphism-card">
+                        <i class="fas fa-trophy level-icon"></i>
+                        <h3>Niveau Actuel: <span class="highlight-level">Maître des Connaissances I</span></h3>
+                        <div class="progress-bar-container-lg">
+                            <div class="progress-bar-lg" style="width: 85%;"></div>
                         </div>
-                        <p>600/1000 points pour le prochain niveau</p>
+                        <p>Prochain niveau dans 150 points !</p>
+                        <button class="btn-primary-small">Voir les objectifs <i class="fas fa-arrow-right"></i></button>
                     </div>
+
                     <div class="badges-rewards">
-                        <h3>Mes Badges & Récompenses</h3>
+                        <h3 class="subsection-title"><i class="fas fa-star-half-alt"></i> Mes Badges & Récompenses</h3>
                         <div class="badge-grid">
-                            <div class="badge-item"><i class="fas fa-medal"></i> Maître des Bases</div>
-                            <div class="badge-item"><i class="fas fa-star"></i> Esprit Curieux</div>
+                            <div class="badge-item tooltipped" data-tooltip="Débloqué pour 10 heures d'étude">
+                                <i class="fas fa-brain badge-icon unlocked"></i>
+                                <p>Esprit Curieux</p>
                             </div>
+                            <div class="badge-item tooltipped" data-tooltip="Débloqué après 5 cours complétés">
+                                <i class="fas fa-graduation-cap badge-icon unlocked"></i>
+                                <p>Diplômé du Savoir</p>
+                            </div>
+                            <div class="badge-item tooltipped" data-tooltip="Débloquez ce badge en participant à 3 défis">
+                                <i class="fas fa-rocket badge-icon locked"></i>
+                                <p>Pionnier</p>
+                            </div>
+                            <div class="badge-item tooltipped" data-tooltip="Débloquez ce badge en aidant 5 camarades sur le forum">
+                                <i class="fas fa-hands-helping badge-icon locked"></i>
+                                <p>Mentor</p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="leaderboards">
-                        <h3>Classements Amicaux</h3>
-                        <ul>
-                            <li>1. Votre Nom - 1250 pts</li>
-                            <li>2. Ami_X - 1100 pts</li>
-                            <li>3. Ami_Y - 980 pts</li>
+                        <h3 class="subsection-title"><i class="fas fa-chart-line"></i> Classements Amicaux</h3>
+                        <div class="leaderboard-options">
+                            <button class="btn-secondary-outline active">Mes Amis</button>
+                            <button class="btn-secondary-outline">Ma Classe</button>
+                            <button class="btn-secondary-outline">Global</button>
+                        </div>
+                        <ul class="leaderboard-list">
+                            <li class="current-user-rank">
+                                <span class="rank">#1</span>
+                                <span class="name">Vous</span>
+                                <span class="points">1250 pts <i class="fas fa-crown gold"></i></span>
+                            </li>
+                            <li><span class="rank">#2</span><span class="name">Ami_X</span><span class="points">1100 pts</span></li>
+                            <li><span class="rank">#3</span><span class="name">Ami_Y</span><span class="points">980 pts</span></li>
+                            <li><span class="rank">#4</span><span class="name">Ami_Z</span><span class="points">850 pts</span></li>
                         </ul>
                     </div>
+
+                    <div class="challenges-section">
+                        <h3 class="subsection-title"><i class="fas fa-bolt"></i> Défis Actuels</h3>
+                        <div class="challenge-card">
+                            <h4>Défi de la Semaine : Maîtrise des Fonctions</h4>
+                            <p>Complétez 3 exercices avancés sur les fonctions mathématiques avant dimanche soir.</p>
+                            <button class="btn-primary-small">Participer <i class="fas fa-trophy"></i></button>
+                        </div>
                     </div>
+                </div>
             </div>
         </section>
 
         <section id="chatbot" class="page-section chatbot-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Assistant IA</h2>
-                <div class="chatbot-interface">
-                    <div class="chat-display">
-                        <div class="message bot-message">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
-                        <div class="message user-message">J'ai une question sur les fonctions linéaires.</div>
+            <div class="container content-wrapper chatbot-container">
+                <h2 class="section-title">Mon Assistant IA <span class="subtitle-chat">(Votre guide personnel 24/7)</span></h2>
+                <div class="chatbot-interface glassmorphism-card">
+                    <div class="chat-header">
+                        <span class="status-indicator online"></span>
+                        <span>EduSmart.AI Assistant</span>
+                        <div class="chat-settings">
+                            <select id="language-select" aria-label="Sélectionner la langue">
+                                <option value="fr-FR">Français</option>
+                                <option value="en-US">English</option>
+                                <option value="wo-SN">Wolof</option>
+                                <option value="ha-NG">Haoussa</option>
+                                <option value="sw-KE">Swahili</option>
+                                </select>
+                            <button id="text-to-speech-btn" class="icon-btn tooltipped" data-tooltip="Activer la lecture vocale"><i class="fas fa-volume-up"></i></button>
+                        </div>
+                    </div>
+                    <div class="chat-display custom-scrollbar">
+                        <div class="message bot-message">Bonjour ! Comment puis-je vous aider à explorer le monde du savoir ?</div>
+                        <div class="message user-message">J'ai des difficultés avec la physique quantique.</div>
+                        <div class="message bot-message">Absolument ! La physique quantique est fascinante. Quel aspect souhaitez-vous explorer en particulier ?</div>
                     </div>
                     <div class="chat-controls">
-                        <select id="language-select">
-                            <option value="fr">Français</option>
-                            <option value="en">Anglais</option>
-                            <option value="wolof">Wolof</option>
-                            </select>
-                        <input type="text" id="chat-input" placeholder="Tapez votre message ou utilisez le micro...">
-                        <button id="voice-input-btn"><i class="fas fa-microphone"></i></button>
-                        <button id="send-message-btn"><i class="fas fa-paper-plane"></i></button>
-                        <button id="text-to-speech-btn"><i class="fas fa-volume-up"></i></button>
+                        <input type="text" id="chat-input" placeholder="Tapez votre message ou utilisez le micro..." aria-label="Champ de saisie du message">
+                        <button id="voice-input-btn" class="icon-btn tooltipped" data-tooltip="Saisie vocale"><i class="fas fa-microphone"></i></button>
+                        <button id="send-message-btn" class="icon-btn send-btn tooltipped" data-tooltip="Envoyer"><i class="fas fa-paper-plane"></i></button>
                     </div>
+                </div>
+                <div class="suggestion-chips">
+                    <span class="chip">Qu'est-ce que la relativité ?</span>
+                    <span class="chip">Donne-moi un exercice sur les fractions</span>
+                    <span class="chip">Explique le cycle de l'eau</span>
                 </div>
             </div>
         </section>
 
         <section id="content-creation" class="page-section content-creation-section hidden">
             <div class="container content-wrapper">
-                <h2>Ma Fabrique de Savoir</h2>
-                <div class="content-generator">
-                    <input type="text" id="content-topic" placeholder="Sujet ou concept à générer (ex: Photosynthèse)">
+                <h2 class="section-title">Ma Fabrique de Savoir <span class="subtitle-content">(Créez vos ressources personnalisées en un clic)</span></h2>
+                <div class="content-generator glassmorphism-card">
+                    <div class="input-group">
+                        <label for="content-topic">Sujet / Concept :</label>
+                        <input type="text" id="content-topic" placeholder="Ex: Révolution Française, Théorème de Pythagore...">
+                    </div>
+
                     <div class="generation-options">
-                        <select id="content-type">
-                            <option value="fiche">Fiche de Révision</option>
-                            <option value="carte">Carte Mémoire</option>
-                            <option value="video">Vidéo Courte Expliquée</option>
-                            <option value="quiz">Quiz</option>
-                        </select>
-                        <select id="difficulty-level">
-                            <option value="facile">Facile</option>
-                            <option value="moyen">Moyen</option>
-                            <option value="difficile">Difficile</option>
-                        </select>
+                        <div class="input-group">
+                            <label for="content-type">Format :</label>
+                            <select id="content-type">
+                                <option value="fiche">Fiche de Révision</option>
+                                <option value="carte">Carte Mémoire</option>
+                                <option value="video">Vidéo Courte Expliquée</option>
+                                <option value="quiz">Quiz Interactif</option>
+                                <option value="resume">Résumé Détaillé</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="difficulty-level">Niveau de Difficulté :</label>
+                            <select id="difficulty-level">
+                                <option value="debutant">Débutant</option>
+                                <option value="intermediaire">Intermédiaire</option>
+                                <option value="avance">Avancé</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div class="multimedia-options">
-                        <input type="text" id="youtube-url" placeholder="URL YouTube (facultatif)">
-                        <button class="btn-secondary"><i class="fas fa-image"></i> Ajouter Image</button>
-                        <button class="btn-secondary"><i class="fas fa-flask"></i> Simulation</button>
+                        <div class="input-group">
+                            <label for="youtube-url">Intégrer Vidéo YouTube (URL) :</label>
+                            <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." class="full-width-input">
+                        </div>
+                        <div class="multimedia-buttons">
+                            <button class="btn-secondary-outline"><i class="fas fa-image"></i> Ajouter Image</button>
+                            <button class="btn-secondary-outline"><i class="fas fa-flask"></i> Ajouter Simulation</button>
+                        </div>
                     </div>
-                    <button id="generate-content-btn" class="btn-primary">Générer le Contenu</button>
-                    <div class="generated-content-preview">
+                    <button id="generate-content-btn" class="btn-primary-large"><i class="fas fa-cogs"></i> Générer le Contenu</button>
+
+                    <div class="generated-content-preview loading-state">
+                        <p><i class="fas fa-rocket fa-bounce"></i> Votre contenu apparaîtra ici après génération.</p>
                         </div>
+
                     <div class="content-library">
-                        <h3>Ma Bibliothèque de Contenu</h3>
-                        </div>
+                        <h3 class="subsection-title"><i class="fas fa-folder-open"></i> Ma Bibliothèque de Contenu</h3>
+                        <ul class="library-list">
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche : Photosynthèse (Générée le 01/06)</a></li>
+                            <li><a href="#"><i class="fas fa-clipboard-question"></i> Quiz : Histoire de France (Généré le 28/05)</a></li>
+                            </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="collaboration" class="page-section collaboration-section hidden">
             <div class="container content-wrapper">
-                <h2>Mon Espace de Dialogue</h2>
-                <div class="qa-forum">
-                    <button class="btn-primary">Poser une nouvelle question</button>
-                    <div class="questions-list">
-                        <div class="question-item">
-                            <h3>Question sur les équations du second degré</h3>
-                            <p>Par: Élève A - Il y a 2 heures</p>
-                            <a href="#" class="view-thread">Voir la discussion (3 réponses)</a>
-                        </div>
-                        <div class="question-item">
-                            <h3>Ressources pour la physique nucléaire</h3>
-                            <p>Par: Élève B - Hier</p>
-                            <a href="#" class="view-thread">Voir la discussion (1 réponse)</a>
-                        </div>
-                        </div>
-                    <div class="shared-resources">
-                        <h3>Ressources Partagées par les Profs</h3>
-                        <ul>
-                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche de Révision - Les Verbes Irréguliers</a></li>
-                            <li><a href="#"><i class="fas fa-file-pdf"></i> Correction Exercice 5 - Chapitre 3</a></li>
-                        </ul>
+                <h2 class="section-title">Mon Espace de Dialogue <span class="subtitle-collaboration">(Échangez avec vos professeurs et camarades)</span></h2>
+                <div class="collaboration-dashboard">
+                    <div class="qa-forum glassmorphism-card">
+                        <h3 class="subsection-title"><i class="fas fa-comments"></i> Questions & Réponses</h3>
+                        <button class="btn-primary-small mb-3"><i class="fas fa-plus-circle"></i> Poser une nouvelle question</button>
+                        <div class="questions-list custom-scrollbar">
+                            <div class="question-item">
+                                <div class="q-header">
+                                    <h4>Question sur les équations du second degré</h4>
+                                    <span class="q-meta"><i class="fas fa-user-circle"></i> Élève A - <i class="fas fa-clock"></i> Il y a 2 heures</span>
+                                </div>
+                                <p class="q-excerpt">Bonjour, je bloque sur la méthode de résolution de l'équation x² + 3x - 4 = 0. Pouvez-vous m'aider ?</p>
+                                <a href="#" class="view-thread">Voir la discussion (3 réponses) <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                            <div class="question-item">
+                                <div class="q-header">
+                                    <h4>Besoin de ressources pour la physique nucléaire</h4>
+                                    <span class="q-meta"><i class="fas fa-user-circle"></i> Élève B - <i class="fas fa-clock"></i> Hier</span>
+                                </div>
+                                <p class="q-excerpt">Notre cours de physique parle de radioactivité. Y a-t-il des vidéos ou des articles pour approfondir ?</p>
+                                <a href="#" class="view-thread">Voir la discussion (1 réponse) <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                            </div>
+                    </div>
+
+                    <div class="shared-resources glassmorphism-card">
+                        <h3 class="subsection-title"><i class="fas fa-share-alt"></i> Ressources Partagées par les Profs</h3>
+                        <ul class="resources-list custom-scrollbar">
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche de Révision - Les Verbes Irréguliers (Français)</a></li>
+                            <li><a href="#"><i class="fas fa-file-pdf"></i> Correction Exercice 5 - Chapitre 3 (Maths)</a></li>
+                            <li><a href="#"><i class="fas fa-video"></i> Vidéo : Le cycle de l'eau expliqué (Sciences)</a></li>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -177,65 +282,123 @@
 
         <section id="parents" class="page-section parents-section hidden">
             <div class="container content-wrapper">
-                <h2>Mon Suivi Parental</h2>
+                <h2 class="section-title">Mon Suivi Parental <span class="subtitle-parent">(Restez informés sur la progression de votre enfant)</span></h2>
                 <div class="parent-dashboard">
-                    <div class="child-progress-summary">
-                        <h3>Progression de [Nom de l'enfant]</h3>
-                        <p>Mathématiques: Bon progrès</p>
-                        <p>Français: Difficultés détectées</p>
+                    <div class="child-overview glassmorphism-card">
+                        <div class="child-avatar">
+                            <img src="https://via.placeholder.com/80x80/007bff/ffffff?text=E" alt="Avatar Enfant">
+                            <h3>Progression de [Nom de l'enfant]</h3>
                         </div>
-                    <div class="alerts-recommendations">
-                        <h3>Alertes & Recommandations</h3>
-                        <div class="alert-item error">
-                            <i class="fas fa-exclamation-triangle"></i> Difficulté détectée en Français.
-                            <p>Suggestion: Revoir les conjugaisons des verbes du 3ème groupe. Accédez à notre module de création de fiches.</p>
+                        <div class="progress-charts">
+                            <div class="chart-item">
+                                <i class="fas fa-chart-pie chart-icon"></i>
+                                <h4>Performance Générale</h4>
+                                <p>Bonne performance globale.</p>
+                            </div>
+                            <div class="chart-item">
+                                <i class="fas fa-chart-bar chart-icon"></i>
+                                <h4>Matières Fortes/Faibles</h4>
+                                <p><span class="strong">Maths: Excellente</span> | <span class="weak">Français: Difficultés</span></p>
+                            </div>
                         </div>
-                        <div class="alert-item info">
-                            <i class="fas fa-info-circle"></i> Félicitations ! [Nom de l'enfant] a obtenu un nouveau badge.
+                        <button class="btn-primary-small"><i class="fas fa-file-export"></i> Télécharger Rapport Complet</button>
+                    </div>
+
+                    <div class="alerts-recommendations glassmorphism-card">
+                        <h3 class="subsection-title"><i class="fas fa-bell"></i> Alertes & Recommandations</h3>
+                        <div class="alert-list">
+                            <div class="alert-item danger">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <div>
+                                    <h4>Difficulté détectée en Français (Conjugaison)</h4>
+                                    <p>Suggestion: Proposez à votre enfant de revoir le module "Temps et Modes des Verbes" sur EduSmart.AI.</p>
+                                    <button class="btn-small-outline">Accéder aux Ressources <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="alert-item success">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h4>Félicitations ! Votre enfant a débloqué un nouveau badge !</h4>
+                                    <p>"Maître des Expressions" - pour sa participation active aux discussions.</p>
+                                    <button class="btn-small-outline">Voir les Réalisations <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="alert-item info">
+                                <i class="fas fa-info-circle"></i>
+                                <div>
+                                    <h4>Nouvelle ressource disponible sur le volcanisme</h4>
+                                    <p>Un article interactif pour approfondir le sujet.</p>
+                                    <button class="btn-small-outline">Découvrir la Ressource <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="parent-actions">
+                            <button class="btn-secondary-outline"><i class="fas fa-cogs"></i> Paramètres de Notification</button>
+                            <button class="btn-secondary-outline"><i class="fas fa-envelope"></i> Contacter l'Enseignant</button>
                         </div>
                     </div>
-                    <button class="btn-secondary">Paramètres de Notification</button>
-                    <button class="btn-secondary">Contacter l'Enseignant</button>
                 </div>
             </div>
         </section>
 
         <section id="impact" class="page-section impact-section hidden">
             <div class="container content-wrapper">
-                <h2>Notre Engagement pour un Avenir Meilleur</h2>
-                <div class="impact-content">
-                    <h3>Notre Mission</h3>
-                    <p>EduSmart.AI s'engage à rendre l'éducation accessible et durable pour tous, en réduisant l'empreinte écologique et en favorisant l'inclusion.</p>
-                    <div class="eco-stats">
-                        <i class="fas fa-leaf"></i>
-                        <p><strong>Économie de Papier:</strong> Plus de 100 000 feuilles de papier économisées par an !</p>
+                <h2 class="section-title">Notre Engagement <span class="subtitle-impact">(Éducation Durable & Inclusion Sociale)</span></h2>
+                <div class="impact-grid">
+                    <div class="impact-card glassmorphism-card">
+                        <i class="fas fa-globe-americas impact-icon primary-color"></i>
+                        <h3>Accès Équitable à l'Éducation</h3>
+                        <p>Nous nous engageons à briser les barrières géographiques et économiques en offrant un accès à distance de qualité.</p>
                     </div>
-                    <div class="social-initiatives">
-                        <h3>Nos Initiatives Sociales</h3>
-                        <p>Nous collaborons avec des écoles rurales pour fournir un accès gratuit à notre plateforme et des formations aux enseignants.</p>
-                        </div>
-                    <button class="btn-primary">En savoir plus sur nos rapports d'impact</button>
+                    <div class="impact-card glassmorphism-card">
+                        <i class="fas fa-recycle impact-icon secondary-color"></i>
+                        <h3>Réduction de l'Empreinte Écologique</h3>
+                        <p>En digitalisant les supports d'apprentissage, nous contribuons activement à la réduction de la consommation de papier.</p>
+                        <p class="statistic">**Plus de 200 000 feuilles économisées annuellement !**</p>
+                    </div>
+                    <div class="impact-card glassmorphism-card">
+                        <i class="fas fa-hands-holding impact-icon tertiary-color"></i>
+                        <h3>Soutien aux Écoles Défavorisées</h3>
+                        <p>Nous mettons en place des partenariats et des initiatives de formation pour les écoles en zones rurales et défavorisées.</p>
+                        <button class="btn-primary-small">Découvrir nos partenariats <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="impact-card glassmorphism-card">
+                        <i class="fas fa-lightbulb impact-icon accent-color"></i>
+                        <h3>Innovation Pédagogique Inclusive</h3>
+                        <p>Nos outils IA et vocaux rendent l'apprentissage accessible à tous, y compris les élèves ayant des difficultés de lecture.</p>
+                    </div>
+                </div>
+                <div class="impact-cta">
+                    <p>Votre engagement avec EduSmart.AI contribue directement à ces initiatives. Merci de faire partie du changement !</p>
+                    <button class="btn-primary-large"><i class="fas fa-hand-holding-heart"></i> Faire un Don ou Devenir Partenaire</button>
                 </div>
             </div>
         </section>
 
         <section id="teachers-ai" class="page-section teachers-ai-section hidden">
-            <div class="container content-wrapper">
-                <h2>Mon Assistant Pédagogique IA (Pour Enseignants)</h2>
-                <div class="teacher-chatbot-interface">
-                    <div class="chat-display">
-                        <div class="message bot-message">Bonjour Professeur ! Comment puis-je vous assister aujourd'hui ?</div>
+            <div class="container content-wrapper teachers-ai-container">
+                <h2 class="section-title">Mon Assistant Pédagogique IA <span class="subtitle-teachers">(L'IA au service de l'excellence éducative)</span></h2>
+                <div class="teacher-chatbot-interface glassmorphism-card">
+                    <div class="chat-header">
+                        <span class="status-indicator online"></span>
+                        <span>Assistant Enseignant AI</span>
+                    </div>
+                    <div class="chat-display custom-scrollbar">
+                        <div class="message bot-message">Bonjour Professeur ! Je suis là pour optimiser votre temps et enrichir votre pédagogie. Comment puis-je vous aider ?</div>
+                        <div class="message user-message">Génère un plan de cours sur la Seconde Guerre Mondiale pour des élèves de 3ème.</div>
+                        <div class="message bot-message">Bien sûr ! Voici une proposition de plan de cours détaillé... (plan généré par l'IA)</div>
                     </div>
                     <div class="chat-controls">
-                        <input type="text" id="teacher-chat-input" placeholder="Demandez à l'IA (ex: Générer un plan de cours sur...)">
-                        <button id="teacher-send-message-btn"><i class="fas fa-paper-plane"></i></button>
+                        <input type="text" id="teacher-chat-input" placeholder="Demandez à l'IA (ex: Analyser les données des élèves...)" aria-label="Champ de saisie pour l'IA enseignant">
+                        <button id="teacher-send-message-btn" class="icon-btn send-btn"><i class="fas fa-paper-plane"></i></button>
                     </div>
-                    <div class="ai-tools-buttons">
-                        <button class="btn-secondary"><i class="fas fa-book-open"></i> Générateur de Plan de Cours</button>
-                        <button class="btn-secondary"><i class="fas fa-chart-line"></i> Analyse de Données Élèves</button>
-                        <button class="btn-secondary"><i class="fas fa-tasks"></i> Plans d'Action Personnalisés</button>
-                        <button class="btn-secondary"><i class="fas fa-search"></i> Banque de Ressources</button>
-                    </div>
+                </div>
+                <div class="ai-tools-buttons">
+                    <button class="btn-tool glassmorphism-card"><i class="fas fa-book-open"></i> Générateur de Plan de Cours</button>
+                    <button class="btn-tool glassmorphism-card"><i class="fas fa-chart-bar"></i> Analyse de Données Élèves</button>
+                    <button class="btn-tool glassmorphism-card"><i class="fas fa-cogs"></i> Plans d'Action Personnalisés</button>
+                    <button class="btn-tool glassmorphism-card"><i class="fas fa-database"></i> Banque de Ressources Pédagogiques</button>
+                    <button class="btn-tool glassmorphism-card"><i class="fas fa-marker"></i> Aide à l'Évaluation</button>
                 </div>
             </div>
         </section>
@@ -243,11 +406,45 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
-            <div class="footer-links">
-                <a href="#">Politique de Confidentialité</a>
-                <a href="#">Conditions d'Utilisation</a>
-                <a href="#">Contact</a>
+            <div class="footer-grid">
+                <div class="footer-col logo-col">
+                    <a href="#home" class="footer-logo">EduSmart.AI</a>
+                    <p>Révolutionnons l'éducation ensemble.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Fonctionnalités</h4>
+                    <ul>
+                        <li><a href="#gamification">Gamification</a></li>
+                        <li><a href="#chatbot">Chatbot IA</a></li>
+                        <li><a href="#content-creation">Création de Contenu</a></li>
+                        <li><a href="#collaboration">Collaboration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Témoignages</a></li>
+                        <li><a href="#impact">Impact Social</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact & Légal</h4>
+                    <ul>
+                        <li><a href="#">Contactez-nous</a></li>
+                        <li><a href="#">Politique de Confidentialité</a></li>
+                        <li><a href="#">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
