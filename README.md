@@ -1,64 +1,62 @@
-EduSmart.AI est une plateforme intelligente d’apprentissage personnalisée, conçue pour révolutionner l’éducation grâce à l’intelligence artificielle. Elle s’adapte au rythme, au style d’apprentissage et aux besoins spécifiques de chaque élève, tout en fournissant aux enseignants des outils avancés d’analyse pédagogique.
+🚀 EduSmart.AI
+L’IA au service d’une éducation plus intelligente, plus inclusive et plus personnalisée.
 
-🚀 Mission
-Offrir à chaque apprenant, partout dans le monde, une expérience éducative personnalisée, inclusive et motivante, en tirant parti de la puissance de l'IA et des technologies éducatives modernes.
+💡 Vision
+Chez EduSmart.AI, nous croyons que chaque apprenant mérite une expérience unique, adaptée à ses besoins, son rythme et ses ambitions. Grâce à l’intelligence artificielle, nous transformons l’éducation traditionnelle en un parcours intelligent, engageant et accessible à tous.
 
-🎯 Objectifs clés
-📊 Personnalisation : Cours et exercices adaptés automatiquement à chaque élève.
+🔍 Ce que nous faisons
+✨ Une plateforme EdTech tout-en-un basée sur l’IA :
+🎯 Parcours personnalisés : contenus et exercices adaptés automatiquement à chaque élève.
 
-📚 Contenu intelligent : Génération de contenus interactifs (quiz, résumés, vidéos explicatives).
+🧠 Assistant IA éducatif : réponses instantanées aux questions, recommandations pédagogiques, feedback intelligent.
 
-🧠 Suivi intelligent : Analyse continue des progrès et recommandations d’amélioration.
+📊 Dashboard analytique : suivi en temps réel des progrès, détection des difficultés.
 
-🧑‍🏫 Assistant IA pour enseignants : Suggestions pédagogiques, détection des blocages d’élèves, et automatisation des corrections.
+🧑‍🏫 Outils pour enseignants : génération de contenus, évaluation automatisée, indicateurs de performance.
 
-🌍 Accessibilité : Fonctionne sur web et mobile, multilingue, adapté à différents contextes scolaires.
+🌍 Accessibilité globale : interface multilingue, compatible web & mobile, faible consommation de données.
 
-🔧 Fonctionnalités principales
-Fonction	Description
-🧑‍🎓 Profil apprenant IA	Diagnostic initial + suivi en temps réel
-📈 Dashboard intelligent	Visualisation des performances et recommandations
-🎥 Cours interactifs	Générés automatiquement ou enrichis par les enseignants
-🧪 Quiz & évaluation IA	Adaptatifs, autocorrigés, avec feedback instantané
-🤖 Chatbot éducatif	Répond aux questions et aide à la compréhension
-🤝 Collaboration	Groupes d’étude, projets, partage entre apprenants
+⚙️ Technologies
+Front-end : React.js + Tailwind CSS
 
-🛠️ Technologies utilisées
-Front-end : React / HTML5 / CSS3 / Tailwind
-
-Back-end : Flask / Node.js
+Back-end : Python (Flask) / Node.js
 
 Base de données : PostgreSQL / MongoDB
 
-IA : OpenAI API, modèles NLP, moteur de recommandation personnalisé
+Intelligence Artificielle : NLP (OpenAI, Hugging Face), moteurs de recommandation, analyse comportementale
 
-DevOps : Docker, GitHub Actions, AWS / Azure
+Cloud & DevOps : Docker, GitHub Actions, AWS / Azure
 
-🌱 Pourquoi EduSmart.AI ?
-Répond aux défis de l'échec scolaire et de l'inégalité des chances.
+🌱 Impact
+📚 Réduction de l’échec scolaire
 
-Encourage une apprentissage actif et engageant.
+🤝 Inclusion numérique en zones défavorisées
 
-Évolutif pour écoles, universités, ONG et institutions publiques.
+♻️ Alignement avec les ODD 4 : Éducation de qualité pour tous
 
-Contribue aux Objectifs de Développement Durable (ODD 4 - Éducation de qualité).
+📈 Pour qui ?
+Écoles & universités
 
-🤝 Rejoignez-nous
-Nous sommes à la recherche de :
+Gouvernements & ONG éducatives
 
-Écoles partenaires
+Parents, tuteurs et apprenants curieux
 
-Investisseurs à impact
+Partenaires EdTech, incubateurs, investisseurs à impact
 
-Mentors en EdTech / IA
+🤝 Collaborer avec nous
+Nous recherchons actuellement :
 
-Développeurs passionnés par l’éducation
+🌐 Partenaires académiques
 
-📩 Contact : hello@edusmart.ai
-🔗 LinkedIn : EduSmart.AI (à adapter si page existe)
-🌐 Site web : www.edusmart.ai (à adapter selon disponibilité)
+💼 Investisseurs (pré-seed / seed)
 
-📌 Licence
-© 2025 EduSmart.AI — Tous droits réservés.
-Ce projet est actuellement en version bêta privée. Toute reproduction ou distribution non autorisée est interdite.
+🧑‍💻 Développeurs & chercheurs IA
 
+🎤 Ambassadeurs éducatifs
+
+📬 edusmartaimaroc@gmail.com
+🌐 https://progitanas.github.io/EduSmart.AI
+
+🛡️ Licence & Confidentialité
+© 2025 EduSmart.AI – Tous droits réservés.
+Ce projet est actuellement en phase bêta privée.
