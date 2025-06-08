@@ -1046,9 +1046,9 @@
                     <div class="profile-header">
                         <div class="profile-avatar">JD</div>
                         <div class="profile-info">
-                            <h2>Jean Dupont</h2>
-                            <p><i class="fas fa-graduation-cap"></i> Étudiant en Prépa Scientifique</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                            <h2>Anas SENHAJI</h2>
+                            <p><i class="fas fa-graduation-cap"></i> Student-Engineer Data Science Generalist, e-Health Specialization</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Casablanca, Morocco</p>
                         </div>
                     </div>
                     
@@ -1179,12 +1179,6 @@
             </div>
         </div>
     </div>
-
----
-
-## Code JavaScript Amélioré
-
-```javascript
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // --- SÉLECTION DES ÉLÉMENTS DU DOM ---
@@ -1226,69 +1220,37 @@
 
         // --- GESTION DE LA NAVIGATION ENTRE LES SECTIONS ---
         function navigateTo(hash) {
-            // Si aucun hash n'est fourni, force le tableau de bord
-            if (!hash || hash === '#') {
-                hash = '#dashboard';
-            }
-            
-            // Masque toutes les sections de l'application
-            pageSections.forEach(section => {
-                section.classList.add('hidden');
-            });
-            
-            // Affiche la section correspondant au hash
-            const targetSection = document.querySelector(hash);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
-            
-            // Met à jour la classe 'active' sur les liens de navigation
-            navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === hash);
-            });
-            
-            // Ferme le menu mobile si ouvert après une navigation
-            headerNav.classList.remove('active');
-            
-            // Fait défiler la fenêtre vers le haut de la nouvelle section
-            window.scrollTo(0, 0);
+    hash = hash.trim();
+    if (!hash || hash === '#') {
+        hash = '#dashboard';
+    }
+
+    // Affiche uniquement la section ciblée
+    pageSections.forEach(section => {
+        if (section.id === hash.substring(1)) {
+            section.classList.remove('hidden');
+
+            // Calcul de l'offset pour tenir compte de la hauteur du header fixe
+            const offset = headerNav.offsetHeight;
+            const topPos = section.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
+        } else {
+            section.classList.add('hidden');
         }
+    });
 
-        // Écoute les clics sur tous les liens de navigation pour changer de section
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); // Empêche le comportement par défaut du lien (rechargement de page)
-                const hash = e.currentTarget.getAttribute('href');
-                navigateTo(hash);
-            });
-        });
+    // Met à jour l'état actif des liens de navigation
+    navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href').trim() === hash);
+    });
 
-        // Gère l'affichage/masquage du menu de navigation pour les écrans mobiles
-        menuToggle.addEventListener('click', () => {
-            headerNav.classList.toggle('active');
-        });
+    // Ferme le menu mobile si ouvert
+    headerNav.classList.remove('active');
+}
 
-        // --- GESTION DU CHATBOT ---
-        // Bascule l'affichage du chatbot via le bouton flottant
-        fabChatbot.addEventListener('click', () => {
-            chatbotWindow.classList.toggle('active');
-        });
-        
-        // Ouvre le chatbot via le bouton "Ouvrir le Chatbot" dans le dashboard
-        if (openChatbotBtn) {
-            openChatbotBtn.addEventListener('click', () => {
-                chatbotWindow.classList.add('active');
-            });
-        }
-
-        // Envoie un message dans le chatbot (clic sur le bouton ou touche Entrée)
-        sendMessage.addEventListener('click', sendChatMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-        
+window.addEventListener('hashchange', () => {
+    navigateTo(window.location.hash);
+});
         function sendChatMessage() {
             const message = chatInput.value.trim();
             if (message) {
