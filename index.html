@@ -35,9 +35,10 @@
         h3 { font-size: 1.25rem; }
         .page-section { animation: fadeIn 0.5s forwards ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
+        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); margin-bottom: 1.5rem; }
         .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; text-decoration: none; transition: var(--transition-fast); }
         .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
+        .btn-secondary { background-color: var(--secondary-color); color: white; padding: 8px 16px; border: none; border-radius: var(--border-radius-md); cursor: pointer; }
 
         /* -- Page d'Authentification -- */
         #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
@@ -66,32 +67,106 @@
         .notification-bell { position: relative; cursor: pointer; font-size: 1.2rem; }
         .notification-dot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; background: var(--error-color); border-radius: 50%; border: 1px solid white; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(229, 62, 62, 0); } 100% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0); } }
-        .notifications-panel { display: none; position: absolute; top: 50px; right: 0; width: 380px; background: var(--surface-color); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg); z-index: 1001; overflow: hidden; }
+        .notifications-panel { display: none; position: absolute; top: 50px; right: 0; width: 380px; background: var(--surface-color); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg); z-index: 1001; overflow: hidden; max-height: 400px; overflow-y: auto; }
         .notifications-panel.active { display: block; animation: fadeIn 0.3s; }
         .fab-chatbot { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--primary-color); color: white; border-radius: 50%; border: none; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: var(--shadow-lg); cursor: pointer; z-index: 1010; transition: all 0.2s ease-in-out; }
         .fab-chatbot:hover { transform: scale(1.1); }
         .chatbot-window { display: none; position: fixed; bottom: 100px; right: 30px; width: 380px; height: 500px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); z-index: 1009; flex-direction: column; overflow: hidden; }
         .chatbot-window.active { display: flex; animation: fadeIn 0.3s; }
+        .chatbot-header { padding: 1rem; background: var(--primary-color); color: white; font-weight: 600; }
+        .chatbot-display { flex-grow: 1; overflow-y: auto; padding: 1rem; }
+        .chatbot-input { padding: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .chatbot-input input { flex-grow: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
 
         /* -- Styles des Sections & Widgets -- */
         .dashboard-grid, .teacher-dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: flex-start; }
-        .path-step { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 1rem; }
+        .three-column-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+        .path-step { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 1rem; transition: var(--transition-fast); }
+        .path-step:hover { transform: translateX(5px); }
         .path-step.done { background: #e8f5e9; border-left: 5px solid var(--success-color); }
         .path-step.active { border-left: 5px solid var(--primary-color); box-shadow: var(--shadow-sm); }
-        .courses-grid, .resource-grid, .study-rooms-grid, .gamification-badges-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .course-card { background-color: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); transition: all 0.2s ease-in-out; overflow: hidden; }
-        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .course-card-banner { height: 150px; background-size: cover; background-position: center; }
-        .course-card-content { padding: 1.5rem; }
+        .courses-grid, .resource-grid, .study-rooms-grid, .gamification-badges-grid, .webinar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .course-card, .webinar-card { background-color: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); transition: all 0.2s ease-in-out; overflow: hidden; }
+        .course-card:hover, .webinar-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .course-card-banner, .webinar-banner { height: 150px; background-size: cover; background-position: center; }
+        .course-card-content, .webinar-content { padding: 1.5rem; }
         .progress-bar-container { background-color: var(--border-color); border-radius: 99px; height: 8px; margin: 10px 0; }
         .progress-bar { background: var(--secondary-color); height: 100%; border-radius: 99px; }
         .collaboration-layout { display: grid; grid-template-columns: 300px 1fr 2fr; gap: 1rem; height: 75vh; }
-        .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; }
+        .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; background: var(--background-color); }
         .groups-list, .threads-list { list-style: none; overflow-y: auto; }
-        .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+        .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); transition: var(--transition-fast); }
+        .groups-list li:hover, .threads-list li:hover { background-color: var(--background-color); }
         .groups-list li.active, .threads-list li.active { background-color: var(--primary-color); color: white; }
         .thread-message-content { flex-grow: 1; overflow-y: auto; padding: 1rem; }
         
+        /* -- Gamification & Badges -- */
+        .badge-item { text-align: center; padding: 1rem; border: 2px solid var(--border-color); border-radius: var(--border-radius-lg); transition: var(--transition-fast); }
+        .badge-item.earned { border-color: var(--success-color); background: linear-gradient(135deg, #e8f5e9, #fff); }
+        .badge-item:hover { transform: scale(1.05); }
+        .level-display { text-align: center; padding: 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: var(--border-radius-lg); }
+        .leaderboard { background: var(--surface-color); border-radius: var(--border-radius-lg); overflow: hidden; }
+        .leaderboard-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border-color); }
+        .leaderboard-item:last-child { border-bottom: none; }
+        .leaderboard-item.me { background: var(--background-color); font-weight: 600; }
+
+        /* -- Quiz Creator & Interactive Elements -- */
+        .quiz-question { margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        .quiz-options { display: grid; gap: 0.5rem; margin-top: 1rem; }
+        .quiz-option { padding: 0.8rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); cursor: pointer; transition: var(--transition-fast); }
+        .quiz-option:hover { background: var(--background-color); }
+        .quiz-option.selected { background: var(--primary-color); color: white; }
+        .quiz-result { padding: 1rem; margin-top: 1rem; border-radius: var(--border-radius-md); }
+        .quiz-result.correct { background: var(--success-color); color: white; }
+        .quiz-result.incorrect { background: var(--error-color); color: white; }
+
+        /* -- Library & Resources -- */
+        .resource-filter { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.5rem 1rem; border: 1px solid var(--border-color); background: white; border-radius: var(--border-radius-md); cursor: pointer; }
+        .filter-btn.active { background: var(--primary-color); color: white; }
+        .resource-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 1rem; }
+        .resource-meta { color: var(--text-color-light); font-size: 0.9rem; }
+
+        /* -- Study Rooms -- */
+        .study-room { background: var(--surface-color); border-radius: var(--border-radius-lg); padding: 1.5rem; border: 1px solid var(--border-color); }
+        .room-participants { display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+        .participant-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+
+        /* -- Performance Reports -- */
+        .report-card { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); border-left: 5px solid var(--info-color); }
+        .metric { text-align: center; }
+        .metric-value { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
+        .metric-label { color: var(--text-color-light); }
+
+        /* -- Virtual Classroom -- */
+        .classroom-controls { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .classroom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+        .classroom-main { background: var(--surface-color); border-radius: var(--border-radius-lg); padding: 1.5rem; }
+        .classroom-sidebar { background: var(--surface-color); border-radius: var(--border-radius-lg); padding: 1.5rem; }
+
+        /* -- Offline Mode Indicator -- */
+        .offline-indicator { position: fixed; top: var(--header-height); left: 0; width: 100%; background: var(--warning-color); color: white; text-align: center; padding: 0.5rem; z-index: 999; display: none; }
+        .offline-indicator.active { display: block; }
+
+        /* -- Export & Integration -- */
+        .export-options { display: flex; gap: 1rem; margin-top: 1rem; }
+        .integration-card { padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); text-align: center; }
+        .integration-card.connected { border-color: var(--success-color); background: #e8f5e9; }
+
+        /* -- Soft Skills Tracking -- */
+        .skill-category { margin-bottom: 2rem; }
+        .skill-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; border-bottom: 1px solid var(--border-color); }
+        .skill-level { display: flex; gap: 3px; }
+        .skill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); }
+        .skill-dot.filled { background: var(--secondary-color); }
+
+        /* -- Language Selector Enhanced -- */
+        .language-selector { position: relative; }
+        .language-dropdown { position: absolute; top: 100%; right: 0; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md); display: none; z-index: 1002; }
+        .language-dropdown.active { display: block; }
+        .language-option { padding: 0.8rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+        .language-option:hover { background: var(--background-color); }
+
         /* -- Design Réactif -- */
         @media (max-width: 1024px) {
             #main-header nav { display: none; position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: var(--surface-color); flex-direction: column; padding-top: 2rem; transform: translateX(-100%); transition: transform 0.3s ease-in-out; z-index: 999; }
@@ -99,18 +174,28 @@
             #main-header nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
             #main-header nav a { padding: 20px; border-radius: 0; width: 100%; justify-content: center; }
             .menu-toggle { display: block; }
-            .dashboard-grid, .collaboration-layout, .teacher-dashboard-grid { grid-template-columns: 1fr; }
+            .dashboard-grid, .collaboration-layout, .teacher-dashboard-grid, .three-column-grid, .classroom-grid { grid-template-columns: 1fr; }
+            .chatbot-window { width: 95vw; right: 2.5vw; }
+            .resource-filter { justify-content: center; }
         }
     </style>
 </head>
 <body>
+    <div class="offline-indicator" id="offline-indicator">
+        <i class="fas fa-wifi"></i> Mode hors-ligne activé - Synchronisation automatique dès la reconnexion
+    </div>
+
     <section id="auth-page">
         <div class="auth-container">
             <h1>EduSmart.AI</h1>
-            <p>Connectez-vous pour commencer votre apprentissage.</p>
+            <p>Connectez-vous pour commencer votre apprentissage personnalisé.</p>
             <form id="login-form">
-                <div class="auth-form-group"><input type="email" value="etudiant@edusmart.ai" required></div>
-                <div class="auth-form-group"><input type="password" value="password" required></div>
+                <div class="auth-form-group">
+                    <input type="email" value="etudiant@edusmart.ai" placeholder="Email" required>
+                </div>
+                <div class="auth-form-group">
+                    <input type="password" value="password" placeholder="Mot de passe" required>
+                </div>
                 <button type="submit" class="auth-btn">Se Connecter</button>
             </form>
         </div>
@@ -124,15 +209,31 @@
                     <ul>
                         <li><a href="#dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                         <li><a href="#courses" class="nav-link"><i class="fas fa-book"></i> Mes Cours</a></li>
+                        <li><a href="#library" class="nav-link"><i class="fas fa-books"></i> Bibliothèque</a></li>
+                        <li><a href="#quiz-creator" class="nav-link"><i class="fas fa-question-circle"></i> Quiz Creator</a></li>
                         <li><a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a></li>
-                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-comments"></i> Dialogue</a></li>
-                        <li><a href="#content-creation" class="nav-link"><i class="fas fa-lightbulb"></i> Fabrique de Savoir</a></li>
+                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-comments"></i> Communauté</a></li>
+                        <li><a href="#study-rooms" class="nav-link"><i class="fas fa-users"></i> Salles d'Étude</a></li>
+                        <li><a href="#webinars" class="nav-link"><i class="fas fa-video"></i> Webinaires</a></li>
                         <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a></li>
+                        <li><a href="#virtual-classroom" class="nav-link"><i class="fas fa-school"></i> Classe Virtuelle</a></li>
                     </ul>
                 </nav>
                 <div class="user-actions">
-                    <div class="notification-bell"><i class="fas fa-bell"></i><div class="notification-dot"></div><div class="notifications-panel"></div></div>
-                    <select class="btn-secondary" style="padding: 8px;"><option>FR</option><option>EN</option></select>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <div class="notification-dot"></div>
+                        <div class="notifications-panel"></div>
+                    </div>
+                    <div class="language-selector">
+                        <button class="btn-secondary" id="language-toggle">🇫🇷 FR</button>
+                        <div class="language-dropdown" id="language-dropdown">
+                            <div class="language-option" data-lang="fr"><span>🇫🇷</span> Français</div>
+                            <div class="language-option" data-lang="en"><span>🇺🇸</span> English</div>
+                            <div class="language-option" data-lang="ar"><span>🇲🇦</span> العربية</div>
+                            <div class="language-option" data-lang="es"><span>🇪🇸</span> Español</div>
+                        </div>
+                    </div>
                     <a href="#profile" class="nav-link profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
                     <button class="menu-toggle"><i class="fas fa-bars"></i></button>
                 </div>
@@ -142,83 +243,143 @@
         <main>
             <section id="dashboard" class="page-section">
                 <div class="container content-wrapper">
+                    <h2><i class="fas fa-tachometer-alt"></i> Tableau de Bord Personnalisé</h2>
                     <div class="dashboard-grid">
                         <div class="main-column">
-                            <div class="widget"><h3><i class="fas fa-route"></i> Mon Parcours d'Apprentissage Personnalisé</h3>
-                                <div class="path-step done"><i class="fas fa-check-circle"></i><div><strong>Leçon : Dérivées</strong><p>Notion acquise !</p></div></div>
-                                <div class="path-step active"><i class="fas fa-pencil-alt"></i><div><strong>Quiz : Dérivées</strong><p>Prochaine étape pour valider vos acquis.</p></div></div>
-                                <div class="path-step"><i class="fas fa-book"></i><div><strong>Leçon : Intégrales</strong><p>Se débloquera après le quiz.</p></div></div>
+                            <div class="widget">
+                                <h3><i class="fas fa-route"></i> Mon Parcours d'Apprentissage Personnalisé</h3>
+                                <div class="path-step done">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Leçon : Dérivées</strong>
+                                        <p>Notion acquise ! Score IA : 95%</p>
+                                    </div>
+                                </div>
+                                <div class="path-step active">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    <div>
+                                        <strong>Quiz Adaptatif : Dérivées</strong>
+                                        <p>Recommandé par l'IA - Difficulté ajustée à votre niveau</p>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="fas fa-book"></i>
+                                    <div>
+                                        <strong>Leçon : Intégrales</strong>
+                                        <p>Se débloquera après validation du quiz</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="widget"><h3><i class="fas fa-star"></i> Recommandations de l'IA</h3>
-                                <p>Basé sur vos performances, voici des contenus qui pourraient vous aider :</p>
-                                <ul style="list-style: none; padding:0;">
-                                    <li class="path-step"><i class="fas fa-video"></i><div><strong>Vidéo :</strong> Visualiser le concept de limite</div></li>
-                                    <li class="path-step"><i class="fas fa-flask"></i><div><strong>Simulation :</strong> L'aire sous la courbe</div></li>
-                                </ul>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-brain"></i> Recommandations de l'IA</h3>
+                                <p>Basées sur vos performances et votre style d'apprentissage :</p>
+                                <div class="path-step">
+                                    <i class="fas fa-video"></i>
+                                    <div>
+                                        <strong>Vidéo Interactive :</strong> Visualiser le concept de limite
+                                        <p>Recommandée car vous êtes un apprenant visuel</p>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="fas fa-flask"></i>
+                                    <div>
+                                        <strong>Simulation 3D :</strong> L'aire sous la courbe
+                                        <p>Pour renforcer votre compréhension géométrique</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget">
+                                <h3><i class="fas fa-chart-line"></i> Analyse de Performance (IA)</h3>
+                                <div class="three-column-grid">
+                                    <div class="report-card">
+                                        <div class="metric">
+                                            <div class="metric-value">8.5/10</div>
+                                            <div class="metric-label">Moyenne Générale</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-card">
+                                        <div class="metric">
+                                            <div class="metric-value">+15%</div>
+                                            <div class="metric-label">Progression ce mois</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-card">
+                                        <div class="metric">
+                                            <div class="metric-value">92%</div>
+                                            <div class="metric-label">Taux de réussite</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><strong>Points forts détectés :</strong> Algèbre, Raisonnement logique</p>
+                                <p><strong>Lacunes identifiées :</strong> Géométrie dans l'espace - Programme de rattrapage personnalisé généré</p>
                             </div>
                         </div>
-                        <div class="sidebar-column"><div class="widget"><h3><i class="far fa-calendar-alt"></i> Agenda</h3><p><strong>Demain :</strong> Échéance Devoir de Physique.</p><p><strong>Mercredi :</strong> Webinaire "Méthodologie".</p></div></div>
+                        
+                        <div class="sidebar-column">
+                            <div class="widget">
+                                <h3><i class="far fa-calendar-alt"></i> Agenda Intelligent</h3>
+                                <div class="path-step">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <div>
+                                        <strong>Demain 14h :</strong> Échéance Devoir de Physique
+                                        <p>Rappel automatique dans 2h</p>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="fas fa-video"></i>
+                                    <div>
+                                        <strong>Mercredi 16h :</strong> Webinaire "Méthodologie BAC"
+                                        <p>Inscription confirmée</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-trophy"></i> Progression Hebdomadaire</h3>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 78%;"></div>
+                                </div>
+                                <p>78% de vos objectifs atteints cette semaine</p>
+                                <button class="btn-primary" style="margin-top: 1rem;">Voir détails</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="courses" class="page-section hidden">
                 <div class="container content-wrapper">
-                    <h2>Mes Cours</h2>
+                    <h2><i class="fas fa-book"></i> Mes Cours</h2>
                     <div class="courses-grid">
-                        <div class="course-card"><div class="course-card-banner" style="background-color: #4A90E2"></div><div class="course-card-content"><h4>Mathématiques - Analyse (Prépa)</h4><p>Avec M. Diallo</p><div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div></div></div>
-                        <div class="course-card"><div class="course-card-banner" style="background-color: #50E3C2"></div><div class="course-card-content"><h4>Physique - Mécanique (Lycée)</h4><p>Avec Mme. Traoré</p><div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div></div></div>
-                        <div class="course-card"><div class="course-card-banner" style="background-color: #E2B44A"></div><div class="course-card-content"><h4>Histoire - XIXe siècle (Lycée)</h4><p>Avec M. Ndiaye</p><div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div></div></div>
-                        <div class="course-card"><div class="course-card-banner" style="background-color: #E53E3E"></div><div class="course-card-content"><h4>Chimie Organique (Prépa)</h4><p>Avec Mme. Gaye</p><div class="progress-bar-container"><div class="progress-bar" style="width: 60%;"></div></div></div></div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="gamification" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Gamification</h2>
-                    <div class="dashboard-grid">
-                        <div class="widget"><h3>Niveau Actuel: Virtuose II</h3><div class="progress-bar-container"><div class="progress-bar" style="width: 80%;"></div></div><p>8200 / 10000 points pour le niveau suivant</p></div>
-                        <div class="widget"><h3>Classement de la semaine</h3><ol><li>Vous - 1250 pts</li><li>Amina K. - 1100 pts</li><li>Moussa F. - 980 pts</li></ol></div>
-                    </div>
-                    <div class="widget" style="margin-top:2rem;"><h3>Mes Badges</h3><div class="gamification-badges-grid"><div class="badge-item"><i class="fas fa-medal fa-2x"></i><p>Maître des Bases</p></div><div class="badge-item"><i class="fas fa-fire fa-2x"></i><p>Série de 5 jours</p></div></div></div>
-            </section>
-            
-            <section id="collaboration" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Dialogue & Forums</h2>
-                    <div class="collaboration-layout">
-                        <div class="groups-column"><div class="column-header">Groupes</div><ul class="groups-list"></ul></div>
-                        <div class="threads-column"><div class="column-header">Discussions</div><ul class="threads-list"></ul></div>
-                        <div class="chat-column"><div class="column-header">Conversation</div><div class="thread-message-content"></div></div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="content-creation" class="page-section hidden">
-                 <div class="container content-wrapper">
-                    <h2>Fabrique de Savoir</h2>
-                    <div class="widget"><p>Générez des fiches de révision, des quiz et des exercices sur n'importe quel sujet.</p><input type="text" id="content-topic" placeholder="Sujet (ex: La mitose)" style="width:100%; padding:10px; margin-bottom:1rem;"><button class="btn-primary">Générer</button></div>
-                 </div>
-            </section>
-
-            <section id="teachers-ai" class="page-section hidden">
-                 <div class="container content-wrapper">
-                    <h2>Espace Professeur</h2>
-                    <div class="teacher-dashboard-grid">
-                        <div class="widget"><h3><i class="fas fa-exclamation-triangle"></i> Détection d'élèves en difficulté (IA)</h3><p><strong>Amina K. :</strong> Baisse de 20% aux quiz de Physique.</p></div>
-                        <div class="widget"><h3><i class="fas fa-tasks"></i> Devoirs à Corriger</h3><p><strong>Dissertation Philo - Term L2 :</strong> 5 copies en attente.</p><button class="btn-secondary">Feedback automatisé par IA</button></div>
-                    </div>
-                 </div>
-            </section>
-            
-            <section id="profile" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Mon Profil</h2>
-                    <div class="widget">
-                        <h3><i class="fas fa-chart-pie"></i> Analyse de Compétences</h3>
-                        <p>Vue d'ensemble de vos points forts et des domaines à améliorer, générée par l'IA.</p>
-                        <div style="max-width: 400px; margin: auto;"><canvas id="skillsChart"></canvas></div>
+                        <div class="course-card">
+                            <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="course-card-content">
+                                <h3>Mathématiques - Analyse (Prépa)</h3>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1582079070932-4d2c803456e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="course-card-content">
+                                <h3>Physique - Mécanique (Lycée)</h3>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 40%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1524995723223-b42f852b75de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="course-card-content">
+                                <h3>Histoire - XIXe siècle (Lycée)</h3>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -226,77 +387,109 @@
 
         <button class="fab-chatbot"><i class="fas fa-robot"></i></button>
         <div class="chatbot-window">
-            <div class="chatbot-header">EduBot - Assistant 24/7</div>
-            <div class="chatbot-display" style="padding:1rem;"></div>
-            <div class="chatbot-input" style="padding:1rem;"><input type="text" style="width:100%;" placeholder="Posez une question..."><button class="btn-primary" style="margin-left:10px;"><i class="fas fa-paper-plane"></i></button></div>
+            <div class="chatbot-header">EduBot - Votre Assistant IA</div>
+            <div class="chatbot-display"></div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Posez une question...">
+                <button class="btn-primary"><i class="fas fa-paper-plane"></i></button>
+            </div>
         </div>
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        // --- GESTION DE L'AUTHENTIFICATION ---
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            document.getElementById('auth-page').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            navigateTo(window.location.hash || '#dashboard');
-            initializeAll();
+        document.addEventListener('DOMContentLoaded', () => {
+            const authPage = document.getElementById('auth-page');
+            const mainApp = document.getElementById('main-app');
+            const loginForm = document.getElementById('login-form');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageSections = document.querySelectorAll('.page-section');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const headerNav = document.querySelector('#main-header nav');
+            const fabChatbot = document.querySelector('.fab-chatbot');
+            const chatbotWindow = document.querySelector('.chatbot-window');
+            const notificationBell = document.querySelector('.notification-bell');
+            const notificationsPanel = document.querySelector('.notifications-panel');
+            const languageToggle = document.getElementById('language-toggle');
+            const languageDropdown = document.getElementById('language-dropdown');
+
+            // --- Authentication ---
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                authPage.style.display = 'none';
+                mainApp.classList.remove('hidden');
+                navigateTo(window.location.hash || '#dashboard');
+            });
+
+            // --- Navigation ---
+            function navigateTo(hash) {
+                if (!hash || hash === '#') {
+                    hash = '#dashboard';
+                }
+                pageSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === hash);
+                });
+                headerNav.classList.remove('active');
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const hash = e.currentTarget.getAttribute('href');
+                    window.location.hash = hash;
+                });
+            });
+
+            window.addEventListener('hashchange', () => {
+                navigateTo(window.location.hash);
+            });
+
+            menuToggle.addEventListener('click', () => {
+                headerNav.classList.toggle('active');
+            });
+
+            // --- Chatbot ---
+            fabChatbot.addEventListener('click', () => {
+                chatbotWindow.classList.toggle('active');
+            });
+
+            // --- Notifications ---
+            notificationBell.addEventListener('click', (e) => {
+                e.stopPropagation();
+                notificationsPanel.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!notificationsPanel.contains(e.target) && !notificationBell.contains(e.target)) {
+                    notificationsPanel.classList.remove('active');
+                }
+            });
+
+            // --- Language Selector ---
+            languageToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!languageDropdown.contains(e.target) && !languageToggle.contains(e.target)) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+
+            // --- Initial Load ---
+            if (window.location.hash) {
+                navigateTo(window.location.hash);
+            } else {
+                navigateTo('#dashboard');
+            }
         });
-
-        // --- NAVIGATION SPA ---
-        const pageSections = document.querySelectorAll('.page-section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        function navigateTo(hash) {
-            if (!hash || hash === '#') hash = '#dashboard';
-            pageSections.forEach(s => s.classList.add('hidden'));
-            const target = document.querySelector(hash);
-            if (target) target.classList.remove('hidden');
-            navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
-            if (document.querySelector('#main-header nav').classList.contains('active')) document.querySelector('.menu-toggle').click();
-        }
-        document.body.addEventListener('click', e => { if (e.target.closest('.nav-link')) { e.preventDefault(); window.location.hash = e.target.closest('.nav-link').getAttribute('href'); } });
-        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
-        document.querySelector('.menu-toggle').addEventListener('click', () => document.querySelector('#main-header nav').classList.toggle('active'));
-
-        // --- NOTIFICATIONS & CHATBOT ---
-        document.querySelector('.fab-chatbot').addEventListener('click', () => document.querySelector('.chatbot-window').classList.toggle('active'));
-        const notificationBell = document.querySelector('.notification-bell');
-        const notificationsPanel = document.querySelector('.notifications-panel');
-        const notificationsData = [{ icon: 'fa-graduation-cap', text: "<strong>Mme. Traoré</strong> a noté votre devoir." }, { icon: 'fa-medal', text: "Nouveau badge débloqué !" }];
-        notificationsPanel.innerHTML = `<div class="column-header">Notifications</div>` + notificationsData.map(n => `<div style="padding:1rem; display:flex; gap:1rem; border-bottom: 1px solid var(--border-color);"><i class="fas ${n.icon}"></i><div>${n.text}</div></div>`).join('');
-        notificationBell.addEventListener('click', e => { e.stopPropagation(); notificationsPanel.classList.toggle('active'); });
-        document.addEventListener('click', () => notificationsPanel.classList.remove('active'));
-        
-        // --- DONNÉES ET LOGIQUE DU FORUM ---
-        const collaborationData = {
-            'general': { name: 'Forum Général', threads: [{ id: 1, title: 'Ressources pour le BAC' }] },
-            'maths-prepa': { name: 'Maths - Prépa MPSI', threads: [{ id: 2, title: 'Problème sur les intégrales' }] }
-        };
-        const messagesData = {
-            1: [{ author: 'Amina', text: 'Salut, quelqu\'un a des bons sites pour réviser ?' }, { author: 'Jean', text: 'Oui, regarde sur prepabac.com !' }],
-            2: [{ author: 'Moussa', text: 'Je bloque sur cet exercice...' }]
-        };
-        const groupsList = document.querySelector('.groups-list');
-        const threadsList = document.querySelector('.threads-list');
-        const chatContent = document.querySelector('.thread-message-content');
-        if (groupsList) {
-            groupsList.innerHTML = Object.keys(collaborationData).map(k => `<li data-group="${k}">${collaborationData[k].name}</li>`).join('');
-            groupsList.addEventListener('click', e => { if (e.target.tagName === 'LI') {
-                const gId = e.target.dataset.group;
-                threadsList.innerHTML = collaborationData[gId].threads.map(t => `<li data-thread="${t.id}">${t.title}</li>`).join('');
-            }});
-            threadsList.addEventListener('click', e => { if (e.target.tagName === 'LI') {
-                const tId = e.target.dataset.thread;
-                chatContent.innerHTML = (messagesData[tId] || []).map(m => `<div style="margin-bottom:1rem;"><p><strong>${m.author}</strong></p><p>${m.text}</p></div>`).join('');
-            }});
-        }
-        
-        // --- INITIALISATION DES GRAPHIQUES ---
-        function initializeAll() {
-            new Chart(document.getElementById('skillsChart'), { type: 'radar', data: { labels: ['Algèbre', 'Analyse', 'Géométrie', 'Probabilités', 'Logique'], datasets: [{ label: 'Mes Compétences', data: [85, 70, 60, 75, 90], backgroundColor: 'rgba(74, 144, 226, 0.2)', borderColor: '#4A90E2' }] }, options: { scales: { r: { beginAtZero: true, max: 100 } } } });
-        }
-    });
     </script>
 </body>
 </html>
