@@ -3,452 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI - Révolutionnez Votre Apprentissage</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>EduSmart.AI ✨ - L'Avenir de l'Apprentissage</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /*=============================================
+        =      EduSmart.AI ✨ Stylesheet v5.0         =
+        =           "Exceptional Version"           =
+        =============================================*/
+
+        /*------------------------------------*\
+          #THEME & VARIABLES
+        \*------------------------------------*/
+        :root {
+            --font-primary: 'Inter', sans-serif;
+            
+            /* Light Theme */
+            --bg-color-light: #F8F9FE;
+            --surface-color-light: #FFFFFF;
+            --header-bg-light: rgba(255, 255, 255, 0.6);
+            --text-primary-light: #1A202C;
+            --text-secondary-light: #5A6474;
+            --border-color-light: #E2E8F0;
+            --primary-color-light: #4A55E2;
+            --primary-dark-light: #3A43B2;
+            --secondary-color-light: #10B981;
+            --accent-color-light: #F59E0B;
+            --shadow-color-light: 220, 220, 240;
+
+            /* Dark Theme */
+            --bg-color-dark: #121212;
+            --surface-color-dark: #1E1E1E;
+            --header-bg-dark: rgba(30, 30, 30, 0.6);
+            --text-primary-dark: #F7F7F7;
+            --text-secondary-dark: #A0AEC0;
+            --border-color-dark: #2D3748;
+            --primary-color-dark: #7F87F4;
+            --primary-dark-dark: #676EDD;
+            --secondary-color-dark: #34D399;
+            --accent-color-dark: #FBBF24;
+            --shadow-color-dark: 0, 0, 0;
+
+            /* Default to Light Theme */
+            --bg-color: var(--bg-color-light);
+            --surface-color: var(--surface-color-light);
+            --header-bg: var(--header-bg-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --border-color: var(--border-color-light);
+            --primary-color: var(--primary-color-light);
+            --primary-dark: var(--primary-dark-light);
+            --secondary-color: var(--secondary-color-light);
+            --accent-color: var(--accent-color-light);
+            --shadow-color: var(--shadow-color-light);
+
+            --shadow-sm: 0 2px 4px rgba(var(--shadow-color), 0.05);
+            --shadow-md: 0 5px 15px rgba(var(--shadow-color), 0.1);
+            --shadow-lg: 0 10px 25px rgba(var(--shadow-color), 0.15);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --header-height: 70px;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: var(--bg-color-dark);
+            --surface-color: var(--surface-color-dark);
+            --header-bg: var(--header-bg-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --border-color: var(--border-color-dark);
+            --primary-color: var(--primary-color-dark);
+            --primary-dark: var(--primary-dark-dark);
+            --secondary-color: var(--secondary-color-dark);
+            --accent-color: var(--accent-color-dark);
+            --shadow-color: var(--shadow-color-dark);
+        }
+
+        /*------------------------------------*\
+          #BASE & PRELOADER
+        \*------------------------------------*/
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: var(--font-primary); 
+            color: var(--text-primary); 
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /*------------------------------------*\
+          #GENERAL & ANIMATIONS
+        \*------------------------------------*/
+        .container { width: 95%; max-width: 1600px; margin: 0 auto; }
+        h2 { font-size: 2.25rem; font-weight: 700; }
+        h3 { font-size: 1.25rem; font-weight: 600; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: page-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        @keyframes page-enter {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*------------------------------------*\
+          #HEADER & GLASSMORPHISM
+        \*------------------------------------*/
+        #main-header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+            position: fixed; top: 0; left: 0; width: 100%;
+            height: var(--header-height); z-index: 1000;
+            display: flex; align-items: center;
+        }
+        .logo a { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--text-primary); }
+        .logo a i { color: var(--primary-color); }
+        #main-header nav a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-smooth);
+        }
+        #main-header nav a.active, #main-header nav a:hover {
+            color: var(--text-primary);
+            background-color: rgba(128, 128, 128, 0.1);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle { display: flex; align-items: center; cursor: pointer; }
+        .dark-mode-toggle .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .dark-mode-toggle .switch input { opacity: 0; width: 0; height: 0; }
+        .dark-mode-toggle .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .dark-mode-toggle .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        .dark-mode-toggle input:checked + .slider { background-color: var(--primary-color); }
+        .dark-mode-toggle input:checked + .slider:before { transform: translateX(20px); }
+        .dark-mode-toggle i { margin: 0 8px; font-size: 1rem; color: var(--text-secondary); }
+
+
+        /*------------------------------------*\
+          #WIDGETS, CARDS & BUTTONS
+        \*------------------------------------*/
+        main { padding-top: var(--header-height); }
+        .content-wrapper { padding: 2.5rem 0; }
+        .widget, .course-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+        .widget:hover, .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(var(--primary-color), 0.5);
+        }
+        .btn-primary { 
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-md); }
+        .btn-primary:active { transform: translateY(0) scale(0.98); }
+
+
+        /*------------------------------------*\
+          #CHATBOT AI
+        \*------------------------------------*/
+        #ai-chatbot-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+        #ai-chatbot-fab:hover { transform: scale(1.1); }
+        
+        #chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            max-width: 90vw;
+            height: 500px;
+            background-color: var(--bg-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: var(--transition-smooth);
+        }
+        #chatbot-container.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .chatbot-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-header h3 { margin: 0; }
+        .chatbot-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; }
+        .message { margin-bottom: 1rem; display: flex; max-width: 85%; }
+        .message.user { align-self: flex-end; flex-direction: row-reverse; }
+        .message.bot { align-self: flex-start; }
+        .message .text {
+            padding: 10px 15px;
+            border-radius: var(--radius-lg);
+        }
+        .message.user .text { background-color: var(--primary-color); color: white; border-top-right-radius: 4px; }
+        .message.bot .text { background-color: var(--surface-color); border: 1px solid var(--border-color); border-top-left-radius: 4px; }
+        .chatbot-input { padding: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .chatbot-input input {
+            flex-grow: 1; padding: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            border-radius: var(--radius-md); color: var(--text-primary);
+        }
+
+        /* --- Autres styles (Dashboard, Profile etc. adaptés pour la nouvelle esthétique) --- */
+        #dashboard .dashboard-grid { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+        .path-step {
+            border-left-width: 4px;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .path-step::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 3px solid var(--primary-color);
+        }
+        .path-step.completed::before { border-color: var(--secondary-color); }
+        #profile-layout {
+             grid-template-columns: 300px 1fr;
+        }
+        canvas#skills-chart { max-height: 400px; }
+        .leaderboards ul li {
+            border-radius: var(--radius-md);
+            transition: background-color 0.2s ease;
+        }
+        .leaderboards ul li:hover {
+            background-color: rgba(128, 128, 128, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            #profile-layout { grid-template-columns: 1fr; }
+            #main-header nav { display: none; /* ... */ }
+            /* ... (autres styles responsives conservés) */
+        }
+
+    </style>
 </head>
 <body>
 
-    <header id="main-header">
-        <div class="container header-content">
-            <div class="logo">
-                <a href="#home">
-                    <img src="https://via.placeholder.com/40x40/6a11cb/ffffff?text=E" alt="EduSmart.AI Logo" class="logo-icon">
-                    EduSmart.AI
-                </a>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <section id="auth-page" class="hidden">
+        </section>
+
+    <div id="main-app" class="hidden">
+        <header id="main-header">
+            <div class="container header-content" style="display:flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div class="logo"><a href="#dashboard"><i class="fas fa-brain"></i> EduSmart.AI</a></div>
+                <nav>
+                    <ul style="display:flex; gap: 1rem; list-style: none;">
+                        <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                        <li><a href="#courses" class="nav-link">Mes Cours</a></li>
+                        <li><a href="#library" class="nav-link">Bibliothèque</a></li>
+                        <li><a href="#collaboration" class="nav-link">Collaboration</a></li>
+                    </ul>
+                </nav>
+                <div class="user-actions" style="display:flex; align-items: center; gap: 1.5rem;">
+                    <div class="dark-mode-toggle">
+                        <i class="fas fa-sun"></i>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <a href="#profile" class="nav-link profile-link" style="display:flex; align-items:center; gap: 8px; text-decoration:none;">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" style="width: 36px; height: 36px; border-radius: 50%;">
+                        <span>Jean</span>
+                    </a>
+                </div>
             </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home" data-section="home"><i class="fas fa-home icon-glow"></i> Accueil</a></li>
-                    <li><a href="#gamification" data-section="gamification"><i class="fas fa-medal icon-glow"></i> Gamification</a></li>
-                    <li><a href="#chatbot" data-section="chatbot"><i class="fas fa-comment-dots icon-glow"></i> Mon Assistant IA</a></li>
-                    <li><a href="#content-creation" data-section="content-creation"><i class="fas fa-magic icon-glow"></i> Fabrique de Savoir</a></li>
-                    <li><a href="#collaboration" data-section="collaboration"><i class="fas fa-hands-helping icon-glow"></i> Espace Dialogue</a></li>
-                    <li><a href="#parents" data-section="parents"><i class="fas fa-users-cog icon-glow"></i> Suivi Parental</a></li>
-                    <li><a href="#impact" data-section="impact"><i class="fas fa-leaf icon-glow"></i> Notre Engagement</a></li>
-                    <li><a href="#teachers-ai" data-section="teachers-ai"><i class="fas fa-robot icon-glow"></i> Assistant Profs</a></li>
-                </ul>
-            </nav>
-            <div class="user-actions">
-                <a href="#" class="profile-link btn-secondary-outline"><i class="fas fa-user-circle"></i> Mon Profil</a>
-                <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        </header>
+
+        <main>
+            <section id="dashboard" class="page-section">
+                <div class="container content-wrapper">
+                    <h2 class="fade-in-up">Bonjour Jean, continuons votre parcours.</h2>
+                    <div id="dashboard" class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 2rem;">
+                         <div class="dashboard-main-column" style="display:flex; flex-direction:column; gap: 2rem;">
+                            <div class="widget fade-in-up" style="animation-delay: 0.1s;">
+                                <div class="widget-header">
+                                    <h3><i class="fas fa-route" style="color: var(--primary-color);"></i> Prochaines Étapes</h3>
+                                </div>
+                                <div class="path-step completed">
+                                    <p style="font-weight: 500; margin:0;">Quiz sur les dérivées</p>
+                                </div>
+                                <div class="path-step">
+                                    <p style="font-weight: 500; margin:0;">Vidéo : l'intégration par parties</p>
+                                </div>
+                            </div>
+                            <div class="widget fade-in-up" style="animation-delay: 0.2s;">
+                                <div class="widget-header">
+                                    <h3><i class="fas fa-lightbulb" style="color: var(--accent-color);"></i> Recommandations de l'IA</h3>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="dashboard-side-column" style="display:flex; flex-direction:column; gap: 2rem;">
+                            <div class="widget fade-in-up" style="animation-delay: 0.3s;">
+                                <h3><i class="fas fa-award"></i> Progression Globale</h3>
+                                <canvas id="progress-chart"></canvas>
+                            </div>
+                            <div class="widget leaderboards fade-in-up" style="animation-delay: 0.4s;">
+                                <h3><i class="fas fa-trophy"></i> Classement</h3>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><span>1. Vous</span><span>12500 pts</span></li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="profile" class="page-section">
+                 <div class="container content-wrapper">
+                    <div id="profile-layout" class="fade-in-up" style="display:grid; grid-template-columns: 300px 1fr; gap: 2rem;">
+                        <div class="widget" style="text-align:center; padding: 2rem;">
+                             <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="profile-avatar" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary-color); margin-bottom: 1rem;">
+                             <h2>Jean Dupont</h2>
+                             <p>Virtuose des Maths - Niveau 12</p>
+                        </div>
+                        <div class="widget">
+                            <h3><i class="fas fa-atom"></i> Analyse des Compétences</h3>
+                            <canvas id="skills-chart"></canvas>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+            
+            </main>
+    </div>
+
+    <div id="ai-chatbot-fab">
+        <i class="fas fa-sparkles"></i>
+    </div>
+
+    <div id="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Assistant EduSmart.AI</h3>
+            <button id="close-chatbot" class="btn-icon" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message bot">
+                <span class="text">Bonjour Jean ! Comment puis-je vous aider à apprendre aujourd'hui ?</span>
             </div>
         </div>
-    </header>
-
-    <main>
-        <section id="home" class="page-section home-section active">
-            <div class="container content-wrapper hero-content">
-                <div class="hero-text">
-                    <h1>Révolutionnez Votre Apprentissage avec <span class="highlight">EduSmart.AI</span></h1>
-                    <p class="subtitle">Votre compagnon éducatif intelligent, interactif et inspirant pour réussir.</p>
-                    <div class="hero-buttons">
-                        <a href="#gamification" class="btn-primary-hero">Commencer l'Aventure <i class="fas fa-arrow-right"></i></a>
-                        <a href="#content-creation" class="btn-secondary-hero">Créer du Contenu <i class="fas fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="https://via.placeholder.com/500x350/a1c4fd/ffffff?text=Apprentissage+Intelligent" alt="Illustration d'apprentissage intelligent" class="floating-image">
-                </div>
-            </div>
-            <div class="container course-overview-home">
-                <h2 class="section-title">Vos Progrès Récents</h2>
-                <div class="courses-grid">
-                    <div class="course-card">
-                        <i class="fas fa-calculator course-icon"></i>
-                        <h3>Mathématiques - Algèbre</h3>
-                        <div class="progress-container"><div class="progress-bar" style="width: 75%;"></div></div>
-                        <p>75% Terminé</p>
-                        <a href="#" class="btn-small">Continuer <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div class="course-card">
-                        <i class="fas fa-book course-icon"></i>
-                        <h3>Français - Grammaire</h3>
-                        <div class="progress-container"><div class="progress-bar" style="width: 50%;"></div></div>
-                        <p>50% Terminé</p>
-                        <a href="#" class="btn-small">Continuer <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div class="course-card">
-                        <i class="fas fa-atom course-icon"></i>
-                        <h3>Sciences - Physique</h3>
-                        <div class="progress-container"><div class="progress-bar" style="width: 90%;"></div></div>
-                        <p>90% Terminé</p>
-                        <a href="#" class="btn-small">Réviser <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="gamification" class="page-section gamification-section hidden">
-            <div class="container content-wrapper">
-                <h2 class="section-title">Mon Aventure d'Apprentissage Gamifiée</h2>
-                <div class="gamification-dashboard">
-                    <div class="level-card glassmorphism-card">
-                        <i class="fas fa-trophy level-icon"></i>
-                        <h3>Niveau Actuel: <span class="highlight-level">Maître des Connaissances I</span></h3>
-                        <div class="progress-bar-container-lg">
-                            <div class="progress-bar-lg" style="width: 85%;"></div>
-                        </div>
-                        <p>Prochain niveau dans 150 points !</p>
-                        <button class="btn-primary-small">Voir les objectifs <i class="fas fa-arrow-right"></i></button>
-                    </div>
-
-                    <div class="badges-rewards">
-                        <h3 class="subsection-title"><i class="fas fa-star-half-alt"></i> Mes Badges & Récompenses</h3>
-                        <div class="badge-grid">
-                            <div class="badge-item tooltipped" data-tooltip="Débloqué pour 10 heures d'étude">
-                                <i class="fas fa-brain badge-icon unlocked"></i>
-                                <p>Esprit Curieux</p>
-                            </div>
-                            <div class="badge-item tooltipped" data-tooltip="Débloqué après 5 cours complétés">
-                                <i class="fas fa-graduation-cap badge-icon unlocked"></i>
-                                <p>Diplômé du Savoir</p>
-                            </div>
-                            <div class="badge-item tooltipped" data-tooltip="Débloquez ce badge en participant à 3 défis">
-                                <i class="fas fa-rocket badge-icon locked"></i>
-                                <p>Pionnier</p>
-                            </div>
-                            <div class="badge-item tooltipped" data-tooltip="Débloquez ce badge en aidant 5 camarades sur le forum">
-                                <i class="fas fa-hands-helping badge-icon locked"></i>
-                                <p>Mentor</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="leaderboards">
-                        <h3 class="subsection-title"><i class="fas fa-chart-line"></i> Classements Amicaux</h3>
-                        <div class="leaderboard-options">
-                            <button class="btn-secondary-outline active">Mes Amis</button>
-                            <button class="btn-secondary-outline">Ma Classe</button>
-                            <button class="btn-secondary-outline">Global</button>
-                        </div>
-                        <ul class="leaderboard-list">
-                            <li class="current-user-rank">
-                                <span class="rank">#1</span>
-                                <span class="name">Vous</span>
-                                <span class="points">1250 pts <i class="fas fa-crown gold"></i></span>
-                            </li>
-                            <li><span class="rank">#2</span><span class="name">Ami_X</span><span class="points">1100 pts</span></li>
-                            <li><span class="rank">#3</span><span class="name">Ami_Y</span><span class="points">980 pts</span></li>
-                            <li><span class="rank">#4</span><span class="name">Ami_Z</span><span class="points">850 pts</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="challenges-section">
-                        <h3 class="subsection-title"><i class="fas fa-bolt"></i> Défis Actuels</h3>
-                        <div class="challenge-card">
-                            <h4>Défi de la Semaine : Maîtrise des Fonctions</h4>
-                            <p>Complétez 3 exercices avancés sur les fonctions mathématiques avant dimanche soir.</p>
-                            <button class="btn-primary-small">Participer <i class="fas fa-trophy"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="chatbot" class="page-section chatbot-section hidden">
-            <div class="container content-wrapper chatbot-container">
-                <h2 class="section-title">Mon Assistant IA <span class="subtitle-chat">(Votre guide personnel 24/7)</span></h2>
-                <div class="chatbot-interface glassmorphism-card">
-                    <div class="chat-header">
-                        <span class="status-indicator online"></span>
-                        <span>EduSmart.AI Assistant</span>
-                        <div class="chat-settings">
-                            <select id="language-select" aria-label="Sélectionner la langue">
-                                <option value="fr-FR">Français</option>
-                                <option value="en-US">English</option>
-                                <option value="wo-SN">Wolof</option>
-                                <option value="ha-NG">Haoussa</option>
-                                <option value="sw-KE">Swahili</option>
-                                </select>
-                            <button id="text-to-speech-btn" class="icon-btn tooltipped" data-tooltip="Activer la lecture vocale"><i class="fas fa-volume-up"></i></button>
-                        </div>
-                    </div>
-                    <div class="chat-display custom-scrollbar">
-                        <div class="message bot-message">Bonjour ! Comment puis-je vous aider à explorer le monde du savoir ?</div>
-                        <div class="message user-message">J'ai des difficultés avec la physique quantique.</div>
-                        <div class="message bot-message">Absolument ! La physique quantique est fascinante. Quel aspect souhaitez-vous explorer en particulier ?</div>
-                    </div>
-                    <div class="chat-controls">
-                        <input type="text" id="chat-input" placeholder="Tapez votre message ou utilisez le micro..." aria-label="Champ de saisie du message">
-                        <button id="voice-input-btn" class="icon-btn tooltipped" data-tooltip="Saisie vocale"><i class="fas fa-microphone"></i></button>
-                        <button id="send-message-btn" class="icon-btn send-btn tooltipped" data-tooltip="Envoyer"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-                <div class="suggestion-chips">
-                    <span class="chip">Qu'est-ce que la relativité ?</span>
-                    <span class="chip">Donne-moi un exercice sur les fractions</span>
-                    <span class="chip">Explique le cycle de l'eau</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="content-creation" class="page-section content-creation-section hidden">
-            <div class="container content-wrapper">
-                <h2 class="section-title">Ma Fabrique de Savoir <span class="subtitle-content">(Créez vos ressources personnalisées en un clic)</span></h2>
-                <div class="content-generator glassmorphism-card">
-                    <div class="input-group">
-                        <label for="content-topic">Sujet / Concept :</label>
-                        <input type="text" id="content-topic" placeholder="Ex: Révolution Française, Théorème de Pythagore...">
-                    </div>
-
-                    <div class="generation-options">
-                        <div class="input-group">
-                            <label for="content-type">Format :</label>
-                            <select id="content-type">
-                                <option value="fiche">Fiche de Révision</option>
-                                <option value="carte">Carte Mémoire</option>
-                                <option value="video">Vidéo Courte Expliquée</option>
-                                <option value="quiz">Quiz Interactif</option>
-                                <option value="resume">Résumé Détaillé</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="difficulty-level">Niveau de Difficulté :</label>
-                            <select id="difficulty-level">
-                                <option value="debutant">Débutant</option>
-                                <option value="intermediaire">Intermédiaire</option>
-                                <option value="avance">Avancé</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="multimedia-options">
-                        <div class="input-group">
-                            <label for="youtube-url">Intégrer Vidéo YouTube (URL) :</label>
-                            <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." class="full-width-input">
-                        </div>
-                        <div class="multimedia-buttons">
-                            <button class="btn-secondary-outline"><i class="fas fa-image"></i> Ajouter Image</button>
-                            <button class="btn-secondary-outline"><i class="fas fa-flask"></i> Ajouter Simulation</button>
-                        </div>
-                    </div>
-                    <button id="generate-content-btn" class="btn-primary-large"><i class="fas fa-cogs"></i> Générer le Contenu</button>
-
-                    <div class="generated-content-preview loading-state">
-                        <p><i class="fas fa-rocket fa-bounce"></i> Votre contenu apparaîtra ici après génération.</p>
-                        </div>
-
-                    <div class="content-library">
-                        <h3 class="subsection-title"><i class="fas fa-folder-open"></i> Ma Bibliothèque de Contenu</h3>
-                        <ul class="library-list">
-                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche : Photosynthèse (Générée le 01/06)</a></li>
-                            <li><a href="#"><i class="fas fa-clipboard-question"></i> Quiz : Histoire de France (Généré le 28/05)</a></li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="collaboration" class="page-section collaboration-section hidden">
-            <div class="container content-wrapper">
-                <h2 class="section-title">Mon Espace de Dialogue <span class="subtitle-collaboration">(Échangez avec vos professeurs et camarades)</span></h2>
-                <div class="collaboration-dashboard">
-                    <div class="qa-forum glassmorphism-card">
-                        <h3 class="subsection-title"><i class="fas fa-comments"></i> Questions & Réponses</h3>
-                        <button class="btn-primary-small mb-3"><i class="fas fa-plus-circle"></i> Poser une nouvelle question</button>
-                        <div class="questions-list custom-scrollbar">
-                            <div class="question-item">
-                                <div class="q-header">
-                                    <h4>Question sur les équations du second degré</h4>
-                                    <span class="q-meta"><i class="fas fa-user-circle"></i> Élève A - <i class="fas fa-clock"></i> Il y a 2 heures</span>
-                                </div>
-                                <p class="q-excerpt">Bonjour, je bloque sur la méthode de résolution de l'équation x² + 3x - 4 = 0. Pouvez-vous m'aider ?</p>
-                                <a href="#" class="view-thread">Voir la discussion (3 réponses) <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="question-item">
-                                <div class="q-header">
-                                    <h4>Besoin de ressources pour la physique nucléaire</h4>
-                                    <span class="q-meta"><i class="fas fa-user-circle"></i> Élève B - <i class="fas fa-clock"></i> Hier</span>
-                                </div>
-                                <p class="q-excerpt">Notre cours de physique parle de radioactivité. Y a-t-il des vidéos ou des articles pour approfondir ?</p>
-                                <a href="#" class="view-thread">Voir la discussion (1 réponse) <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            </div>
-                    </div>
-
-                    <div class="shared-resources glassmorphism-card">
-                        <h3 class="subsection-title"><i class="fas fa-share-alt"></i> Ressources Partagées par les Profs</h3>
-                        <ul class="resources-list custom-scrollbar">
-                            <li><a href="#"><i class="fas fa-file-alt"></i> Fiche de Révision - Les Verbes Irréguliers (Français)</a></li>
-                            <li><a href="#"><i class="fas fa-file-pdf"></i> Correction Exercice 5 - Chapitre 3 (Maths)</a></li>
-                            <li><a href="#"><i class="fas fa-video"></i> Vidéo : Le cycle de l'eau expliqué (Sciences)</a></li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="parents" class="page-section parents-section hidden">
-            <div class="container content-wrapper">
-                <h2 class="section-title">Mon Suivi Parental <span class="subtitle-parent">(Restez informés sur la progression de votre enfant)</span></h2>
-                <div class="parent-dashboard">
-                    <div class="child-overview glassmorphism-card">
-                        <div class="child-avatar">
-                            <img src="https://via.placeholder.com/80x80/007bff/ffffff?text=E" alt="Avatar Enfant">
-                            <h3>Progression de [Nom de l'enfant]</h3>
-                        </div>
-                        <div class="progress-charts">
-                            <div class="chart-item">
-                                <i class="fas fa-chart-pie chart-icon"></i>
-                                <h4>Performance Générale</h4>
-                                <p>Bonne performance globale.</p>
-                            </div>
-                            <div class="chart-item">
-                                <i class="fas fa-chart-bar chart-icon"></i>
-                                <h4>Matières Fortes/Faibles</h4>
-                                <p><span class="strong">Maths: Excellente</span> | <span class="weak">Français: Difficultés</span></p>
-                            </div>
-                        </div>
-                        <button class="btn-primary-small"><i class="fas fa-file-export"></i> Télécharger Rapport Complet</button>
-                    </div>
-
-                    <div class="alerts-recommendations glassmorphism-card">
-                        <h3 class="subsection-title"><i class="fas fa-bell"></i> Alertes & Recommandations</h3>
-                        <div class="alert-list">
-                            <div class="alert-item danger">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <div>
-                                    <h4>Difficulté détectée en Français (Conjugaison)</h4>
-                                    <p>Suggestion: Proposez à votre enfant de revoir le module "Temps et Modes des Verbes" sur EduSmart.AI.</p>
-                                    <button class="btn-small-outline">Accéder aux Ressources <i class="fas fa-arrow-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="alert-item success">
-                                <i class="fas fa-check-circle"></i>
-                                <div>
-                                    <h4>Félicitations ! Votre enfant a débloqué un nouveau badge !</h4>
-                                    <p>"Maître des Expressions" - pour sa participation active aux discussions.</p>
-                                    <button class="btn-small-outline">Voir les Réalisations <i class="fas fa-arrow-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="alert-item info">
-                                <i class="fas fa-info-circle"></i>
-                                <div>
-                                    <h4>Nouvelle ressource disponible sur le volcanisme</h4>
-                                    <p>Un article interactif pour approfondir le sujet.</p>
-                                    <button class="btn-small-outline">Découvrir la Ressource <i class="fas fa-arrow-right"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="parent-actions">
-                            <button class="btn-secondary-outline"><i class="fas fa-cogs"></i> Paramètres de Notification</button>
-                            <button class="btn-secondary-outline"><i class="fas fa-envelope"></i> Contacter l'Enseignant</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="impact" class="page-section impact-section hidden">
-            <div class="container content-wrapper">
-                <h2 class="section-title">Notre Engagement <span class="subtitle-impact">(Éducation Durable & Inclusion Sociale)</span></h2>
-                <div class="impact-grid">
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-globe-americas impact-icon primary-color"></i>
-                        <h3>Accès Équitable à l'Éducation</h3>
-                        <p>Nous nous engageons à briser les barrières géographiques et économiques en offrant un accès à distance de qualité.</p>
-                    </div>
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-recycle impact-icon secondary-color"></i>
-                        <h3>Réduction de l'Empreinte Écologique</h3>
-                        <p>En digitalisant les supports d'apprentissage, nous contribuons activement à la réduction de la consommation de papier.</p>
-                        <p class="statistic">**Plus de 200 000 feuilles économisées annuellement !**</p>
-                    </div>
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-hands-holding impact-icon tertiary-color"></i>
-                        <h3>Soutien aux Écoles Défavorisées</h3>
-                        <p>Nous mettons en place des partenariats et des initiatives de formation pour les écoles en zones rurales et défavorisées.</p>
-                        <button class="btn-primary-small">Découvrir nos partenariats <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                    <div class="impact-card glassmorphism-card">
-                        <i class="fas fa-lightbulb impact-icon accent-color"></i>
-                        <h3>Innovation Pédagogique Inclusive</h3>
-                        <p>Nos outils IA et vocaux rendent l'apprentissage accessible à tous, y compris les élèves ayant des difficultés de lecture.</p>
-                    </div>
-                </div>
-                <div class="impact-cta">
-                    <p>Votre engagement avec EduSmart.AI contribue directement à ces initiatives. Merci de faire partie du changement !</p>
-                    <button class="btn-primary-large"><i class="fas fa-hand-holding-heart"></i> Faire un Don ou Devenir Partenaire</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="teachers-ai" class="page-section teachers-ai-section hidden">
-            <div class="container content-wrapper teachers-ai-container">
-                <h2 class="section-title">Mon Assistant Pédagogique IA <span class="subtitle-teachers">(L'IA au service de l'excellence éducative)</span></h2>
-                <div class="teacher-chatbot-interface glassmorphism-card">
-                    <div class="chat-header">
-                        <span class="status-indicator online"></span>
-                        <span>Assistant Enseignant AI</span>
-                    </div>
-                    <div class="chat-display custom-scrollbar">
-                        <div class="message bot-message">Bonjour Professeur ! Je suis là pour optimiser votre temps et enrichir votre pédagogie. Comment puis-je vous aider ?</div>
-                        <div class="message user-message">Génère un plan de cours sur la Seconde Guerre Mondiale pour des élèves de 3ème.</div>
-                        <div class="message bot-message">Bien sûr ! Voici une proposition de plan de cours détaillé... (plan généré par l'IA)</div>
-                    </div>
-                    <div class="chat-controls">
-                        <input type="text" id="teacher-chat-input" placeholder="Demandez à l'IA (ex: Analyser les données des élèves...)" aria-label="Champ de saisie pour l'IA enseignant">
-                        <button id="teacher-send-message-btn" class="icon-btn send-btn"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-                <div class="ai-tools-buttons">
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-book-open"></i> Générateur de Plan de Cours</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-chart-bar"></i> Analyse de Données Élèves</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-cogs"></i> Plans d'Action Personnalisés</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-database"></i> Banque de Ressources Pédagogiques</button>
-                    <button class="btn-tool glassmorphism-card"><i class="fas fa-marker"></i> Aide à l'Évaluation</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col logo-col">
-                    <a href="#home" class="footer-logo">EduSmart.AI</a>
-                    <p>Révolutionnons l'éducation ensemble.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Fonctionnalités</h4>
-                    <ul>
-                        <li><a href="#gamification">Gamification</a></li>
-                        <li><a href="#chatbot">Chatbot IA</a></li>
-                        <li><a href="#content-creation">Création de Contenu</a></li>
-                        <li><a href="#collaboration">Collaboration</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Ressources</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Témoignages</a></li>
-                        <li><a href="#impact">Impact Social</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact & Légal</h4>
-                    <ul>
-                        <li><a href="#">Contactez-nous</a></li>
-                        <li><a href="#">Politique de Confidentialité</a></li>
-                        <li><a href="#">Conditions d'Utilisation</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
-            </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Posez votre question...">
+            <button class="btn-primary" style="padding: 10px 15px;"><i class="fas fa-paper-plane"></i></button>
         </div>
-    </footer>
+    </div>
 
-    <script src="script.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- PRELOADER ---
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', () => {
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
+        });
+
+        // --- THEME (DARK MODE) ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                themeToggle.checked = true;
+            }
+        }
+
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // --- APP LOGIC ---
+        const mainApp = document.getElementById('main-app');
+        mainApp.classList.remove('hidden'); // On affiche l'app directement pour cette démo
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+
+        function navigateTo(hash) {
+            pageSections.forEach(section => section.classList.remove('active'));
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            const targetSection = document.querySelector(hash);
+            const targetLink = document.querySelector(`a[href="${hash}"]`);
+
+            if (targetSection) {
+                targetSection.classList.add('active');
+                animateOnScroll(targetSection);
+            }
+            if (targetLink) {
+                targetLink.classList.add('active');
+            }
+
+            // Render charts if the section is active
+            if (hash === '#dashboard') renderProgressChart();
+            if (hash === '#profile') renderSkillsChart();
+        }
+
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        navigateTo(window.location.hash || '#dashboard'); // Initial navigation
+
+        // --- CHATBOT ---
+        const chatbotFab = document.getElementById('ai-chatbot-fab');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeChatbotBtn = document.getElementById('close-chatbot');
+
+        chatbotFab.addEventListener('click', () => chatbotContainer.classList.toggle('active'));
+        closeChatbotBtn.addEventListener('click', () => chatbotContainer.classList.remove('active'));
+        
+        // --- ANIMATE ON SCROLL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function animateOnScroll(container) {
+            container.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        }
+
+        // --- CHART RENDERING ---
+        let progressChart, skillsChart;
+
+        function renderProgressChart() {
+            const ctx = document.getElementById('progress-chart');
+            if (!ctx || Chart.getChart(ctx)) return;
+            progressChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Complété', 'Restant'],
+                    datasets: [{
+                        data: [72, 28],
+                        backgroundColor: ['#4A55E2', '#E2E8F0'],
+                        borderWidth: 0,
+                    }]
+                },
+                options: { responsive: true, cutout: '80%', plugins: { legend: { display: false } } }
+            });
+        }
+        
+        function renderSkillsChart() {
+            const ctx = document.getElementById('skills-chart');
+            if (!ctx || Chart.getChart(ctx)) return;
+            
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)';
+            const ticksColor = isDark ? '#A0AEC0' : '#5A6474';
+
+            skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Analyse', 'Créativité', 'Collaboration', 'Logique', 'Rigueur', 'Autonomie'],
+                    datasets: [{
+                        label: 'Mes Compétences',
+                        data: [8, 6, 7, 9, 8, 5],
+                        fill: true,
+                        backgroundColor: 'rgba(74, 85, 226, 0.2)',
+                        borderColor: '#4A55E2',
+                        pointBackgroundColor: '#4A55E2',
+                        pointBorderColor: '#fff',
+                    }]
+                },
+                options: { 
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        r: {
+                            angleLines: { color: gridColor },
+                            grid: { color: gridColor },
+                            pointLabels: { color: ticksColor, font: { size: 14 } },
+                            ticks: { backdropColor: 'transparent', color: ticksColor }
+                        }
+                    }
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
