@@ -1214,34 +1214,40 @@
                 if (!hash || hash === '#') {
                     hash = '#dashboard';
                 }
+                
+                // Masquer toutes les sections
                 pageSections.forEach(section => {
                     section.classList.add('hidden');
                 });
+                
+                // Afficher la section cible
                 const targetSection = document.querySelector(hash);
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
                 }
+                
+                // Mettre à jour la navigation active
                 navLinks.forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === hash);
                 });
+                
+                // Fermer le menu mobile si ouvert
                 headerNav.classList.remove('active');
                 
                 // Réinitialiser le défilement en haut de la section
                 window.scrollTo(0, 0);
             }
 
+            // Gestion des clics sur les liens de navigation
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const hash = e.currentTarget.getAttribute('href');
-                    window.location.hash = hash;
+                    navigateTo(hash);
                 });
             });
 
-            window.addEventListener('hashchange', () => {
-                navigateTo(window.location.hash);
-            });
-
+            // Gestion du menu mobile
             menuToggle.addEventListener('click', () => {
                 headerNav.classList.toggle('active');
             });
@@ -1429,12 +1435,9 @@
                 });
             }
             
-            // --- Initial Load ---
-            if (window.location.hash) {
-                navigateTo(window.location.hash);
-            } else {
-                navigateTo('#dashboard');
-            }
+            // --- Initialisation de la navigation ---
+            // Afficher la section dashboard par défaut
+            navigateTo('#dashboard');
             
             // Simuler des notifications
             setTimeout(() => {
