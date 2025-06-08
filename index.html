@@ -3,365 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI ✨ - L'Avenir de l'Apprentissage</title>
+    <title>EduSmart.AI v4.0 - Plateforme d'Apprentissage Augmentée</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /*=============================================
-        =      EduSmart.AI ✨ Stylesheet v5.0         =
-        =           "Exceptional Version"           =
+        =         EduSmart.AI Stylesheet v4.0         =
         =============================================*/
 
         /*------------------------------------*\
-          #THEME & VARIABLES
+          #ROOT, BASE & AUTHENTIFICATION
         \*------------------------------------*/
         :root {
-            --font-primary: 'Inter', sans-serif;
-            
-            /* Light Theme */
-            --bg-color-light: #F8F9FE;
-            --surface-color-light: #FFFFFF;
-            --header-bg-light: rgba(255, 255, 255, 0.6);
-            --text-primary-light: #1A202C;
-            --text-secondary-light: #5A6474;
-            --border-color-light: #E2E8F0;
-            --primary-color-light: #4A55E2;
-            --primary-dark-light: #3A43B2;
-            --secondary-color-light: #10B981;
-            --accent-color-light: #F59E0B;
-            --shadow-color-light: 220, 220, 240;
-
-            /* Dark Theme */
-            --bg-color-dark: #121212;
-            --surface-color-dark: #1E1E1E;
-            --header-bg-dark: rgba(30, 30, 30, 0.6);
-            --text-primary-dark: #F7F7F7;
-            --text-secondary-dark: #A0AEC0;
-            --border-color-dark: #2D3748;
-            --primary-color-dark: #7F87F4;
-            --primary-dark-dark: #676EDD;
-            --secondary-color-dark: #34D399;
-            --accent-color-dark: #FBBF24;
-            --shadow-color-dark: 0, 0, 0;
-
-            /* Default to Light Theme */
-            --bg-color: var(--bg-color-light);
-            --surface-color: var(--surface-color-light);
-            --header-bg: var(--header-bg-light);
-            --text-primary: var(--text-primary-light);
-            --text-secondary: var(--text-secondary-light);
-            --border-color: var(--border-color-light);
-            --primary-color: var(--primary-color-light);
-            --primary-dark: var(--primary-dark-light);
-            --secondary-color: var(--secondary-color-light);
-            --accent-color: var(--accent-color-light);
-            --shadow-color: var(--shadow-color-light);
-
-            --shadow-sm: 0 2px 4px rgba(var(--shadow-color), 0.05);
-            --shadow-md: 0 5px 15px rgba(var(--shadow-color), 0.1);
-            --shadow-lg: 0 10px 25px rgba(var(--shadow-color), 0.15);
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --header-height: 70px;
+          --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
+          --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
+          --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
+          --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
+          --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+          --transition-fast: all 0.2s ease-in-out; --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+          --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
         }
-
-        html[data-theme='dark'] {
-            --bg-color: var(--bg-color-dark);
-            --surface-color: var(--surface-color-dark);
-            --header-bg: var(--header-bg-dark);
-            --text-primary: var(--text-primary-dark);
-            --text-secondary: var(--text-secondary-dark);
-            --border-color: var(--border-color-dark);
-            --primary-color: var(--primary-color-dark);
-            --primary-dark: var(--primary-dark-dark);
-            --secondary-color: var(--secondary-color-dark);
-            --accent-color: var(--accent-color-dark);
-            --shadow-color: var(--shadow-color-dark);
-        }
-
-        /*------------------------------------*\
-          #BASE & PRELOADER
-        \*------------------------------------*/
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { 
-            font-family: var(--font-primary); 
-            color: var(--text-primary); 
-            background-color: var(--bg-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+        body { font-family: var(--font-primary); color: var(--text-color); background-color: var(--background-color); }
+        .hidden { display: none !important; }
+        .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
+        h2 { font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.25rem; }
+        .page-section { animation: fadeIn 0.5s forwards ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
+        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; transition: var(--transition-fast); text-decoration: none; }
+        .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
+        .btn-secondary { background-color: var(--secondary-color); color: var(--primary-color-dark); }
+        .btn-secondary:hover { background-color: #45D1B3; }
+        .btn-icon { background: none; border: none; font-size: 1.5rem; color: var(--text-color-light); cursor: pointer; transition: var(--transition-fast); }
+        .btn-icon:hover { color: var(--primary-color); }
 
-        #preloader {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: var(--bg-color);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--border-color);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+
+        /* Auth Page */
+        #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
+        .auth-container { width: 400px; padding: 40px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); text-align: center; }
+        .auth-container h1 { color: var(--primary-color); font-size: 2rem; margin-bottom: 10px; }
+        .auth-form-group { margin-bottom: 20px; text-align: left; }
+        .auth-form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        .auth-btn { width: 100%; padding: 15px; border: none; background: var(--primary-color); color: white; font-size: 1rem; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
 
         /*------------------------------------*\
-          #GENERAL & ANIMATIONS
+          #MAIN APP LAYOUT & HEADER
         \*------------------------------------*/
-        .container { width: 95%; max-width: 1600px; margin: 0 auto; }
-        h2 { font-size: 2.25rem; font-weight: 700; }
-        h3 { font-size: 1.25rem; font-weight: 600; }
-        .page-section { display: none; }
-        .page-section.active { display: block; animation: page-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        
-        @keyframes page-enter {
-            from { opacity: 0; transform: translateY(30px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-up.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /*------------------------------------*\
-          #HEADER & GLASSMORPHISM
-        \*------------------------------------*/
-        #main-header {
-            background-color: var(--header-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
-            position: fixed; top: 0; left: 0; width: 100%;
-            height: var(--header-height); z-index: 1000;
-            display: flex; align-items: center;
-        }
-        .logo a { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: var(--text-primary); }
-        .logo a i { color: var(--primary-color); }
-        #main-header nav a {
-            color: var(--text-secondary);
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: var(--radius-md);
-            transition: var(--transition-smooth);
-        }
-        #main-header nav a.active, #main-header nav a:hover {
-            color: var(--text-primary);
-            background-color: rgba(128, 128, 128, 0.1);
-        }
-
-        /* Dark Mode Toggle */
-        .dark-mode-toggle { display: flex; align-items: center; cursor: pointer; }
-        .dark-mode-toggle .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-        .dark-mode-toggle .switch input { opacity: 0; width: 0; height: 0; }
-        .dark-mode-toggle .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .dark-mode-toggle .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        .dark-mode-toggle input:checked + .slider { background-color: var(--primary-color); }
-        .dark-mode-toggle input:checked + .slider:before { transform: translateX(20px); }
-        .dark-mode-toggle i { margin: 0 8px; font-size: 1rem; color: var(--text-secondary); }
-
-
-        /*------------------------------------*\
-          #WIDGETS, CARDS & BUTTONS
-        \*------------------------------------*/
+        #main-header { background-color: var(--surface-color); box-shadow: var(--shadow-md); position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 1000; display: flex; align-items: center; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
+        #main-header nav ul { display: flex; gap: 1rem; list-style: none; }
+        #main-header nav a { display: flex; align-items: center; gap: 8px; padding: 10px 15px; color: var(--text-color-light); font-weight: 500; border-radius: var(--border-radius-md); text-decoration: none; position: relative; }
+        #main-header nav a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--primary-color); transition: width 0.3s ease; }
+        #main-header nav a.active, #main-header nav a:hover { color: var(--primary-color); background-color: var(--background-color); }
+        #main-header nav a.active::after { width: 80%; }
+        .user-actions { display: flex; align-items: center; gap: 1rem; }
+        .user-actions a { text-decoration: none; }
+        .profile-link { font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .profile-link i { font-size: 1.5rem; }
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
         main { padding-top: var(--header-height); }
-        .content-wrapper { padding: 2.5rem 0; }
-        .widget, .course-card {
-            background: var(--surface-color);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition-smooth);
-            overflow: hidden;
-        }
-        .widget:hover, .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(var(--primary-color), 0.5);
-        }
-        .btn-primary { 
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-            box-shadow: var(--shadow-sm);
-        }
-        .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: var(--shadow-md); }
-        .btn-primary:active { transform: translateY(0) scale(0.98); }
+        .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
 
+        .header-icon-group { display: flex; align-items: center; gap: 1.5rem; }
+        .language-selector select { border: none; background: transparent; font-family: var(--font-primary); font-weight: 500; color: var(--text-color-light); }
+        .language-selector select:hover { color: var(--primary-color); }
+        
+        /*------------------------------------*\
+          #DASHBOARD & WIDGETS
+        \*------------------------------------*/
+        #dashboard .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .dashboard-main-column { display: flex; flex-direction: column; gap: 2rem; }
+        .path-step { padding: 1rem; border-left: 3px solid var(--primary-color); margin-bottom: 1rem; background: #f9f9f9; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;}
+        .path-step.completed { border-left-color: var(--success-color); }
+        .recommendation-card { display: flex; gap: 1rem; align-items: center; padding: 10px; border-radius: var(--border-radius-md); transition: var(--transition-fast); }
+        .recommendation-card:hover { background-color: var(--background-color); }
+        .recommendation-card .icon { font-size: 1.5rem; color: var(--primary-color); }
 
         /*------------------------------------*\
-          #CHATBOT AI
+          #COURSES & FILTERS
         \*------------------------------------*/
-        #ai-chatbot-fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            z-index: 1001;
-            transition: transform 0.3s ease;
-        }
-        #ai-chatbot-fab:hover { transform: scale(1.1); }
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
+        .filter-btn { background: var(--surface-color); border: 1px solid var(--border-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: var(--transition-fast); }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .course-card { background-color: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); transition: var(--transition-smooth); display: flex; flex-direction: column; }
+        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .course-card-banner { height: 150px; background-size: cover; background-position: center; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; }
+        .course-card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .progress-bar-container { background-color: var(--border-color); border-radius: 99px; height: 8px; margin: 10px 0; }
+        .progress-bar { background: var(--secondary-color); height: 100%; border-radius: 99px; }
+        .course-card-footer { margin-top: auto; padding-top: 1rem; }
         
-        #chatbot-container {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 380px;
-            max-width: 90vw;
-            height: 500px;
-            background-color: var(--bg-color);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            transition: var(--transition-smooth);
-        }
-        #chatbot-container.active {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .chatbot-header {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .chatbot-header h3 { margin: 0; }
-        .chatbot-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; }
-        .message { margin-bottom: 1rem; display: flex; max-width: 85%; }
-        .message.user { align-self: flex-end; flex-direction: row-reverse; }
-        .message.bot { align-self: flex-start; }
-        .message .text {
-            padding: 10px 15px;
-            border-radius: var(--radius-lg);
-        }
-        .message.user .text { background-color: var(--primary-color); color: white; border-top-right-radius: 4px; }
-        .message.bot .text { background-color: var(--surface-color); border: 1px solid var(--border-color); border-top-left-radius: 4px; }
-        .chatbot-input { padding: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        .chatbot-input input {
-            flex-grow: 1; padding: 12px;
-            border: 1px solid var(--border-color);
-            background-color: var(--surface-color);
-            border-radius: var(--radius-md); color: var(--text-primary);
-        }
+        /*------------------------------------*\
+          #TABS (Médiathèque, Profile)
+        \*------------------------------------*/
+        .tabs { display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); margin-bottom: 2rem; }
+        .tab-btn { padding: 10px 20px; font-weight: 600; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; font-size: 1rem; }
+        .tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+        .tab-content { display: none; animation: fadeIn 0.4s; }
+        .tab-content.active { display: block; }
 
-        /* --- Autres styles (Dashboard, Profile etc. adaptés pour la nouvelle esthétique) --- */
-        #dashboard .dashboard-grid { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
-        .path-step {
-            border-left-width: 4px;
-            position: relative;
-            padding-left: 2rem;
-        }
-        .path-step::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--bg-color);
-            border: 3px solid var(--primary-color);
-        }
-        .path-step.completed::before { border-color: var(--secondary-color); }
-        #profile-layout {
-             grid-template-columns: 300px 1fr;
-        }
-        canvas#skills-chart { max-height: 400px; }
-        .leaderboards ul li {
-            border-radius: var(--radius-md);
-            transition: background-color 0.2s ease;
-        }
-        .leaderboards ul li:hover {
-            background-color: rgba(128, 128, 128, 0.05);
-        }
+        /*------------------------------------*\
+          #PROFILE PAGE
+        \*------------------------------------*/
+        .profile-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: flex-start; }
+        .profile-header { display: flex; flex-direction:column; align-items: center; gap: 1rem; margin-bottom: 2rem; text-align: center; }
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-color); box-shadow: var(--shadow-md); }
+        .profile-info h2 { margin-bottom: 0.5rem; }
+        .profile-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); }
+        .stat-card i { font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .stat-card .stat-value { font-size: 1.5rem; font-weight: 600; }
+        .badge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem; text-align: center; }
+        .badge-item i { font-size: 3.5rem; color: var(--warning-color); transition: var(--transition-fast); }
+        .badge-item:hover i { transform: scale(1.1); }
+        .badge-item p { font-weight: 500; margin-top: 0.5rem; }
 
-        /* Responsive */
+        /*------------------------------------*\
+          #COLLABORATION & STUDY ROOMS
+        \*------------------------------------*/
+        .collaboration-layout { display: grid; grid-template-columns: 300px 1fr 2fr; gap: 1rem; height: 75vh; }
+        .groups-column, .threads-column, .chat-column { background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+        .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; display: flex; justify-content: space-between; align-items: center;}
+        .groups-list, .threads-list { list-style: none; overflow-y: auto; padding: 0;}
+        .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+        .groups-list li.active, .threads-list li.active { background-color: var(--primary-color); color: white; }
+        .groups-list li:hover, .threads-list li:hover { background-color: var(--background-color); }
+        .thread-message { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+        .thread-message-author { font-weight: 600; }
+        .thread-message-content { flex-grow: 1; overflow-y: auto; }
+        .study-rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .room-card { text-align: center; }
+        .room-card .icon { font-size: 3rem; margin-bottom: 1rem; }
+        .room-card .presence { font-size: 0.9rem; color: var(--text-color-light); }
+
+        /*------------------------------------*\
+          #TEACHER'S ASSISTANT
+        \*------------------------------------*/
+        .teacher-dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
+        .chart-container { position: relative; height: 250px; width: 100%;}
+        #at-risk-list { list-style: none; padding: 0; }
+        #at-risk-list li { display:flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid var(--border-color); }
+        #at-risk-list li .reason { font-size: 0.8rem; color: var(--error-color); }
+        
+        /*------------------------------------*\
+          #RESPONSIVE DESIGN
+        \*------------------------------------*/
+        @media (max-width: 1200px) {
+            .collaboration-layout { grid-template-columns: 250px 1fr 2fr; }
+        }
         @media (max-width: 1024px) {
-            #profile-layout { grid-template-columns: 1fr; }
-            #main-header nav { display: none; /* ... */ }
-            /* ... (autres styles responsives conservés) */
+            #main-header nav { display: none; position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: var(--surface-color); flex-direction: column; padding-top: 2rem; transform: translateX(-100%); transition: transform 0.3s ease-in-out; z-index: 999; box-shadow: 5px 0 15px rgba(0,0,0,0.1); }
+            #main-header nav.active { display: flex; transform: translateX(0); }
+            #main-header nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
+            #main-header nav a { padding: 20px; border-radius: 0; width: 100%; justify-content: center; }
+            .menu-toggle { display: block; }
+            .collaboration-layout { grid-template-columns: 1fr; height: auto; }
+            .threads-column, .chat-column { display: none; } /* On mobile, show only groups first */
+            .gamification-grid { grid-template-columns: 1fr; }
+            .profile-layout { grid-template-columns: 1fr; }
         }
-
+        @media (max-width: 768px) {
+            h2 { font-size: 1.75rem; }
+            .dashboard-grid, .teacher-dashboard-grid { grid-template-columns: 1fr; }
+            .profile-header { flex-direction: column; text-align: center; }
+            .auth-container { width: 90%; padding: 25px; }
+            .header-icon-group { gap: 0.5rem; }
+            .profile-link span { display: none; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
-
     <section id="auth-page" class="hidden">
-        </section>
+        <div class="auth-container">
+            <h1>Bienvenue sur EduSmart.AI</h1>
+            <p>Connectez-vous pour commencer votre aventure.</p>
+            <form id="login-form">
+                <div class="auth-form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" value="etudiant@edusmart.ai" required></div>
+                <div class="auth-form-group"><label for="password">Mot de passe</label><input type="password" id="password" value="password" required></div>
+                <button type="submit" class="auth-btn">Se Connecter</button>
+            </form>
+        </div>
+    </section>
 
     <div id="main-app" class="hidden">
         <header id="main-header">
-            <div class="container header-content" style="display:flex; justify-content: space-between; align-items: center; width: 100%;">
-                <div class="logo"><a href="#dashboard"><i class="fas fa-brain"></i> EduSmart.AI</a></div>
+            <div class="container header-content">
+                <div class="logo"><a href="#dashboard">EduSmart.AI</a></div>
                 <nav>
-                    <ul style="display:flex; gap: 1rem; list-style: none;">
-                        <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
-                        <li><a href="#courses" class="nav-link">Mes Cours</a></li>
-                        <li><a href="#library" class="nav-link">Bibliothèque</a></li>
-                        <li><a href="#collaboration" class="nav-link">Collaboration</a></li>
+                    <ul>
+                        <li><a href="#dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="#courses" class="nav-link"><i class="fas fa-book"></i> Mes Cours</a></li>
+                        <li><a href="#library" class="nav-link"><i class="fas fa-swatchbook"></i> Bibliothèque</a></li>
+                        <li><a href="#study-rooms" class="nav-link"><i class="fas fa-users-rays"></i> Salles d'étude</a></li>
+                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-comments"></i> Forum</a></li>
+                        <li><a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a></li>
+                        <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a></li>
                     </ul>
                 </nav>
-                <div class="user-actions" style="display:flex; align-items: center; gap: 1.5rem;">
-                    <div class="dark-mode-toggle">
-                        <i class="fas fa-sun"></i>
-                        <label class="switch">
-                            <input type="checkbox" id="theme-toggle">
-                            <span class="slider"></span>
-                        </label>
-                        <i class="fas fa-moon"></i>
+                <div class="user-actions">
+                    <div class="header-icon-group">
+                        <button class="btn-icon" title="Chatbot d'aide"><i class="fas fa-robot"></i></button>
+                        <button class="btn-icon" title="Notifications"><i class="fas fa-bell"></i></button>
+                        <div class="language-selector">
+                            <i class="fas fa-globe"></i>
+                            <select>
+                                <option value="fr">FR</option>
+                                <option value="en">EN</option>
+                            </select>
+                        </div>
                     </div>
-                    <a href="#profile" class="nav-link profile-link" style="display:flex; align-items:center; gap: 8px; text-decoration:none;">
-                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" style="width: 36px; height: 36px; border-radius: 50%;">
-                        <span>Jean</span>
+                    <a href="#profile" class="nav-link profile-link">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Mon Profil</span>
                     </a>
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
                 </div>
             </div>
         </header>
@@ -369,220 +235,360 @@
         <main>
             <section id="dashboard" class="page-section">
                 <div class="container content-wrapper">
-                    <h2 class="fade-in-up">Bonjour Jean, continuons votre parcours.</h2>
-                    <div id="dashboard" class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 2rem;">
-                         <div class="dashboard-main-column" style="display:flex; flex-direction:column; gap: 2rem;">
-                            <div class="widget fade-in-up" style="animation-delay: 0.1s;">
+                    <h2>Votre Parcours Personnalisé</h2>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-main-column">
+                            <div class="widget">
                                 <div class="widget-header">
                                     <h3><i class="fas fa-route" style="color: var(--primary-color);"></i> Prochaines Étapes</h3>
                                 </div>
                                 <div class="path-step completed">
-                                    <p style="font-weight: 500; margin:0;">Quiz sur les dérivées</p>
+                                    <p style="font-weight: 500; margin:0;"><strong>Terminé :</strong> Quiz sur les dérivées</p>
+                                    <small>Score: 85% - Excellent !</small>
                                 </div>
                                 <div class="path-step">
-                                    <p style="font-weight: 500; margin:0;">Vidéo : l'intégration par parties</p>
+                                    <p style="font-weight: 500; margin:0;"><strong>À faire :</strong> Vidéo sur l'intégration par parties</p>
+                                    <small>Temps estimé : 15 min</small>
+                                </div>
+                                 <div class="path-step">
+                                    <p style="font-weight: 500; margin:0;"><strong>À faire :</strong> Exercices interactifs</p>
+                                    <small>Objectif : 5 exercices réussis</small>
                                 </div>
                             </div>
-                            <div class="widget fade-in-up" style="animation-delay: 0.2s;">
+                             <div class="widget">
                                 <div class="widget-header">
-                                    <h3><i class="fas fa-lightbulb" style="color: var(--accent-color);"></i> Recommandations de l'IA</h3>
+                                    <h3><i class="fas fa-lightbulb" style="color: var(--warning-color);"></i> L'IA vous recommande</h3>
+                                    <small>Basé sur vos derniers résultats</small>
                                 </div>
+                                <div class="recommendation-card">
+                                    <i class="fas fa-video icon"></i>
+                                    <div>
+                                        <p style="font-weight: 500; margin:0;">Revoir une vidéo sur le théorème de Rolle</p>
+                                        <small>Point à renforcer en analyse.</small>
+                                    </div>
                                 </div>
+                                <div class="recommendation-card">
+                                    <i class="fas fa-file-alt icon"></i>
+                                    <div>
+                                        <p style="font-weight: 500; margin:0;">Lire la fiche de synthèse sur la thermodynamique</p>
+                                        <small>Pour préparer le prochain chapitre de Physique.</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="dashboard-side-column" style="display:flex; flex-direction:column; gap: 2rem;">
-                            <div class="widget fade-in-up" style="animation-delay: 0.3s;">
-                                <h3><i class="fas fa-award"></i> Progression Globale</h3>
-                                <canvas id="progress-chart"></canvas>
+                        <div class="widget">
+                            <div class="widget-header">
+                                <h3><i class="fas fa-calendar-alt"></i> Mon Agenda</h3>
+                                <a href="#" class="btn-primary btn-sm">Ajouter</a>
                             </div>
-                            <div class="widget leaderboards fade-in-up" style="animation-delay: 0.4s;">
-                                <h3><i class="fas fa-trophy"></i> Classement</h3>
-                                <ul style="list-style: none; padding: 0;">
-                                    <li><span>1. Vous</span><span>12500 pts</span></li>
-                                    </ul>
-                            </div>
+                            <p><strong>10:00</strong> - Cours en direct : Physique</p>
+                            <p><strong>Demain, 14:00</strong> - Salle d'étude : Révision BAC</p>
+                            <p><strong>09/06</strong> - Échéance : Devoir d'Histoire</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="courses" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2>Mes Cours</h2>
+                    <div class="filters"><button class="filter-btn active" data-filter="all">Tous</button><button class="filter-btn" data-filter="collège">Collège</button><button class="filter-btn" data-filter="lycée">Lycée (Bac)</button><button class="filter-btn" data-filter="prépa">Classes Prépa</button></div>
+                    <div class="courses-grid">
+                        <div class="course-card" data-level="lycée"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/4A90E2/FFFFFF?text=Maths');"></div><div class="course-card-content"><h3>Mathématiques - Analyse</h3><p>Avec M. Diallo</p><p>Progression: 75%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer le parcours</a></div></div></div>
+                        <div class="course-card" data-level="prépa"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/50E3C2/FFFFFF?text=Physique');"></div><div class="course-card-content"><h3>Physique - Électromagnétisme</h3><p>Avec Mme. Traoré</p><p>Progression: 40%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer le parcours</a></div></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="library" class="page-section hidden">
+                 <div class="container content-wrapper">
+                    <h2><i class="fas fa-swatchbook"></i> Bibliothèque de Contenus</h2>
+                    <div class="widget">
+                        <div class="filters">
+                             <input type="search" placeholder="Rechercher une notion, un cours..." style="padding: 10px; flex-grow: 1; border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
+                             <button class="filter-btn active" data-filter="all">Tous</button>
+                             <button class="filter-btn" data-filter="video">Vidéos</button>
+                             <button class="filter-btn" data-filter="quiz">Quiz</button>
+                             <button class="filter-btn" data-filter="fiche">Fiches</button>
+                             <button class="filter-btn" data-filter="webinar">Webinaires</button>
+                        </div>
+                         <p style="text-align: center; padding: 2rem;">La bibliothèque intelligente vous permet de trouver des ressources sur mesure.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="study-rooms" class="page-section hidden">
+                 <div class="container content-wrapper">
+                     <div class="widget-header">
+                        <h2><i class="fas fa-users-rays"></i> Salles d'étude</h2>
+                        <a href="#" class="btn-primary"><i class="fas fa-plus"></i> Créer une salle</a>
+                    </div>
+                    <div class="study-rooms-grid">
+                        <div class="widget room-card">
+                            <i class="fas fa-brain icon" style="color: var(--primary-color);"></i>
+                            <h3>Révisions BAC - Maths</h3>
+                            <p class="presence">5 personnes en ligne</p>
+                            <a href="#" class="btn-primary" style="margin-top: 1rem;">Rejoindre</a>
+                        </div>
+                         <div class="widget room-card">
+                             <i class="fas fa-atom icon" style="color: var(--secondary-color);"></i>
+                            <h3>Aide aux devoirs - Physique</h3>
+                             <p class="presence">2 personnes en ligne</p>
+                            <a href="#" class="btn-primary" style="margin-top: 1rem;">Rejoindre</a>
+                        </div>
+                         <div class="widget room-card">
+                             <i class="fas fa-feather-alt icon" style="color: var(--warning-color);"></i>
+                            <h3>Préparation Exposé - Histoire</h3>
+                             <p class="presence">Salle vide</p>
+                            <a href="#" class="btn-secondary" style="margin-top: 1rem;">Rejoindre</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="profile" class="page-section">
+            <section id="collaboration" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-comments"></i> Forums de Discussion</h2>
+                    <div class="collaboration-layout">
+                        <div class="groups-column"><div class="column-header">Groupes</div><ul class="groups-list"></ul></div>
+                        <div class="threads-column"><div class="column-header">Discussions</div><ul class="threads-list"></ul></div>
+                        <div class="chat-column"><div class="column-header">Conversation</div><div class="thread-message-content"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gamification" class="page-section hidden">
                  <div class="container content-wrapper">
-                    <div id="profile-layout" class="fade-in-up" style="display:grid; grid-template-columns: 300px 1fr; gap: 2rem;">
-                        <div class="widget" style="text-align:center; padding: 2rem;">
-                             <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="profile-avatar" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary-color); margin-bottom: 1rem;">
-                             <h2>Jean Dupont</h2>
-                             <p>Virtuose des Maths - Niveau 12</p>
-                        </div>
-                        <div class="widget">
-                            <h3><i class="fas fa-atom"></i> Analyse des Compétences</h3>
-                            <canvas id="skills-chart"></canvas>
-                        </div>
+                    <h2>Ma Progression</h2>
+                    <div class="gamification-grid">
+                        <div class="widget"><h3>Niveau Actuel: Virtuose II</h3><p>Vous êtes sur la bonne voie, continuez comme ça !</p><div class="progress-bar-container" style="height:25px;"><div class="progress-bar" style="width: 80%;"></div></div><p>8200 / 10000 points pour le niveau suivant</p></div>
+                        <div class="widget leaderboards"><h3>Classements</h3><ul style="list-style: none; padding: 0;"><li><span>1. Vous</span><span>12500 pts</span></li><li><span>2. Ami_X</span><span>11000 pts</span></li><li><span>3. Ami_Y</span><span>9800 pts</span></li></ul></div>
                     </div>
                  </div>
             </section>
+
+            <section id="teachers-ai" class="page-section hidden">
+                <div class="container content-wrapper">
+                     <div class="widget-header">
+                        <h2><i class="fas fa-chalkboard-teacher"></i> Espace Professeur</h2>
+                        <a href="#" class="btn-primary"><i class="fas fa-plus"></i> Créer une classe</a>
+                    </div>
+                    <div class="teacher-dashboard-grid">
+                        <div class="widget">
+                            <h3><i class="fas fa-users"></i> Mes Classes</h3>
+                            <p>Vous gérez <strong>3 classes</strong>. Sélectionnez une classe pour voir les détails.</p>
+                        </div>
+                         <div class="widget">
+                            <h3><i class="fas fa-tasks"></i> Actions Rapides</h3>
+                            <a href="#" class="btn-primary" style="display:block; margin-bottom: 1rem;">Créer un quiz</a>
+                            <a href="#" class="btn-secondary" style="display:block; margin-bottom: 1rem;">Partager une ressource</a>
+                             <a href="#" class="btn-primary" style="display:block;">Voir les 5 devoirs à corriger</a>
+                        </div>
+                        <div class="widget">
+                             <div class="widget-header">
+                                 <h3><i class="fas fa-exclamation-triangle" style="color: var(--error-color);"></i> Détection IA : Élèves à suivre</h3>
+                             </div>
+                            <ul id="at-risk-list">
+                                <li><span>Jean Dupont</span> <span class="reason">Baisse de performance</span></li>
+                                <li><span>Amina Diallo</span> <span class="reason">Devoirs non rendus</span></li>
+                            </ul>
+                        </div>
+                        <div class="widget">
+                           <h3><i class="fas fa-chart-line"></i> Performance de la classe "Terminale S1"</h3>
+                            <p>Rapport sur le dernier chapitre : 85% de réussite moyenne.</p>
+                             <a href="#">Générer un rapport détaillé PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-            </main>
-    </div>
+            <section id="profile" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <div class="profile-layout">
+                        <div>
+                            <div class="widget profile-header">
+                                <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="profile-avatar">
+                                <div class="profile-info">
+                                    <h2>Jean Dupont</h2>
+                                    <p>Étudiant en Classes Prépa</p>
+                                </div>
+                            </div>
+                            <div class="widget">
+                                 <div class="profile-stats">
+                                    <div class="stat-card"><i class="fas fa-book-open"></i><div class="stat-value">12</div><p>Cours terminés</p></div>
+                                    <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-value">142</div><p>Heures d'étude</p></div>
+                                    <div class="stat-card"><i class="fas fa-medal"></i><div class="stat-value">25</div><p>Badges obtenus</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <div class="tabs profile-tabs">
+                               <button class="tab-btn active" data-tab="analysis">Analyse & Rapports</button>
+                               <button class="tab-btn" data-tab="badges">Mes Badges</button>
+                               <button class="tab-btn" data-tab="settings">Paramètres</button>
+                            </div>
+                            
+                            <div id="analysis" class="tab-content active" style="padding-top:2rem;">
+                                 <div class="widget-header">
+                                    <h3>Analyse des compétences</h3>
+                                     <a href="#" class="btn-primary"><i class="fas fa-file-pdf"></i> Exporter en PDF</a>
+                                </div>
+                                <canvas id="skills-chart"></canvas>
+                                <div style="margin-top: 2rem;">
+                                    <h4>Feedback de l'IA :</h4>
+                                    <p><strong>Points forts :</strong> Excellente résolution de problèmes en Algèbre.</p>
+                                    <p><strong>Axes d'amélioration :</strong> La créativité et la collaboration pourraient être renforcées. Participez à une salle d'étude pour progresser !</p>
+                                </div>
+                            </div>
 
-    <div id="ai-chatbot-fab">
-        <i class="fas fa-sparkles"></i>
-    </div>
+                            <div id="badges" class="tab-content" style="padding-top:2rem;">
+                                <div class="badge-grid">
+                                    <div class="badge-item"><i class="fas fa-medal"></i><p>Maître des Bases</p></div>
+                                    <div class="badge-item"><i class="fas fa-star"></i><p>Esprit Curieux</p></div>
+                                    <div class="badge-item"><i class="fas fa-brain"></i><p>Problème Résolu</p></div>
+                                    <div class="badge-item"><i class="fas fa-fire"></i><p>Série de 5 jours</p></div>
+                                </div>
+                            </div>
 
-    <div id="chatbot-container">
-        <div class="chatbot-header">
-            <h3>Assistant EduSmart.AI</h3>
-            <button id="close-chatbot" class="btn-icon" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
-        </div>
-        <div class="chatbot-messages">
-            <div class="message bot">
-                <span class="text">Bonjour Jean ! Comment puis-je vous aider à apprendre aujourd'hui ?</span>
-            </div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" placeholder="Posez votre question...">
-            <button class="btn-primary" style="padding: 10px 15px;"><i class="fas fa-paper-plane"></i></button>
-        </div>
+                            <div id="settings" class="tab-content" style="padding-top:2rem;">
+                                 <h3>Paramètres du compte</h3>
+                                 <p>Ici se trouveront les options pour changer de mot de passe, gérer les notifications, etc.</p>
+                                 <h3 style="margin-top:2rem;">Intégrations</h3>
+                                 <p>Connectez vos autres outils pour une expérience unifiée.</p>
+                                 <a href="#" class="btn-secondary">Lier avec Google Classroom</a>
+                                 <a href="#" class="btn-secondary">Lier avec Zoom</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
-
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- PRELOADER ---
-        const preloader = document.getElementById('preloader');
-        window.addEventListener('load', () => {
-            preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 500);
-        });
-
-        // --- THEME (DARK MODE) ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                themeToggle.checked = true;
-            }
-        }
-
-        themeToggle.addEventListener('change', () => {
-            if (themeToggle.checked) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // --- APP LOGIC ---
+        const authPage = document.getElementById('auth-page');
         const mainApp = document.getElementById('main-app');
-        mainApp.classList.remove('hidden'); // On affiche l'app directement pour cette démo
-
+        const loginForm = document.getElementById('login-form');
         const navLinks = document.querySelectorAll('.nav-link');
         const pageSections = document.querySelectorAll('.page-section');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const headerNav = document.querySelector('#main-header nav');
 
         function navigateTo(hash) {
-            pageSections.forEach(section => section.classList.remove('active'));
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            const targetSection = document.querySelector(hash);
-            const targetLink = document.querySelector(`a[href="${hash}"]`);
-
-            if (targetSection) {
-                targetSection.classList.add('active');
-                animateOnScroll(targetSection);
+            if (!hash || hash === '#') {
+                authPage.classList.remove('hidden');
+                mainApp.classList.add('hidden');
+                return;
             }
-            if (targetLink) {
-                targetLink.classList.add('active');
-            }
-
-            // Render charts if the section is active
-            if (hash === '#dashboard') renderProgressChart();
-            if (hash === '#profile') renderSkillsChart();
-        }
-
-        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
-        navigateTo(window.location.hash || '#dashboard'); // Initial navigation
-
-        // --- CHATBOT ---
-        const chatbotFab = document.getElementById('ai-chatbot-fab');
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const closeChatbotBtn = document.getElementById('close-chatbot');
-
-        chatbotFab.addEventListener('click', () => chatbotContainer.classList.toggle('active'));
-        closeChatbotBtn.addEventListener('click', () => chatbotContainer.classList.remove('active'));
-        
-        // --- ANIMATE ON SCROLL ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        function animateOnScroll(container) {
-            container.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-        }
-
-        // --- CHART RENDERING ---
-        let progressChart, skillsChart;
-
-        function renderProgressChart() {
-            const ctx = document.getElementById('progress-chart');
-            if (!ctx || Chart.getChart(ctx)) return;
-            progressChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Complété', 'Restant'],
-                    datasets: [{
-                        data: [72, 28],
-                        backgroundColor: ['#4A55E2', '#E2E8F0'],
-                        borderWidth: 0,
-                    }]
-                },
-                options: { responsive: true, cutout: '80%', plugins: { legend: { display: false } } }
-            });
-        }
-        
-        function renderSkillsChart() {
-            const ctx = document.getElementById('skills-chart');
-            if (!ctx || Chart.getChart(ctx)) return;
             
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            const gridColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)';
-            const ticksColor = isDark ? '#A0AEC0' : '#5A6474';
+            authPage.classList.add('hidden');
+            mainApp.classList.remove('hidden');
+            mainApp.style.opacity = '1';
 
-            skillsChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Analyse', 'Créativité', 'Collaboration', 'Logique', 'Rigueur', 'Autonomie'],
-                    datasets: [{
-                        label: 'Mes Compétences',
-                        data: [8, 6, 7, 9, 8, 5],
-                        fill: true,
-                        backgroundColor: 'rgba(74, 85, 226, 0.2)',
-                        borderColor: '#4A55E2',
-                        pointBackgroundColor: '#4A55E2',
-                        pointBorderColor: '#fff',
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        r: {
-                            angleLines: { color: gridColor },
-                            grid: { color: gridColor },
-                            pointLabels: { color: ticksColor, font: { size: 14 } },
-                            ticks: { backdropColor: 'transparent', color: ticksColor }
-                        }
-                    }
+            pageSections.forEach(section => section.classList.add('hidden'));
+            
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                 targetSection.classList.remove('hidden');
+            } else {
+                 document.querySelector('#dashboard').classList.remove('hidden');
+            }
+            
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+            
+            if (headerNav.classList.contains('active')) {
+                headerNav.classList.remove('active');
+            }
+
+            if (hash === '#profile') {
+                renderSkillsChart();
+            }
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            authPage.style.transition = 'opacity 0.5s ease-out';
+            authPage.style.opacity = '0';
+            setTimeout(() => {
+                authPage.classList.add('hidden');
+                authPage.style.opacity = '1';
+                
+                mainApp.classList.remove('hidden');
+                mainApp.style.opacity = '0';
+                
+                setTimeout(() => { 
+                    mainApp.style.opacity = '1'; 
+                }, 50);
+
+                window.location.hash = '#dashboard';
+            }, 500);
+        });
+
+        document.body.addEventListener('click', (e) => {
+            const link = e.target.closest('.nav-link');
+            if (link) {
+                e.preventDefault();
+                const hash = link.getAttribute('href');
+                if (window.location.hash !== hash) {
+                    window.location.hash = hash;
+                } else {
+                    navigateTo(hash);
                 }
+            }
+        });
+        
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        
+        menuToggle.addEventListener('click', () => headerNav.classList.toggle('active'));
+        
+        function setupTabs(containerSelector) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+            const tabButtons = container.querySelectorAll('.tab-btn');
+            const tabContents = container.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+                });
             });
         }
+        setupTabs('.profile-tabs');
+
+        function renderSkillsChart() {
+             const ctx = document.getElementById('skills-chart');
+             if (ctx && !Chart.getChart(ctx)) {
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Analyse', 'Créativité', 'Collaboration', 'Logique', 'Rigueur', 'Autonomie'],
+                        datasets: [{
+                            label: 'Mes Compétences',
+                            data: [8, 6, 7, 9, 8, 5],
+                            fill: true,
+                            backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                            borderColor: 'rgb(74, 144, 226)',
+                            pointBackgroundColor: 'rgb(74, 144, 226)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(74, 144, 226)'
+                        }]
+                    },
+                    options: {
+                       responsive: true,
+                       maintainAspectRatio: true
+                    }
+                });
+             }
+        }
+
+        // Gérer le chargement initial
+        navigateTo(window.location.hash);
     });
     </script>
 </body>
