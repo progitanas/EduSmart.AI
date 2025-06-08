@@ -17,19 +17,19 @@
         
         /* -- Variables Globales et Styles de Base -- */
         :root {
-          --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
-          --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
-          --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
-          --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
-          --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-          --transition-fast: all 0.2s ease-in-out;
-          --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
+            --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
+            --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
+            --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
+            --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
+            --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --transition-fast: all 0.2s ease-in-out;
+            --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; font-size: 16px; }
         body { font-family: var(--font-primary); color: var(--text-color); background-color: var(--background-color); }
-        .hidden { display: none !important; }
+        .hidden { display: none !important; } /* Garder cette classe pour masquer */
         .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
         h2 { font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 1.5rem; }
         h3 { font-size: 1.25rem; }
@@ -236,7 +236,7 @@
         </div>
     </section>
 
-    <div id="main-app" class="hidden">
+    <div id="main-app" class="hidden"> 
         <header id="main-header">
             <div class="container header-content">
                 <div class="logo"><a href="#dashboard">EduSmart.AI</a></div>
@@ -252,6 +252,7 @@
                         <li><a href="#webinars" class="nav-link"><i class="fas fa-video"></i> Webinaires</a></li>
                         <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a></li>
                         <li><a href="#virtual-classroom" class="nav-link"><i class="fas fa-school"></i> Classe Virtuelle</a></li>
+                        <li><a href="#profile" class="nav-link"><i class="fas fa-user-circle"></i> Mon Profil</a></li>
                     </ul>
                 </nav>
                 <div class="user-actions">
@@ -1200,70 +1201,77 @@
             const offlineIndicator = document.getElementById('offline-indicator');
             const openChatbotBtn = document.getElementById('open-chatbot');
             
-            // --- Authentication ---
+            // --- GESTION DE L'AUTHENTIFICATION ---
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                authPage.style.display = 'none';
+                // Cache la page d'authentification
+                authPage.classList.add('hidden');
+                // Affiche l'application principale
                 mainApp.classList.remove('hidden');
-                navigateTo(window.location.hash || '#dashboard');
-                initCharts();
+                // Navigue vers le tableau de bord par défaut ou le hash actuel
+                // Le hash permet de se souvenir de la dernière section visitée si l'URL est partagée/rechargée
+                navigateTo(window.location.hash || '#dashboard'); 
+                initCharts(); // Initialise les graphiques une fois le DOM visible
             });
 
-            // --- Navigation ---
+            // --- GESTION DE LA NAVIGATION ENTRE SECTIONS ---
             function navigateTo(hash) {
+                // Si aucun hash n'est spécifié, on va au tableau de bord
                 if (!hash || hash === '#') {
                     hash = '#dashboard';
                 }
                 
-                // Masquer toutes les sections
+                // Masque toutes les sections de la page
                 pageSections.forEach(section => {
                     section.classList.add('hidden');
                 });
                 
-                // Afficher la section cible
+                // Affiche la section cible
                 const targetSection = document.querySelector(hash);
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
                 }
                 
-                // Mettre à jour la navigation active
+                // Met à jour la classe 'active' sur les liens de navigation
                 navLinks.forEach(link => {
                     link.classList.toggle('active', link.getAttribute('href') === hash);
                 });
                 
-                // Fermer le menu mobile si ouvert
+                // Ferme le menu mobile si ouvert après navigation
                 headerNav.classList.remove('active');
                 
-                // Réinitialiser le défilement en haut de la section
+                // Remonte en haut de la page pour la nouvelle section
                 window.scrollTo(0, 0);
             }
 
-            // Gestion des clics sur les liens de navigation
+            // Écoute les clics sur tous les liens de navigation
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // Empêche le comportement par défaut du lien (rechargement de page)
                     const hash = e.currentTarget.getAttribute('href');
                     navigateTo(hash);
                 });
             });
 
-            // Gestion du menu mobile
+            // Gère l'affichage/masquage du menu mobile
             menuToggle.addEventListener('click', () => {
                 headerNav.classList.toggle('active');
             });
 
-            // --- Chatbot ---
+            // --- GESTION DU CHATBOT ---
+            // Ouvre/ferme le chatbot via le bouton flottant
             fabChatbot.addEventListener('click', () => {
                 chatbotWindow.classList.toggle('active');
             });
             
+            // Ouvre le chatbot via le bouton du dashboard
             if (openChatbotBtn) {
                 openChatbotBtn.addEventListener('click', () => {
                     chatbotWindow.classList.add('active');
                 });
             }
 
-            // Gestion des messages du chatbot
+            // Envoie un message dans le chatbot
             sendMessage.addEventListener('click', sendChatMessage);
             chatInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
@@ -1274,23 +1282,23 @@
             function sendChatMessage() {
                 const message = chatInput.value.trim();
                 if (message) {
-                    // Afficher le message de l'utilisateur
+                    // Crée et ajoute le message de l'utilisateur
                     const userMessage = document.createElement('div');
                     userMessage.className = 'chat-message user-message';
                     userMessage.textContent = message;
                     document.querySelector('.chatbot-display').appendChild(userMessage);
                     
-                    // Réinitialiser l'input
+                    // Vide l'input
                     chatInput.value = '';
                     
-                    // Simuler une réponse du bot
+                    // Simule une réponse du bot avec un délai
                     typingIndicator.style.display = 'block';
                     setTimeout(() => {
                         typingIndicator.style.display = 'none';
                         const botMessage = document.createElement('div');
                         botMessage.className = 'chat-message bot-message';
                         
-                        // Réponses préprogrammées
+                        // Réponses simples basées sur le contenu du message
                         if (message.toLowerCase().includes('dérivée') || message.toLowerCase().includes('dérivé')) {
                             botMessage.innerHTML = `
                                 <p>Je vois que vous travaillez sur les dérivées! Voici quelques explications :</p>
@@ -1311,24 +1319,26 @@
                         }
                         
                         document.querySelector('.chatbot-display').appendChild(botMessage);
+                        // Fait défiler le chat vers le bas
                         document.querySelector('.chatbot-display').scrollTop = document.querySelector('.chatbot-display').scrollHeight;
-                    }, 1500);
+                    }, 1500); // Délai de 1.5 secondes
                 }
             }
 
-            // --- Notifications ---
+            // --- GESTION DES NOTIFICATIONS ---
             notificationBell.addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Empêche l'événement de se propager et de fermer le panel
                 notificationsPanel.classList.toggle('active');
             });
 
+            // Ferme le panel de notifications si on clique ailleurs
             document.addEventListener('click', (e) => {
                 if (!notificationsPanel.contains(e.target) && !notificationBell.contains(e.target)) {
                     notificationsPanel.classList.remove('active');
                 }
             });
 
-            // --- Language Selector ---
+            // --- SÉLECTEUR DE LANGUE ---
             languageToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 languageDropdown.classList.toggle('active');
@@ -1337,22 +1347,23 @@
             document.querySelectorAll('.language-option').forEach(option => {
                 option.addEventListener('click', () => {
                     const lang = option.getAttribute('data-lang');
-                    languageToggle.innerHTML = option.innerHTML;
+                    languageToggle.innerHTML = option.innerHTML; // Affiche le drapeau et le texte de la langue sélectionnée
                     languageDropdown.classList.remove('active');
                     
-                    // Simuler le changement de langue
                     alert(`Langue changée en ${option.textContent.trim()}. En production, toute l'interface serait traduite.`);
                 });
             });
 
+            // Ferme le dropdown de langue si on clique ailleurs
             document.addEventListener('click', (e) => {
                 if (!languageDropdown.contains(e.target) && !languageToggle.contains(e.target)) {
                     languageDropdown.classList.remove('active');
                 }
             });
 
-            // --- Mode Hors-ligne ---
+            // --- INDICATEUR DE MODE HORS-LIGNE ---
             function checkOnlineStatus() {
+                // Simule une connexion intermittente pour l'exemple
                 const isOnline = Math.random() > 0.2; // 80% de chance d'être en ligne
                 if (isOnline) {
                     offlineIndicator.classList.remove('active');
@@ -1361,92 +1372,92 @@
                 }
             }
             
-            // Vérifier le statut toutes les 30 secondes
+            // Vérifie le statut toutes les 30 secondes
             setInterval(checkOnlineStatus, 30000);
-            checkOnlineStatus();
-            
-            // --- Initialisation des graphiques ---
+            checkOnlineStatus(); // Vérifie au chargement initial
+
+            // --- INITIALISATION DES GRAPHIQUES (Chart.js) ---
             function initCharts() {
-                // Graphique de performance
-                const performanceCtx = document.getElementById('performance-chart').getContext('2d');
-                new Chart(performanceCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
-                        datasets: [{
-                            label: 'Moyenne générale',
-                            data: [6.5, 7.0, 7.5, 8.0, 8.2, 8.5],
-                            borderColor: '#4A90E2',
-                            backgroundColor: 'rgba(74, 144, 226, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
+                // S'assure que les canvas existent avant d'initialiser les graphiques
+                const performanceCanvas = document.getElementById('performance-chart');
+                if (performanceCanvas) {
+                    const performanceCtx = performanceCanvas.getContext('2d');
+                    new Chart(performanceCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+                            datasets: [{
+                                label: 'Moyenne générale',
+                                data: [6.5, 7.0, 7.5, 8.0, 8.2, 8.5],
+                                borderColor: '#4A90E2',
+                                backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
                 
-                // Graphique des compétences
-                const skillsCtx = document.getElementById('skills-chart').getContext('2d');
-                new Chart(skillsCtx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Collaboration', 'Communication', 'Pensée critique', 'Créativité', 'Résolution problèmes', 'Autonomie'],
-                        datasets: [{
-                            label: 'Vos compétences',
-                            data: [7, 8, 9, 6, 8, 7],
-                            backgroundColor: 'rgba(80, 227, 194, 0.2)',
-                            borderColor: '#50E3C2',
-                            pointBackgroundColor: '#50E3C2'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            r: {
-                                angleLines: { display: true },
-                                suggestedMin: 0,
-                                suggestedMax: 10
+                const skillsCanvas = document.getElementById('skills-chart');
+                if (skillsCanvas) {
+                    const skillsCtx = skillsCanvas.getContext('2d');
+                    new Chart(skillsCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Collaboration', 'Communication', 'Pensée critique', 'Créativité', 'Résolution problèmes', 'Autonomie'],
+                            datasets: [{
+                                label: 'Vos compétences',
+                                data: [7, 8, 9, 6, 8, 7],
+                                backgroundColor: 'rgba(80, 227, 194, 0.2)',
+                                borderColor: '#50E3C2',
+                                pointBackgroundColor: '#50E3C2'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                r: {
+                                    angleLines: { display: true },
+                                    suggestedMin: 0,
+                                    suggestedMax: 10
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
                 
-                // Graphique des élèves (espace profs)
-                const studentsCtx = document.getElementById('students-chart').getContext('2d');
-                new Chart(studentsCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Thomas', 'Marie', 'Jean', 'Sophie', 'Lucie', 'Pierre'],
-                        datasets: [{
-                            label: 'Progression mensuelle (%)',
-                            data: [12, 15, 8, -5, 10, 7],
-                            backgroundColor: [
-                                '#4A90E2', '#50E3C2', '#4A90E2', 
-                                '#E53E3E', '#4A90E2', '#4A90E2'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
+                const studentsCanvas = document.getElementById('students-chart');
+                if (studentsCanvas) {
+                    const studentsCtx = studentsCanvas.getContext('2d');
+                    new Chart(studentsCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Thomas', 'Marie', 'Jean', 'Sophie', 'Lucie', 'Pierre'],
+                            datasets: [{
+                                label: 'Progression mensuelle (%)',
+                                data: [12, 15, 8, -5, 10, 7],
+                                backgroundColor: [
+                                    '#4A90E2', '#50E3C2', '#4A90E2', 
+                                    '#E53E3E', '#4A90E2', '#4A90E2'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
             }
             
-            // --- Initialisation de la navigation ---
-            // Afficher la section dashboard par défaut
-            navigateTo('#dashboard');
-            
-            // Simuler des notifications
-            setTimeout(() => {
-                const notificationDot = document.querySelector('.notification-dot');
-                notificationDot.style.animation = 'none';
-                setTimeout(() => {
-                    notificationDot.style.animation = 'pulse 2s infinite';
-                }, 10);
-            }, 5000);
+            // --- INITIALISATION AU CHARGEMENT DE LA PAGE ---
+            // Au chargement, la page d'authentification est déjà visible par défaut (pas de 'hidden' sur #auth-page).
+            // L'application principale est cachée via 'hidden' sur #main-app.
+            // Les sections internes sont cachées via 'hidden' sur chacune sauf le tableau de bord.
+            // L'affichage de l'application et la navigation se font après la soumission du formulaire de connexion.
         });
     </script>
 </body>
