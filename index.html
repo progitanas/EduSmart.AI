@@ -1,409 +1,845 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI v5.0 - Plateforme d'Apprentissage Perfectionnée</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
-        :root {
-            --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
-            --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
-            --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
-            --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
-            --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            --transition-fast: all 0.2s ease-in-out; --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-primary); color: var(--text-color); background-color: var(--background-color); }
-        .hidden { display: none !important; }
-        .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
-        h2 { font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 1.5rem; }
-        h3 { font-size: 1.25rem; }
-        .page-section { animation: fadeIn 0.5s forwards ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
-        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; transition: var(--transition-fast); text-decoration: none; }
-        .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
+    <meta charset="UTF-8">
 
-        /* --- Navigation améliorée --- */
-        #main-header { position: fixed; width: 100%; z-index: 1000; background-color: var(--surface-color); box-shadow: var(--shadow-md);}
-        .header-container { display:flex; justify-content:space-between; align-items:center; width: 100%;}
-        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
-        .main-nav, .user-actions { display: flex; align-items: center; gap: 1rem; }
-        .main-nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
-        .main-nav > ul > li { padding: 0 0.5rem; }
-        .main-nav a { display: flex; align-items: center; gap: 8px; padding: 8px 16px; color: var(--text-color-light); font-weight: 500; border-radius: var(--border-radius-md); text-decoration: none; transition: var(--transition-fast); }
-        .main-nav a:hover, .main-nav a.active { color: var(--primary-color); background-color: var(--background-color); }
-        
-        .nav-dropdown { position: relative; }
-        .nav-dropdown-content { display: none; position: absolute; top: 120%; right: 0; background-color: var(--surface-color); min-width: 200px; box-shadow: var(--shadow-lg); border-radius: var(--border-radius-md); z-index: 1; padding: 0.5rem; border: 1px solid var(--border-color); animation: dropdown-fade 0.2s ease-out; }
-        .nav-dropdown:hover .nav-dropdown-content { display: block; }
-        .nav-dropdown-content a { color: var(--text-color); padding: 10px 15px; display: block; width: 100%; text-align: left; }
-        .nav-dropdown-content a:hover { background-color: var(--background-color); }
-        @keyframes dropdown-fade { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* --- Page Compte/Paramètres --- */
-        .account-layout { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: flex-start; }
-        .account-nav { display: flex; flex-direction: column; gap: 0.5rem; }
-        .account-nav-link { display: flex; align-items: center; gap: 1rem; padding: 12px 16px; border-radius: var(--border-radius-md); font-weight: 500; color: var(--text-color-light); text-decoration: none; transition: var(--transition-fast); border: 2px solid transparent; }
-        .account-nav-link i { width: 20px; text-align: center; }
-        .account-nav-link.active, .account-nav-link:hover { color: var(--primary-color); background-color: var(--background-color); border-left: 2px solid var(--primary-color); }
-        .account-content { display: none; }
-        .account-content.active { display: block; animation: fadeIn 0.5s; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); transition: var(--transition-fast); }
-        .form-group input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2); }
-        .notification-setting { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border-color); }
-        .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--primary-color); }
-        input:checked + .slider:before { transform: translateX(22px); }
+    <title>EduSmart.AI v3.0 - Plateforme d'Apprentissage Complète</title>
 
-        /* --- Styles de base et Auth --- */
-        #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
-        .auth-container { width: 400px; padding: 40px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); text-align: center; }
-        .auth-form-group { margin-bottom: 20px; text-align: left; }
-        .auth-form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
-        .auth-btn { width: 100%; padding: 15px; border: none; background: var(--primary-color); color: white; font-size: 1rem; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
-        main { padding-top: var(--header-height); }
-        .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
-        
-        /* Styles pour les sections réintégrées */
-        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
-        .path-step { padding: 1rem; border-left: 3px solid var(--primary-color); margin-bottom: 1rem; background: #f9fbfd; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;}
-        .path-step.completed { border-left-color: var(--success-color); }
-        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
-        .filter-btn { background: var(--surface-color); border: 1px solid var(--border-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: var(--transition-fast); }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
-        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .course-card { background-color: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); transition: var(--transition-smooth); display: flex; flex-direction: column; }
-        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .course-card-banner { height: 150px; background-size: cover; background-position: center; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; }
-        .course-card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .progress-bar-container { background-color: var(--border-color); border-radius: 99px; height: 8px; margin: 10px 0; }
-        .progress-bar { background: var(--secondary-color); height: 100%; border-radius: 99px; }
-        .course-card-footer { margin-top: auto; padding-top: 1rem; }
-        .collaboration-layout { display: grid; grid-template-columns: 300px 1fr; gap: 2rem; min-height: 70vh; }
-        .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; display: flex; justify-content: space-between; align-items: center;}
-        .groups-list, .threads-list { list-style: none; overflow-y: auto; padding: 0;}
-        .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); transition: background-color var(--transition-fast); }
-        .groups-list li.active, .threads-list li.active { background-color: var(--primary-color); color: white; }
-        .groups-list li:hover, .threads-list li:hover { background-color: var(--background-color); }
-        .thread-message-content { padding: 1rem; }
+    
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .main-nav, .user-actions .nav-dropdown { display: none; }
-            .menu-toggle { display: block !important; }
-            .account-layout, .dashboard-grid, .collaboration-layout { grid-template-columns: 1fr; }
-        }
-        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+    <style>
+
+        /*=============================================
+
+        =         EduSmart.AI Stylesheet v3.0         =
+
+        =============================================*/
+
+
+
+        /*------------------------------------*\
+
+          #ROOT, BASE & AUTHENTIFICATION
+
+        \*------------------------------------*/
+
+        :root {
+
+          --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
+
+          --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
+
+          --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
+
+          --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
+
+          --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+
+          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+
+          --transition-fast: all 0.2s ease-in-out; --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+          --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
+
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body { font-family: var(--font-primary); color: var(--text-color); background-color: var(--background-color); }
+
+        .hidden { display: none !important; }
+
+        .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
+
+        h2 { font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 1.5rem; }
+
+        h3 { font-size: 1.25rem; }
+
+        .page-section { animation: fadeIn 0.5s forwards ease-out; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
+
+        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+
+        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; transition: var(--transition-fast); }
+
+        .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
+
+
+
+        /* Auth Page */
+
+        #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
+
+        .auth-container { width: 400px; padding: 40px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); text-align: center; }
+
+        .auth-container h1 { color: var(--primary-color); font-size: 2rem; margin-bottom: 10px; }
+
+        .auth-form-group { margin-bottom: 20px; text-align: left; }
+
+        .auth-form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+
+        .auth-btn { width: 100%; padding: 15px; border: none; background: var(--primary-color); color: white; font-size: 1rem; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
+
+
+
+        /*------------------------------------*\
+
+          #MAIN APP LAYOUT & HEADER
+
+        \*------------------------------------*/
+
+        #main-header { background-color: var(--surface-color); box-shadow: var(--shadow-md); position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 1000; display: flex; align-items: center; }
+
+        .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
+
+        #main-header nav ul { display: flex; gap: 1rem; list-style: none; }
+
+        #main-header nav a { display: flex; align-items: center; gap: 8px; padding: 10px 15px; color: var(--text-color-light); font-weight: 500; border-radius: var(--border-radius-md); text-decoration: none; position: relative; }
+
+        #main-header nav a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--primary-color); transition: width 0.3s ease; }
+
+        #main-header nav a.active, #main-header nav a:hover { color: var(--primary-color); background-color: var(--background-color); }
+
+        #main-header nav a.active::after { width: 80%; }
+
+        .user-actions { display: flex; align-items: center; gap: 1rem; }
+
+        .user-actions a { text-decoration: none; }
+
+        .profile-link { font-weight: 500; display: flex; align-items: center; gap: 8px; }
+
+        .profile-link i { font-size: 1.5rem; }
+
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+        main { padding-top: var(--header-height); }
+
+        .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
+
+
+
+        /*------------------------------------*\
+
+          #DASHBOARD & WIDGETS
+
+        \*------------------------------------*/
+
+        #dashboard .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+
+        .dashboard-main-column { display: flex; flex-direction: column; gap: 2rem; }
+
+        .calendar-body { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+
+        .calendar-day-name { font-weight: 600; font-size: 0.8rem; color: var(--text-color-light); }
+
+        .calendar-date { padding: 10px; border-radius: 50%; cursor: pointer; }
+
+        .calendar-date.today { background: var(--primary-color); color: white; font-weight: 600; }
+
+        .calendar-date.event::after { content: ''; display: block; margin: 2px auto 0; width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; }
+
+        .homework-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+
+        .homework-grade { font-weight: 600; padding: 5px 10px; border-radius: var(--border-radius-md); }
+
+        .grade-good { background: #d4edda; color: #155724; } .grade-avg { background: #fff3cd; color: #856404; }
+
+
+
+        /*------------------------------------*\
+
+          #COURSES & FILTERS
+
+        \*------------------------------------*/
+
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
+
+        .filter-btn { background: var(--surface-color); border: 1px solid var(--border-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: var(--transition-fast); }
+
+        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+        .course-card { background-color: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); transition: var(--transition-smooth); display: flex; flex-direction: column; }
+
+        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+        .course-card-banner { height: 150px; background-size: cover; background-position: center; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; }
+
+        .course-card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+
+        .progress-bar-container { background-color: var(--border-color); border-radius: 99px; height: 8px; margin: 10px 0; }
+
+        .progress-bar { background: var(--secondary-color); height: 100%; border-radius: 99px; }
+
+        .course-card-footer { margin-top: auto; padding-top: 1rem; }
+
+        
+
+        /*------------------------------------*\
+
+          #TABS (Médiathèque, Profile)
+
+        \*------------------------------------*/
+
+        .tabs { display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); margin-bottom: 2rem; }
+
+        .tab-btn { padding: 10px 20px; font-weight: 600; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; font-size: 1rem; }
+
+        .tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+
+        .tab-content { display: none; animation: fadeIn 0.4s; }
+
+        .tab-content.active { display: block; }
+
+
+
+        /*------------------------------------*\
+
+          #PROFILE PAGE
+
+        \*------------------------------------*/
+
+        .profile-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; }
+
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-color); box-shadow: var(--shadow-md); }
+
+        .profile-info h2 { margin-bottom: 0.5rem; }
+
+        .profile-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+        .stat-card { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); }
+
+        .stat-card i { font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+
+        .stat-card .stat-value { font-size: 1.5rem; font-weight: 600; }
+
+        .badge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1.5rem; text-align: center; }
+
+        .badge-item i { font-size: 3.5rem; color: var(--warning-color); transition: var(--transition-fast); }
+
+        .badge-item:hover i { transform: scale(1.1); }
+
+        .badge-item p { font-weight: 500; margin-top: 0.5rem; }
+
+
+
+        /*------------------------------------*\
+
+          #GAMIFICATION PAGE
+
+        \*------------------------------------*/
+
+        .gamification-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: flex-start; }
+
+        .leaderboards ul li { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--border-color); }
+
+        .leaderboards ul li:first-child { font-weight: 700; color: var(--primary-color); }
+
+
+
+        /*------------------------------------*\
+
+          #COLLABORATION PAGE (FORUM)
+
+        \*------------------------------------*/
+
+        .collaboration-layout { display: grid; grid-template-columns: 300px 1fr 2fr; gap: 1rem; height: 75vh; }
+
+        .groups-column, .threads-column, .chat-column { background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+
+        .column-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; }
+
+        .groups-list, .threads-list { list-style: none; overflow-y: auto; }
+
+        .groups-list li, .threads-list li { padding: 1rem; cursor: pointer; border-bottom: 1px solid var(--border-color); }
+
+        .groups-list li.active, .threads-list li.active { background-color: var(--primary-color); color: white; }
+
+        .groups-list li:hover, .threads-list li:hover { background-color: var(--background-color); }
+
+        .thread-message { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+
+        .thread-message-author { font-weight: 600; }
+
+        .thread-message-content { flex-grow: 1; overflow-y: auto; }
+
+
+
+        /*------------------------------------*\
+
+          #TEACHER'S ASSISTANT
+
+        \*------------------------------------*/
+
+        .teacher-dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
+
+        .chart-container { position: relative; height: 250px; }
+
+        .chart-bar { position: absolute; bottom: 0; width: 40px; background-color: var(--primary-color); border-radius: 4px 4px 0 0; text-align: center; color: white; font-size: 0.8rem; padding-top: 5px; transition: height 0.5s ease-out; }
+
+
+
+        /*------------------------------------*\
+
+          #RESPONSIVE DESIGN
+
+        \*------------------------------------*/
+
+        @media (max-width: 1200px) {
+
+            .collaboration-layout { grid-template-columns: 250px 1fr 2fr; }
+
+        }
+
+        @media (max-width: 1024px) {
+
+            #main-header nav { display: flex; position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: var(--surface-color); flex-direction: column; padding-top: 2rem; transform: translateX(-100%); transition: transform 0.3s ease-in-out; z-index: 999; box-shadow: 5px 0 15px rgba(0,0,0,0.1); }
+
+            #main-header nav.active { transform: translateX(0); }
+
+            #main-header nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
+
+            #main-header nav a { padding: 20px; border-radius: 0; width: 100%; justify-content: center; }
+
+            .menu-toggle { display: block; }
+
+            .collaboration-layout { grid-template-columns: 1fr; height: auto; }
+
+            .threads-column, .chat-column { display: none; } /* On mobile, show only groups first */
+
+            .gamification-grid { grid-template-columns: 1fr; }
+
+        }
+
+        @media (max-width: 768px) {
+
+            h2 { font-size: 1.75rem; }
+
+            .dashboard-grid, .teacher-dashboard-grid { grid-template-columns: 1fr; }
+
+            .profile-header { flex-direction: column; text-align: center; }
+
+            .auth-container { width: 90%; padding: 25px; }
+
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <section id="auth-page" class="hidden">
-        <div class="auth-container">
-            <h1>Bienvenue sur EduSmart.AI</h1>
-            <p>Connectez-vous pour commencer votre aventure.</p>
-            <form id="login-form">
-                <div class="auth-form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" value="etudiant@edusmart.ai" required></div>
-                <div class="auth-form-group"><label for="password">Mot de passe</label><input type="password" id="password" value="password" required></div>
-                <button type="submit" class="auth-btn">Se Connecter</button>
-            </form>
-        </div>
-    </section>
 
-    <div id="main-app" class="hidden">
-        <header id="main-header">
-            <div class="container header-container">
-                <div class="logo"><a href="#dashboard">EduSmart.AI</a></div>
-                
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="#dashboard" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                        <li><a href="#courses" class="nav-link"><i class="fas fa-book"></i> Mes Cours</a></li>
-                        <li><a href="#library" class="nav-link"><i class="fas fa-swatchbook"></i> Bibliothèque</a></li>
-                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-comments"></i> Forum</a></li>
-                        <li class="nav-dropdown">
-                            <a href="#" class="nav-link">Plus <i class="fas fa-chevron-down" style="font-size: 0.8em;"></i></a>
-                            <div class="nav-dropdown-content">
-                                <a href="#study-rooms" class="nav-link"><i class="fas fa-users-rays"></i> Salles d'étude</a>
-                                <a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a>
-                                <a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
 
-                <div class="user-actions">
-                    <button class="btn-icon" title="Notifications"><i class="fas fa-bell"></i></button>
-                    <a href="#profile/general" class="nav-link profile-link">
-                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" style="width: 36px; height: 36px; border-radius: 50%;">
-                    </a>
-                </div>
-                
-                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-            </div>
-        </header>
+    <section id="auth-page">
 
-        <main>
-            <section id="dashboard" class="page-section">
-                 <div class="container content-wrapper">
-                    <h2>Tableau de bord</h2>
-                     <div class="dashboard-grid">
-                         <div class="widget">
-                             <div class="widget-header">
-                                 <h3><i class="fas fa-route" style="color: var(--primary-color);"></i> Prochaines Étapes</h3>
-                             </div>
-                             <div class="path-step completed">
-                                 <p style="font-weight: 500; margin:0;"><strong>Terminé :</strong> Quiz sur les dérivées</p>
-                                 <small>Score: 85% - Excellent !</small>
-                             </div>
-                             <div class="path-step">
-                                 <p style="font-weight: 500; margin:0;"><strong>À faire :</strong> Vidéo sur l'intégration par parties</p>
-                                 <small>Temps estimé : 15 min</small>
-                             </div>
-                         </div>
-                         <div class="widget">
-                             <div class="widget-header">
-                                 <h3><i class="fas fa-lightbulb" style="color: var(--warning-color);"></i> L'IA vous recommande</h3>
-                             </div>
-                             <p>Contenu des recommandations...</p>
-                         </div>
-                     </div>
-                 </div>
-            </section>
-            
-            <section id="courses" class="page-section hidden">
-                 <div class="container content-wrapper">
-                    <h2>Mes Cours</h2>
-                    <div class="filters"><button class="filter-btn active" data-filter="all">Tous</button><button class="filter-btn" data-filter="lycée">Lycée (Bac)</button><button class="filter-btn" data-filter="prépa">Classes Prépa</button></div>
-                    <div class="courses-grid">
-                        <div class="course-card" data-level="lycée"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/4A90E2/FFFFFF?text=Maths');"></div><div class="course-card-content"><h3>Mathématiques - Analyse</h3><p>Avec M. Diallo</p><p>Progression: 75%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
-                        <div class="course-card" data-level="prépa"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/50E3C2/FFFFFF?text=Physique');"></div><div class="course-card-content"><h3>Physique - Électromagnétisme</h3><p>Avec Mme. Traoré</p><p>Progression: 40%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
-                    </div>
-                 </div>
-            </section>
-            
-             <section id="library" class="page-section hidden">
-                 <div class="container content-wrapper">
-                    <h2>Bibliothèque</h2>
-                    <p>Contenu de la bibliothèque...</p>
-                 </div>
-            </section>
-            
-            <section id="collaboration" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Forum de Discussion</h2>
-                    <div class="collaboration-layout">
-                        <div class="widget">
-                            <div class="column-header">Groupes</div>
-                            <ul class="groups-list"></ul>
-                        </div>
-                        <div class="widget">
-                            <div class="column-header">Discussions</div>
-                            <ul class="threads-list"></ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="profile" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Mon Compte</h2>
-                    <div class="account-layout">
-                        <div class="widget">
-                            <nav class="account-nav">
-                                <a href="#profile/general" class="account-nav-link" data-target="general">
-                                    <i class="fas fa-user-circle"></i> Mon Profil
-                                </a>
-                                <a href="#profile/security" class="account-nav-link" data-target="security">
-                                    <i class="fas fa-lock"></i> Sécurité
-                                </a>
-                                <a href="#profile/notifications" class="account-nav-link" data-target="notifications">
-                                    <i class="fas fa-bell"></i> Notifications
-                                </a>
-                                <a href="#profile/integrations" class="account-nav-link" data-target="integrations">
-                                    <i class="fas fa-puzzle-piece"></i> Intégrations
-                                </a>
-                                <a href="#profile/account" class="account-nav-link" data-target="account">
-                                    <i class="fas fa-cog"></i> Compte
-                                </a>
-                            </nav>
-                        </div>
-                        <div class="widget">
-                            <div id="general" class="account-content">
-                                <h3>Informations Générales</h3>
-                                <div class="form-group">
-                                    <label for="fullName">Nom complet</label>
-                                    <input type="text" id="fullName" value="Jean Dupont">
-                                </div>
-                                <div class="form-group">
-                                    <label for="profileEmail">Adresse e-mail</label>
-                                    <input type="email" id="profileEmail" value="jean.dupont@edusmart.ai">
-                                </div>
-                                <button class="btn-primary">Enregistrer les modifications</button>
-                            </div>
-                            <div id="security" class="account-content">
-                                <h3>Changer le mot de passe</h3>
-                                <div class="form-group">
-                                    <label for="currentPassword">Mot de passe actuel</label>
-                                    <input type="password" id="currentPassword">
-                                </div>
-                                <div class="form-group">
-                                    <label for="newPassword">Nouveau mot de passe</label>
-                                    <input type="password" id="newPassword">
-                                </div>
-                                 <div class="form-group">
-                                    <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
-                                    <input type="password" id="confirmPassword">
-                                </div>
-                                <button class="btn-primary">Changer le mot de passe</button>
-                            </div>
-                            <div id="notifications" class="account-content">
-                                <h3>Préférences de notification</h3>
-                                <div class="notification-setting">
-                                    <p>Nouveau devoir disponible</p>
-                                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                                </div>
-                                <div class="notification-setting">
-                                    <p>Rappel d'échéance de devoir</p>
-                                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                                </div>
-                                <div class="notification-setting">
-                                    <p>Nouvelle réponse sur le forum</p>
-                                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                                </div>
-                            </div>
-                            <div id="integrations" class="account-content">
-                                <h3>Applications Connectées</h3>
-                                <div class="notification-setting">
-                                    <div>
-                                        <i class="fab fa-google" style="color: #DB4437; font-size: 1.5rem; margin-right: 1rem;"></i>
-                                        <strong>Google Classroom</strong>
-                                    </div>
-                                    <a href="#" class="btn-primary">Gérer</a>
-                                </div>
-                            </div>
-                            <div id="account" class="account-content">
-                                <h3>Gestion du Compte</h3>
-                                <div class="form-group">
-                                    <button class="btn-primary"><i class="fas fa-file-export"></i> Exporter mes données</button>
-                                </div>
-                                <hr style="margin: 2rem 0; border: 1px solid var(--border-color);">
-                                <h4 style="color: var(--error-color);">Zone de danger</h4>
-                                <p>La suppression de votre compte est irréversible.</p>
-                                <button class="btn-primary" style="background: var(--error-color);">Supprimer mon compte</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- ...Autres sections potentielles pour les liens du dropdown... -->
-            <section id="study-rooms" class="page-section hidden"><div class="container content-wrapper"><h2>Salles d'étude</h2></div></section>
-            <section id="gamification" class="page-section hidden"><div class="container content-wrapper"><h2>Gamification</h2></div></section>
-            <section id="teachers-ai" class="page-section hidden"><div class="container content-wrapper"><h2>Espace Professeurs</h2></div></section>
-        </main>
-    </div>
+        <div class="auth-container">
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
+            <h1>Bienvenue sur EduSmart.AI</h1>
 
-        const authPage = document.getElementById('auth-page');
-        const mainApp = document.getElementById('main-app');
-        const loginForm = document.getElementById('login-form');
+            <p>Connectez-vous pour commencer votre aventure.</p>
 
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                authPage.classList.add('hidden');
-                mainApp.classList.remove('hidden');
-                if (!window.location.hash || window.location.hash === '#') {
-                    window.location.hash = '#dashboard';
-                } else {
-                    navigateTo(window.location.hash);
-                }
-            });
-        }
+            <form id="login-form">
 
-        function navigateTo(hash) {
-            const pageSections = document.querySelectorAll('.page-section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            let targetId = hash.split('/')[0] || '#dashboard';
+                <div class="auth-form-group"><label for="email">Adresse e-mail</label><input type="email" id="email" value="etudiant@edusmart.ai" required></div>
 
-            if (targetId === '#') targetId = '#dashboard';
+                <div class="auth-form-group"><label for="password">Mot de passe</label><input type="password" id="password" value="password" required></div>
 
-            authPage.classList.add('hidden');
-            mainApp.classList.remove('hidden');
+                <button type="submit" class="auth-btn">Se Connecter</button>
 
-            pageSections.forEach(section => {
-                section.classList.toggle('hidden', `#${section.id}` !== targetId);
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === targetId);
-            });
-            
-            if (targetId === '#profile') {
-                const subpage = hash.split('/')[1] || 'general';
-                document.querySelectorAll('.account-nav-link').forEach(link => {
-                    link.classList.toggle('active', link.dataset.target === subpage);
-                });
-                document.querySelectorAll('.account-content').forEach(content => {
-                    content.classList.toggle('active', content.id === subpage);
-                });
-            }
-        }
+            </form>
 
-        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        </div>
 
-        document.body.addEventListener('click', e => {
-            let targetLink = e.target.closest('a');
-            if (targetLink && targetLink.hash !== "" && !targetLink.classList.contains('nav-dropdown-toggle')) {
-                e.preventDefault();
-                if (window.location.hash !== targetLink.hash) {
-                    window.location.hash = targetLink.hash;
-                }
-            }
-        });
+    </section>
 
-        // Simuler des données pour le forum
-        const collaborationData = {
-            'general': { name: 'Forum Général', threads: [ {id: 1, title: 'Ressources pour le BAC'}, {id: 2, title: 'Comment gérer son stress ?'} ] },
-            'maths-lycee': { name: 'Maths - Lycée', threads: [ {id: 3, title: 'Problème sur les intégrales'} ] },
-        };
-        const groupsList = document.querySelector('.groups-list');
-        const threadsList = document.querySelector('.threads-list');
 
-        if(groupsList && threadsList){
-            groupsList.innerHTML = Object.keys(collaborationData).map(key => `<li data-group="${key}">${collaborationData[key].name}</li>`).join('');
-            
-            groupsList.addEventListener('click', e => {
-                if(e.target.tagName === 'LI') {
-                    const groupId = e.target.dataset.group;
-                    document.querySelectorAll('.groups-list li').forEach(li => li.classList.remove('active'));
-                    e.target.classList.add('active');
-                    threadsList.innerHTML = collaborationData[groupId].threads.map(t => `<li data-thread="${t.id}">${t.title}</li>`).join('');
-                }
-            });
-        }
 
-        navigateTo(window.location.hash || '#');
-    });
-    </script>
+    <div id="main-app" class="hidden">
+
+        <header id="main-header">
+
+            <div class="container header-content">
+
+                <div class="logo"><a href="#dashboard">EduSmart.AI</a></div>
+
+                <nav>
+
+                    <ul>
+
+                        <li><a href="#dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
+                        <li><a href="#courses" class="nav-link"><i class="fas fa-book"></i> Mes Cours</a></li>
+
+                        <li><a href="#gamification" class="nav-link"><i class="fas fa-gamepad"></i> Gamification</a></li>
+
+                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-users"></i> Dialogue</a></li>
+
+                        <li><a href="#content-creation" class="nav-link"><i class="fas fa-lightbulb"></i> Fabrique de Savoir</a></li>
+
+                        <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a></li>
+
+                    </ul>
+
+                </nav>
+
+                <div class="user-actions">
+
+                    <a href="#profile" class="nav-link profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
+
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <main>
+
+            <section id="dashboard" class="page-section">
+
+                <div class="container content-wrapper">
+
+                    <h2>Tableau de Bord</h2>
+
+                    <div class="dashboard-grid">
+
+                        <div class="dashboard-main-column">
+
+                            <div class="widget"><div class="widget-header"><h3>Prochains Cours en Direct</h3></div><p>Votre prochain cours de <strong>Mathématiques - Analyse</strong> commence à <strong>10:00</strong>.</p><a href="#live-class" class="btn-primary" style="margin-top: 1rem;">Rejoindre la salle</a></div>
+
+                            <div class="widget"><div class="widget-header"><h3>Devoirs Récents et Notes</h3></div><div class="homework-item"><div><p style="font-weight: 500; margin:0;">Exposé d'Histoire</p><small>Rendu le 05/06/2025</small></div><span class="homework-grade grade-good">16/20</span></div><div class="homework-item"><div><p style="font-weight: 500; margin:0;">Exercices de Physique</p><small>Échéance: 08/06/2025</small></div><span class="homework-grade grade-avg">En cours</span></div></div>
+
+                        </div>
+
+                        <div class="widget"><div class="widget-header"><h3>Mon Agenda - Juin 2025</h3></div><div class="calendar-body"><div class="calendar-day-name">Lun</div><div class="calendar-day-name">Mar</div><div class="calendar-day-name">Mer</div><div class="calendar-day-name">Jeu</div><div class="calendar-day-name">Ven</div><div class="calendar-day-name">Sam</div><div class="calendar-day-name">Dim</div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date today">7</div><div class="calendar-date">8</div><div class="calendar-date event">9</div><div class="calendar-date">10</div><div class="calendar-date">11</div><div class="calendar-date">12</div><div class="calendar-date event">13</div><div class="calendar-date">14</div><div class="calendar-date">15</div></div></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            
+
+            <section id="courses" class="page-section hidden">
+
+                <div class="container content-wrapper">
+
+                    <h2>Mes Cours</h2>
+
+                    <div class="filters"><button class="filter-btn active" data-filter="all">Tous</button><button class="filter-btn" data-filter="collège">Collège</button><button class="filter-btn" data-filter="lycée">Lycée (Bac)</button><button class="filter-btn" data-filter="prépa">Classes Prépa</button></div>
+
+                    <div class="courses-grid">
+
+                         <div class="course-card" data-level="lycée"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/4A90E2/FFFFFF?text=Maths');"></div><div class="course-card-content"><h3>Mathématiques - Analyse</h3><p>Avec M. Diallo</p><p>Progression: 75%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
+
+                        <div class="course-card" data-level="prépa"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/50E3C2/FFFFFF?text=Physique');"></div><div class="course-card-content"><h3>Physique - Électromagnétisme</h3><p>Avec Mme. Traoré</p><p>Progression: 40%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
+
+                        <div class="course-card" data-level="collège"><div class="course-card-banner" style="background-image: url('https://placehold.co/600x400/E2B44A/FFFFFF?text=Histoire');"></div><div class="course-card-content"><h3>Histoire-Géographie</h3><p>Avec M. Ndiaye</p><p>Progression: 90%</p><div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div><div class="course-card-footer"><a href="#" class="btn-primary">Continuer</a></div></div></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            
+
+            <section id="gamification" class="page-section hidden">
+
+                 <div class="container content-wrapper">
+
+                    <h2>Ma Progression</h2>
+
+                    <div class="gamification-grid">
+
+                        <div class="widget"><h3>Niveau Actuel: Virtuose II</h3><p>Vous êtes sur la bonne voie, continuez comme ça !</p><div class="progress-bar-container" style="height:25px;"><div class="progress-bar" style="width: 80%;"></div></div><p>8200 / 10000 points pour le niveau suivant</p></div>
+
+                        <div class="widget leaderboards"><h3>Classements</h3><ul><li><span>1. Vous</span><span>12500 pts</span></li><li><span>2. Ami_X</span><span>11000 pts</span></li><li><span>3. Ami_Y</span><span>9800 pts</span></li></ul></div>
+
+                    </div>
+
+                 </div>
+
+            </section>
+
+
+
+            <section id="collaboration" class="page-section hidden">
+
+                <div class="container content-wrapper">
+
+                    <h2>Espace de Dialogue</h2>
+
+                    <div class="collaboration-layout">
+
+                        <div class="groups-column"><div class="column-header">Groupes</div><ul class="groups-list"></ul></div>
+
+                        <div class="threads-column"><div class="column-header">Discussions</div><ul class="threads-list"></ul></div>
+
+                        <div class="chat-column"><div class="column-header">Conversation</div><div class="thread-message-content"></div></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <section id="content-creation" class="page-section hidden">
+
+                 <div class="container content-wrapper">
+
+                    <h2>Fabrique de Savoir</h2>
+
+                    <div class="widget"><p>Générez du contenu personnalisé pour vous aider à réviser.</p><input type="text" id="content-topic" placeholder="Sujet (ex: La mitose)" style="width:100%; padding:10px; margin-bottom:1rem;"><button id="generate-content-btn" class="btn-primary">Générer une Fiche</button><div class="generated-content-preview" style="margin-top:1rem; padding:1rem; border:1px dashed var(--border-color); border-radius:var(--border-radius-md);"></div></div>
+
+                 </div>
+
+            </section>
+
+
+
+            <section id="teachers-ai" class="page-section hidden">
+
+                 <div class="container content-wrapper">
+
+                    <h2>Espace Professeur</h2>
+
+                    <div class="teacher-dashboard-grid">
+
+                        <div class="widget"><h3>Classes à Gérer</h3><p>Vous avez 3 classes actives.</p></div>
+
+                        <div class="widget"><h3>Devoirs à Corriger</h3><p>5 devoirs en attente pour la classe de <strong>Terminale S1</strong>.</p><a href="#" class="btn-primary">Voir les devoirs</a></div>
+
+                        <div class="widget"><h3>Analyse de Performance: Théorème de Pythagore</h3><div class="chart-container"><div class="chart-bar" style="left: 20px; height: 75%;"><small>Terminale S1</small></div><div class="chart-bar" style="left: 80px; height: 50%;"><small>Terminale S2</small></div><div class="chart-bar" style="left: 140px; height: 90%;"><small>Seconde C</small></div></div></div>
+
+                    </div>
+
+                 </div>
+
+            </section>
+
+            
+
+            <section id="profile" class="page-section hidden">
+
+                <div class="container content-wrapper">
+
+                    <div class="profile-header">
+
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="profile-avatar">
+
+                        <div class="profile-info">
+
+                            <h2>Jean Dupont</h2>
+
+                            <p>Étudiant en Classes Prépa</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="profile-stats">
+
+                        <div class="stat-card"><i class="fas fa-book-open"></i><div class="stat-value">12</div><p>Cours terminés</p></div>
+
+                        <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-value">142</div><p>Heures d'étude</p></div>
+
+                        <div class="stat-card"><i class="fas fa-medal"></i><div class="stat-value">25</div><p>Badges obtenus</p></div>
+
+                    </div>
+
+                    <div class="widget">
+
+                        <div class="tabs profile-tabs">
+
+                           <button class="tab-btn active" data-tab="badges">Mes Badges</button>
+
+                           <button class="tab-btn" data-tab="settings">Paramètres</button>
+
+                        </div>
+
+                        <div id="badges" class="tab-content active" style="padding-top:2rem;">
+
+                            <div class="badge-grid">
+
+                                <div class="badge-item"><i class="fas fa-medal"></i><p>Maître des Bases</p></div>
+
+                                <div class="badge-item"><i class="fas fa-star"></i><p>Esprit Curieux</p></div>
+
+                                <div class="badge-item"><i class="fas fa-brain"></i><p>Problème Résolu</p></div>
+
+                                <div class="badge-item"><i class="fas fa-fire"></i><p>Série de 5 jours</p></div>
+
+                            </div>
+
+                        </div>
+
+                        <div id="settings" class="tab-content" style="padding-top:2rem;"><p>Ici se trouveront les options pour changer de mot de passe, gérer les notifications, etc.</p></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+
+    <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+
+
+        // --- AUTHENTIFICATION LOGIC ---
+
+        const authPage = document.getElementById('auth-page');
+
+        const mainApp = document.getElementById('main-app');
+
+        const loginForm = document.getElementById('login-form');
+
+
+
+        loginForm.addEventListener('submit', (e) => {
+
+            e.preventDefault();
+
+            authPage.style.transition = 'opacity 0.5s ease-out';
+
+            authPage.style.opacity = '0';
+
+            setTimeout(() => {
+
+                authPage.classList.add('hidden');
+
+                mainApp.classList.remove('hidden');
+
+                mainApp.style.opacity = '0';
+
+                setTimeout(() => { mainApp.style.opacity = '1'; }, 50);
+
+                navigateTo(window.location.hash || '#dashboard');
+
+            }, 500);
+
+        });
+
+
+
+        // --- CORE APP LOGIC & NAVIGATION ---
+
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const pageSections = document.querySelectorAll('.page-section');
+
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        const headerNav = document.querySelector('#main-header nav');
+
+        
+
+        function navigateTo(hash) {
+
+            if (!hash || hash === '#') hash = '#dashboard';
+
+            pageSections.forEach(section => section.classList.add('hidden'));
+
+            
+
+            const targetSection = document.querySelector(hash);
+
+            if (targetSection) targetSection.classList.remove('hidden');
+
+            
+
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+
+            if (headerNav.classList.contains('active')) menuToggle.click();
+
+        }
+
+
+
+        document.body.addEventListener('click', (e) => {
+
+            if (e.target.closest('.nav-link')) {
+
+                e.preventDefault();
+
+                const link = e.target.closest('.nav-link');
+
+                const hash = link.getAttribute('href');
+
+                if (window.location.hash !== hash) window.location.hash = hash;
+
+                else navigateTo(hash);
+
+            }
+
+        });
+
+        
+
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+
+        menuToggle.addEventListener('click', () => headerNav.classList.toggle('active'));
+
+
+
+        // --- COURSES FILTERING LOGIC ---
+
+        document.querySelectorAll('.filters .filter-btn').forEach(button => {
+
+            button.addEventListener('click', () => {
+
+                const filter = button.dataset.filter;
+
+                document.querySelectorAll('.filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+
+                button.classList.add('active');
+
+                document.querySelectorAll('.courses-grid .course-card').forEach(card => {
+
+                    card.classList.toggle('hidden', filter !== 'all' && card.dataset.level !== filter);
+
+                });
+
+            });
+
+        });
+
+
+
+        // --- DYNAMIC TABS LOGIC ---
+
+        function setupTabs(containerSelector) {
+
+            const container = document.querySelector(containerSelector);
+
+            if (!container) return;
+
+            const tabButtons = container.querySelectorAll('.tab-btn');
+
+            const tabContents = container.querySelectorAll('.tab-content');
+
+            
+
+            tabButtons.forEach(button => {
+
+                button.addEventListener('click', () => {
+
+                    const tabId = button.dataset.tab;
+
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                    button.classList.add('active');
+
+                    tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+
+                });
+
+            });
+
+        }
+
+        setupTabs('.profile-tabs');
+
+
+
+        // --- COLLABORATION SPACE LOGIC ---
+
+        const collaborationData = {
+
+            'general': { name: 'Forum Général', threads: [ {id: 1, title: 'Ressources pour le BAC', author: 'Élève A'}, {id: 2, title: 'Comment gérer son stress ?', author: 'Élève B'} ] },
+
+            'maths-lycee': { name: 'Maths - Lycée', threads: [ {id: 3, title: 'Problème sur les intégrales', author: 'Élève C'} ] },
+
+        };
+
+        const messagesData = { 1: [{author: 'Élève A', text: 'Salut, quelqu\'un a des bons sites pour réviser le BAC S ?'}], 3: [{author: 'Élève C', text: 'Je bloque sur cet exercice...'}] };
+
+        const groupsList = document.querySelector('.groups-list');
+
+        const threadsList = document.querySelector('.threads-list');
+
+        const chatContent = document.querySelector('.thread-message-content');
+
+        
+
+        if (groupsList) {
+
+            groupsList.innerHTML = Object.keys(collaborationData).map(key => `<li data-group="${key}">${collaborationData[key].name}</li>`).join('');
+
+            groupsList.addEventListener('click', e => {
+
+                if(e.target.tagName === 'LI') {
+
+                    const groupId = e.target.dataset.group;
+
+                    document.querySelectorAll('.groups-list li').forEach(li => li.classList.remove('active'));
+
+                    e.target.classList.add('active');
+
+                    threadsList.innerHTML = collaborationData[groupId].threads.map(t => `<li data-thread="${t.id}">${t.title}</li>`).join('');
+
+                    chatContent.innerHTML = '<p style="text-align:center; padding: 2rem;">Sélectionnez une discussion.</p>';
+
+                }
+
+            });
+
+            threadsList.addEventListener('click', e => {
+
+                if(e.target.tagName === 'LI') {
+
+                    const threadId = e.target.dataset.thread;
+
+                    document.querySelectorAll('.threads-list li').forEach(li => li.classList.remove('active'));
+
+                    e.target.classList.add('active');
+
+                    chatContent.innerHTML = (messagesData[threadId] || []).map(m => `<div class="thread-message"><p class="thread-message-author">${m.author}</p><p>${m.text}</p></div>`).join('');
+
+                }
+
+            });
+
+        }
+
+    });
+
+    </script>
+
 </body>
+
 </html>
