@@ -3,324 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSmart.AI - Plateforme d'Apprentissage Intégrée</title>
+    <title>EduSmart.AI v4.0 - Plateforme d'Apprentissage Intégrée</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /*=============================================
-        =         EduSmart.AI Stylesheet v2.0         =
+        =         EduSmart.AI Stylesheet v4.0         =
         =============================================*/
-
-        /*------------------------------------*\
-          #ROOT & FONT VARIABLES
-        \*------------------------------------*/
         :root {
-          --primary-color: #4A90E2;
-          --primary-color-dark: #357ABD;
-          --secondary-color: #50E3C2;
-          --background-color: #F4F7FC;
-          --surface-color: #FFFFFF;
-          --text-color: #333745;
-          --text-color-light: #667085;
-          --border-color: #E2E8F0;
-          --error-color: #E53E3E;
-          --success-color: #38A169;
-          --warning-color: #DD6B20;
-          --info-color: #3182CE;
-          --font-primary: 'Poppins', sans-serif;
-          --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.06);
-          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-          --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-          --transition-fast: all 0.2s ease-in-out;
-          --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-          --header-height: 70px;
-          --max-width: 1300px;
-          --border-radius-md: 8px;
-          --border-radius-lg: 16px;
+          --primary-color: #4A90E2; --primary-color-dark: #357ABD; --secondary-color: #50E3C2;
+          --background-color: #F4F7FC; --surface-color: #FFFFFF; --text-color: #333745;
+          --text-color-light: #667085; --border-color: #E2E8F0; --error-color: #E53E3E;
+          --success-color: #38A169; --warning-color: #DD6B20; --info-color: #3182CE;
+          --font-primary: 'Poppins', sans-serif; --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+          --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+          --transition-fast: all 0.2s ease-in-out; --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+          --header-height: 70px; --max-width: 1400px; --border-radius-md: 8px; --border-radius-lg: 16px;
         }
-
-        /*------------------------------------*\
-          #BASE & AUTHENTIFICATION PAGE
-        \*------------------------------------*/
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-          font-family: var(--font-primary);
-          color: var(--text-color);
-          background-color: var(--background-color);
-          line-height: 1.6;
-        }
-        
-        #auth-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%);
-        }
-        .auth-container {
-            width: 400px;
-            padding: 40px;
-            background: var(--surface-color);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-            animation: fadeInAuth 0.7s ease-out;
-        }
-        @keyframes fadeInAuth { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        .auth-container h1 {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .auth-container p { margin-bottom: 30px; }
-        .auth-form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .auth-form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-        .auth-form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            font-size: 1rem;
-        }
-        .auth-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.9rem; }
-        .auth-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: var(--border-radius-md);
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-        .auth-btn:hover { background: var(--primary-color-dark); box-shadow: var(--shadow-md); }
-        .auth-switch { margin-top: 25px; }
-        
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: var(--font-primary); color: var(--text-color); background-color: var(--background-color); }
         .hidden { display: none !important; }
-
-        /*------------------------------------*\
-          #MAIN APP LAYOUT & HEADER
-        \*------------------------------------*/
-        #main-header {
-          background-color: var(--surface-color);
-          box-shadow: var(--shadow-md);
-          position: fixed;
-          top: 0; left: 0;
-          width: 100%;
-          height: var(--header-height);
-          z-index: 1000;
-          display: flex; align-items: center;
-        }
-        .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); }
-        #main-header nav ul { display: flex; gap: 1rem; list-style: none; }
-        #main-header nav a {
-          display: flex; align-items: center; gap: 8px;
-          padding: 10px 15px;
-          color: var(--text-color-light);
-          font-weight: 500;
-          border-radius: var(--border-radius-md);
-          position: relative;
-        }
-        #main-header nav a::after {
-            content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); width: 0; height: 3px;
-            background: var(--primary-color); transition: width 0.3s ease;
-        }
-        #main-header nav a.active, #main-header nav a:hover {
-          color: var(--primary-color); background-color: var(--background-color);
-        }
-        #main-header nav a.active::after { width: 80%; }
-        .user-actions { display: flex; align-items: center; gap: 1rem; }
-        .profile-link { font-weight: 500; display: flex; align-items: center; gap: 8px; }
-        .profile-link i { font-size: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-        main { padding-top: var(--header-height); }
-        .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
         .container { width: 90%; max-width: var(--max-width); margin: 0 auto; }
         h2 { font-size: 2rem; color: var(--primary-color-dark); margin-bottom: 1.5rem; }
         h3 { font-size: 1.25rem; }
         .page-section { animation: fadeIn 0.5s forwards ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .widget { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md); }
+        .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; text-decoration: none; transition: var(--transition-fast); }
+        .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
+        .btn-secondary { background: var(--surface-color); color: var(--text-color); border: 1px solid var(--border-color); padding: 8px 15px; border-radius: var(--border-radius-md); cursor: pointer; }
 
-        /*------------------------------------*\
-          #WIDGETS & CARDS
-        \*------------------------------------*/
-        .widget {
-            background: var(--surface-color);
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .widget-header h3 { color: var(--text-color); }
+        /* Auth Page */
+        #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
+        .auth-container { width: 400px; padding: 40px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); text-align: center; }
+        .auth-container h1 { color: var(--primary-color); font-size: 2rem; margin-bottom: 10px; }
+        .auth-form-group { margin-bottom: 20px; text-align: left; }
+        .auth-form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        .auth-btn { width: 100%; padding: 15px; border: none; background: var(--primary-color); color: white; font-size: 1rem; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
 
-        /*------------------------------------*\
-          #DASHBOARD (#home)
-        \*------------------------------------*/
-        #dashboard .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        .dashboard-main-column { display: flex; flex-direction: column; gap: 2rem; }
+        /* Header & Nav */
+        #main-header { background-color: var(--surface-color); box-shadow: var(--shadow-md); position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 1000; display: flex; align-items: center; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
+        #main-header nav ul { display: flex; gap: .5rem; list-style: none; }
+        #main-header nav a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; color: var(--text-color-light); font-weight: 500; border-radius: var(--border-radius-md); text-decoration: none; position: relative; }
+        #main-header nav a::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--primary-color); transition: width 0.3s ease; }
+        #main-header nav a.active, #main-header nav a:hover { color: var(--primary-color); background-color: var(--background-color); }
+        #main-header nav a.active::after { width: 80%; }
+        .user-actions { display: flex; align-items: center; gap: 1rem; }
+        .user-actions a { text-decoration: none; color: var(--text-color); }
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        main { padding-top: var(--header-height); }
+        .content-wrapper { padding: 2rem 0; min-height: calc(100vh - var(--header-height)); }
+
+        /* Notifications & Language */
+        .notification-bell { position: relative; cursor: pointer; font-size: 1.2rem; }
+        .notification-dot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; background: var(--error-color); border-radius: 50%; border: 1px solid white; }
+        .notifications-panel { display: none; position: absolute; top: 50px; right: 0; width: 350px; background: var(--surface-color); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg); z-index: 1001; }
+        .notifications-panel.active { display: block; }
         
-        /* Calendar Widget */
-        .calendar-body { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .calendar-day-name { font-weight: 600; font-size: 0.8rem; color: var(--text-color-light); }
-        .calendar-date { padding: 10px; border-radius: 50%; cursor: pointer; transition: var(--transition-fast); }
-        .calendar-date:hover { background: var(--background-color); }
-        .calendar-date.today { background: var(--primary-color); color: white; font-weight: 600; }
-        .calendar-date.event { position: relative; }
-        .calendar-date.event::after {
-            content: ''; position: absolute; bottom: 5px; left: 50%;
-            transform: translateX(-50%); width: 5px; height: 5px;
-            background: var(--secondary-color); border-radius: 50%;
-        }
-
-        /* Homework Widget */
-        .homework-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
-        .homework-item:last-child { border: none; }
-        .homework-grade { font-weight: 600; padding: 5px 10px; border-radius: var(--border-radius-md); }
-        .grade-good { background: #d4edda; color: #155724; }
-        .grade-avg { background: #fff3cd; color: #856404; }
-
-        /*------------------------------------*\
-          #MES COURS (#courses)
-        \*------------------------------------*/
-        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
-        .filter-btn {
-            background: var(--surface-color); border: 1px solid var(--border-color);
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: var(--transition-fast);
-        }
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-color); color: white; border-color: var(--primary-color);
-        }
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .course-card {
-            background-color: var(--surface-color);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-smooth);
-            display: flex; flex-direction: column;
-        }
-        .course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .course-card-banner { height: 150px; background-size: cover; background-position: center; border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; }
-        .course-card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .course-card-content h3 { color: var(--primary-color-dark); }
-        .course-teacher { font-size: 0.9rem; color: var(--text-color-light); margin: 5px 0 15px; }
-        .progress-bar-container { background-color: var(--border-color); border-radius: 99px; height: 8px; margin: 10px 0; }
-        .progress-bar { background: var(--secondary-color); height: 100%; border-radius: 99px; }
-        .course-card-footer { margin-top: auto; padding-top: 1rem; }
-        .btn-primary {
-            display: inline-block; background-color: var(--primary-color); color: #fff;
-            padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600;
-            border: none; cursor: pointer; text-align: center;
-        }
-        .btn-primary:hover { background-color: var(--primary-color-dark); }
+        /* Dashboard */
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+        .path-step { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 1rem; }
+        .path-step.done { background: #e8f5e9; }
+        .path-step-icon { font-size: 1.5rem; color: var(--primary-color); }
         
-        /*------------------------------------*\
-          #MÉDIATHÈQUE (#library)
-        \*------------------------------------*/
-        .tabs { display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); margin-bottom: 2rem; }
-        .tab-btn {
-            padding: 10px 20px; font-weight: 600; cursor: pointer;
-            border: none; background: none; border-bottom: 3px solid transparent;
-        }
-        .tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .resource-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
-        }
-        .resource-card { background: var(--surface-color); border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm); overflow: hidden; }
-        .resource-card-icon { font-size: 3rem; text-align: center; padding: 2rem; color: var(--primary-color); }
-        .resource-card-body { padding: 1rem; }
-
-        /*------------------------------------*\
-          #CLASSE EN DIRECT (#live-class)
-        \*------------------------------------*/
-        .live-class-layout {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 2rem;
-            height: 75vh;
-        }
-        .live-video-container { background: #000; border-radius: var(--border-radius-lg); display: flex; justify-content: center; align-items: center; color: white; }
-        .live-sidebar { display: flex; flex-direction: column; gap: 1rem; }
-        .live-chat, .live-participants { background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); flex-grow: 1; display: flex; flex-direction: column; }
-        .live-chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; }
-        .live-chat-input { display: flex; padding: 1rem; border-top: 1px solid var(--border-color); }
-        .live-chat-input input { flex-grow: 1; border: 1px solid var(--border-color); border-radius: 20px; padding: 8px 15px; }
+        /* Profile & Reports */
+        .profile-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; }
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
+        .skills-chart-container { max-width: 400px; margin: auto; }
         
-        /*------------------------------------*\
-          #RESPONSIVE DESIGN
-        \*------------------------------------*/
+        /* Collaboration & Study Rooms */
+        .collaboration-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1rem; }
+        .collaboration-sidebar .widget { margin-bottom: 1rem; }
+        .room-card { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        
+        /* Teacher's Dashboard */
+        .teacher-dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .vigilance-item { display: flex; align-items: center; gap: 1rem; padding: .5rem 0; }
+
+        /* Floating Action Button (FAB) for Chatbot */
+        .fab-chatbot {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: var(--primary-color); color: white;
+            border-radius: 50%; border: none;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.8rem; box-shadow: var(--shadow-lg);
+            cursor: pointer; z-index: 1010; transition: var(--transition-smooth);
+        }
+        .fab-chatbot:hover { transform: scale(1.1); background: var(--primary-color-dark); }
+        .chatbot-window {
+            display: none; position: fixed; bottom: 100px; right: 30px;
+            width: 380px; height: 500px;
+            background: var(--surface-color); border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg); z-index: 1009;
+            flex-direction: column; overflow: hidden;
+            transform: translateY(20px); opacity: 0; transition: all 0.3s ease-out;
+        }
+        .chatbot-window.active { display: flex; transform: translateY(0); opacity: 1; }
+        .chatbot-header { padding: 1rem; background: var(--primary-color); color: white; font-weight: 600; }
+        .chatbot-display { flex-grow: 1; padding: 1rem; overflow-y: auto; }
+        .chatbot-input { display: flex; padding: 1rem; border-top: 1px solid var(--border-color); }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            #main-header nav {
-                display: flex; position: fixed; top: var(--header-height); left: 0;
-                width: 100%; height: calc(100vh - var(--header-height));
-                background-color: var(--surface-color); flex-direction: column;
-                padding-top: 2rem; transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out; z-index: 999;
-                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-            }
-            #main-header nav.active { transform: translateX(0); }
+            #main-header nav { display: none; position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: var(--surface-color); flex-direction: column; padding-top: 2rem; transform: translateX(-100%); transition: transform 0.3s ease-in-out; z-index: 999; }
+            #main-header nav.active { display: flex; transform: translateX(0); }
             #main-header nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
             #main-header nav a { padding: 20px; border-radius: 0; width: 100%; justify-content: center; }
             .menu-toggle { display: block; }
-            .live-class-layout { grid-template-columns: 1fr; height: auto; }
-        }
-
-        @media (max-width: 768px) {
-            h2 { font-size: 1.75rem; }
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .auth-container { width: 90%; padding: 25px; }
-            .filters { justify-content: center; }
+            .dashboard-grid, .collaboration-layout { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-
     <section id="auth-page">
         <div class="auth-container">
             <h1>Bienvenue sur EduSmart.AI</h1>
             <p>Connectez-vous pour commencer votre aventure.</p>
             <form id="login-form">
-                <div class="auth-form-group">
-                    <label for="email">Adresse e-mail</label>
-                    <input type="email" id="email" value="etudiant@edusmart.ai" required>
-                </div>
-                <div class="auth-form-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" value="password" required>
-                </div>
-                <div class="auth-options">
-                    <label><input type="checkbox" checked> Se souvenir de moi</label>
-                    <a href="#">Mot de passe oublié ?</a>
-                </div>
+                <div class="auth-form-group"><input type="email" value="etudiant@edusmart.ai" required></div>
+                <div class="auth-form-group"><input type="password" value="password" required></div>
                 <button type="submit" class="auth-btn">Se Connecter</button>
             </form>
-            <div class="auth-switch">
-                <p>Pas encore de compte ? <a href="#">Inscrivez-vous</a></p>
-            </div>
         </div>
     </section>
-
 
     <div id="main-app" class="hidden">
         <header id="main-header">
@@ -331,13 +143,19 @@
                         <li><a href="#dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                         <li><a href="#courses" class="nav-link"><i class="fas fa-book"></i> Mes Cours</a></li>
                         <li><a href="#library" class="nav-link"><i class="fas fa-photo-film"></i> Médiathèque</a></li>
-                        <li><a href="#live-class" class="nav-link"><i class="fas fa-video"></i> Classe en Direct</a></li>
-                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-users"></i> Dialogue</a></li>
-                        <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Assistant Profs</a></li>
+                        <li><a href="#reports" class="nav-link"><i class="fas fa-chart-line"></i> Rapports</a></li>
+                        <li><a href="#collaboration" class="nav-link"><i class="fas fa-users"></i> Collaboration</a></li>
+                        <li><a href="#teachers-ai" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Espace Profs</a></li>
                     </ul>
                 </nav>
                 <div class="user-actions">
-                    <a href="#" class="profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <div class="notification-dot"></div>
+                        <div class="notifications-panel"><div style="padding:1rem; text-align:center;">Aucune nouvelle notification</div></div>
+                    </div>
+                    <a href="#profile" class="nav-link profile-link"><i class="fas fa-user-circle"></i> Mon Profil</a>
+                    <select class="language-switcher btn-secondary" style="padding: 8px;"><option>FR</option><option>EN</option><option>AR</option></select>
                     <button class="menu-toggle"><i class="fas fa-bars"></i></button>
                 </div>
             </div>
@@ -348,165 +166,107 @@
                 <div class="container content-wrapper">
                     <h2>Tableau de Bord</h2>
                     <div class="dashboard-grid">
-                        <div class="dashboard-main-column">
+                        <div class="main-column">
                             <div class="widget">
-                                <div class="widget-header"><h3>Prochains Cours en Direct</h3></div>
-                                <p>Votre prochain cours de <strong>Mathématiques - Analyse</strong> commence dans <strong>45 minutes</strong>.</p>
-                                <a href="#live-class" class="btn-primary" style="margin-top: 1rem;">Rejoindre la salle</a>
+                                <h3><i class="fas fa-route"></i> Mon Parcours Personnalisé</h3>
+                                <div class="path-step done"><div class="path-step-icon"><i class="fas fa-check-circle"></i></div><div><strong>Revoir les fonctions</strong><p>Leçon terminée le 06/06/2025</p></div></div>
+                                <div class="path-step"><div class="path-step-icon"><i class="fas fa-pencil-alt"></i></div><div><strong>Prochaine étape : Quiz sur les fonctions</strong><p>Testez vos connaissances pour débloquer la suite.</p></div></div>
                             </div>
                              <div class="widget">
-                                <div class="widget-header"><h3>Devoirs Récents et Notes</h3></div>
-                                <div class="homework-item">
-                                    <div>
-                                        <p style="font-weight: 500; margin:0;">Exposé d'Histoire</p>
-                                        <small>Rendu le 05/06/2025</small>
-                                    </div>
-                                    <span class="homework-grade grade-good">16/20</span>
+                                <h3><i class="fas fa-star"></i> Recommandé pour vous</h3>
+                                <p>Basé sur vos progrès, voici des contenus qui pourraient vous intéresser.</p>
                                 </div>
-                                <div class="homework-item">
-                                    <div>
-                                        <p style="font-weight: 500; margin:0;">Exercices de Physique</p>
-                                        <small>Échéance: 08/06/2025</small>
-                                    </div>
-                                    <span class="homework-grade grade-avg">En cours</span>
-                                </div>
-                            </div>
                         </div>
-                        <div class="widget">
-                            <div class="widget-header"><h3>Mon Agenda - Juin 2025</h3></div>
-                            <div class="calendar-body">
-                                <div class="calendar-day-name">Lun</div><div class="calendar-day-name">Mar</div><div class="calendar-day-name">Mer</div><div class="calendar-day-name">Jeu</div><div class="calendar-day-name">Ven</div><div class="calendar-day-name">Sam</div><div class="calendar-day-name">Dim</div>
-                                <div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date"></div><div class="calendar-date today">7</div><div class="calendar-date">8</div>
-                                <div class="calendar-date event">9</div><div class="calendar-date">10</div><div class="calendar-date">11</div><div class="calendar-date">12</div><div class="calendar-date event">13</div><div class="calendar-date">14</div><div class="calendar-date">15</div>
-                            </div>
+                        <div class="sidebar-column">
+                            <div class="widget"><h3><i class="far fa-calendar-alt"></i> Agenda</h3><p>Échéance du devoir de Physique demain à 18:00.</p></div>
                         </div>
                     </div>
                 </div>
             </section>
-            
+
             <section id="courses" class="page-section hidden">
                 <div class="container content-wrapper">
                     <h2>Mes Cours</h2>
-                    <div class="filters">
-                        <button class="filter-btn active" data-filter="all">Tous les Niveaux</button>
-                        <button class="filter-btn" data-filter="collège">Collège</button>
-                        <button class="filter-btn" data-filter="lycée">Lycée (Bac)</button>
-                        <button class="filter-btn" data-filter="prépa">Classes Prépa</button>
                     </div>
-                    <div class="courses-grid">
-                         <div class="course-card" data-level="lycée" data-subject="maths">
-                            <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1509228468458-18a782943440?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEzfHxtYXRofGVufDB8fHx8MTY4NjEwMzkxMg&ixlib=rb-4.0.3&q=80&w=400');"></div>
-                            <div class="course-card-content">
-                                <h3>Mathématiques - Analyse</h3>
-                                <p class="course-teacher">Avec M. Diallo</p>
-                                <p>Progression: 75%</p>
-                                <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
-                                <div class="course-card-footer">
-                                    <a href="#" class="btn-primary">Continuer le cours</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="course-card" data-level="prépa" data-subject="physique">
-                            <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1633596683188-345293621d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxwaHlzaWN8ZW58MHx8fHwxNjg2MTA0MDAy&ixlib=rb-4.0.3&q=80&w=400');"></div>
-                            <div class="course-card-content">
-                                <h3>Physique - Électromagnétisme</h3>
-                                <p class="course-teacher">Avec Mme. Traoré</p>
-                                <p>Progression: 40%</p>
-                                <div class="progress-bar-container"><div class="progress-bar" style="width: 40%;"></div></div>
-                                <div class="course-card-footer">
-                                    <a href="#" class="btn-primary">Continuer le cours</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="course-card" data-level="collège" data-subject="histoire">
-                            <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1524041255240-53416d85b6b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEzfHxoaXN0b3J5fGVufDB8fHx8MTY4NjEwNDE4OQ&ixlib=rb-4.0.3&q=80&w=400');"></div>
-                            <div class="course-card-content">
-                                <h3>Histoire-Géographie</h3>
-                                <p class="course-teacher">Avec M. Ndiaye</p>
-                                <p>Progression: 90%</p>
-                                <div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div>
-                                <div class="course-card-footer">
-                                    <a href="#" class="btn-primary">Continuer le cours</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="library" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Médiathèque</h2>
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="videos">Vidéos</button>
-                        <button class="tab-btn" data-tab="articles">Articles</button>
-                        <button class="tab-btn" data-tab="simulations">Simulations</button>
-                        <button class="tab-btn" data-tab="annales">Annales</button>
-                    </div>
-                    <div id="videos" class="tab-content active">
-                        <div class="resource-grid">
-                            <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-play-circle"></i></div><div class="resource-card-body"><h3>Introduction à l'Algèbre</h3></div></div>
-                            <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-play-circle"></i></div><div class="resource-card-body"><h3>Les lois de Newton</h3></div></div>
-                        </div>
-                    </div>
-                     <div id="articles" class="tab-content">
-                         <div class="resource-grid">
-                            <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-file-alt"></i></div><div class="resource-card-body"><h3>Comprendre la mitose</h3></div></div>
-                        </div>
-                    </div>
-                    </div>
-            </section>
-
-            <section id="live-class" class="page-section hidden">
-                <div class="container content-wrapper">
-                    <h2>Classe en Direct: Mathématiques - Analyse</h2>
-                    <div class="live-class-layout">
-                        <div class="live-video-container">
-                            <i class="fas fa-video fa-3x"></i>
-                        </div>
-                        <div class="live-sidebar">
-                            <div class="live-chat">
-                                <div class="widget-header" style="padding: 1rem 1rem 0;"><h3>Chat en direct</h3></div>
-                                <div class="live-chat-messages">
-                                    <p><small><strong>M. Diallo:</strong> Bonjour à tous !</small></p>
-                                    <p><small><strong>Vous:</strong> Bonjour Monsieur !</small></p>
-                                </div>
-                                <div class="live-chat-input"><input type="text" placeholder="Posez une question..."></div>
-                            </div>
-                            <div class="live-participants">
-                                <div class="widget-header" style="padding: 1rem 1rem 0;"><h3>Participants (15)</h3></div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
             </section>
             
-            </main>
-        
-        <footer id="main-footer">
-            <div class="container">
-                <p>&copy; 2025 EduSmart.AI. Tous droits réservés.</p>
-                <div class="footer-links">
-                    <a href="#">Politique de Confidentialité</a>
-                    <a href="#">Conditions d'Utilisation</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-        </footer>
-    </div>
+            <section id="library" class="page-section hidden">
+                 <div class="container content-wrapper">
+                    <h2>Médiathèque</h2>
+                    </div>
+            </section>
 
+            <section id="reports" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2>Rapports de Performance</h2>
+                    <div class="widget">
+                        <h3>Progression Globale</h3>
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="collaboration" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2>Collaboration</h2>
+                    <div class="collaboration-layout">
+                        <div class="collaboration-sidebar">
+                            <div class="widget"><h3><i class="fas fa-comments"></i> Forums</h3><p>Rejoignez les discussions par matière.</p></div>
+                            <div class="widget"><h3><i class="fas fa-users"></i> Salles d'Étude</h3><div class="room-card"><span>Révision BAC Maths</span><button class="btn-primary">Rejoindre</button></div></div>
+                        </div>
+                        <div class="main-content"><div class="widget"><h3>Sélectionnez un forum pour commencer</h3></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="teachers-ai" class="page-section hidden">
+                 <div class="container content-wrapper">
+                    <h2>Espace Professeur</h2>
+                    <div class="teacher-dashboard-grid">
+                        <div class="widget">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Vigilance Pédagogique (IA)</h3>
+                            <div class="vigilance-item"><i class="fas fa-user-circle"></i> <div><strong>Élève Y:</strong> Baisse de performance détectée en Physique.</div></div>
+                            <div class="vigilance-item"><i class="fas fa-user-circle"></i> <div><strong>Élève Z:</strong> N'a pas rendu les deux derniers devoirs.</div></div>
+                        </div>
+                        <div class="widget">
+                            <h3><i class="fas fa-tasks"></i> Devoirs à Corriger</h3>
+                            <div class="room-card"><span>Devoir de Maths - Term S1</span><button class="btn-secondary">Analyser avec l'IA</button></div>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+
+            <section id="profile" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <div class="profile-header">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="profile-avatar">
+                        <div><h2>Jean Dupont</h2><p>Étudiant en Classes Prépa</p></div>
+                    </div>
+                    <div class="widget">
+                        <h3><i class="fas fa-chart-pie"></i> Analyse de Compétences</h3>
+                        <div class="skills-chart-container"><canvas id="skillsChart"></canvas></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <button class="fab-chatbot"><i class="fas fa-robot"></i></button>
+        <div class="chatbot-window">
+            <div class="chatbot-header">EduBot - Votre Assistant IA</div>
+            <div class="chatbot-display"></div>
+            <div class="chatbot-input"><input type="text" placeholder="Posez une question..."><button><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- AUTHENTIFICATION LOGIC ---
         const authPage = document.getElementById('auth-page');
         const mainApp = document.getElementById('main-app');
         const loginForm = document.getElementById('login-form');
 
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Empêche le rechargement de la page
-            // Simulation d'une connexion réussie
+            e.preventDefault();
             authPage.style.transition = 'opacity 0.5s ease-out';
             authPage.style.opacity = '0';
             setTimeout(() => {
@@ -514,92 +274,88 @@
                 mainApp.classList.remove('hidden');
                 mainApp.style.opacity = '0';
                 setTimeout(() => { mainApp.style.opacity = '1'; }, 50);
-                // Naviguer vers le dashboard par défaut après connexion
                 navigateTo(window.location.hash || '#dashboard');
+                initializeCharts();
             }, 500);
         });
 
-
-        // --- CORE APP LOGIC ---
         const navLinks = document.querySelectorAll('.nav-link');
         const pageSections = document.querySelectorAll('.page-section');
-        const headerNav = document.querySelector('#main-header nav');
         const menuToggle = document.querySelector('.menu-toggle');
-        const menuIcon = document.querySelector('.menu-toggle i');
+        const headerNav = document.querySelector('#main-header nav');
         
         function navigateTo(hash) {
-            if (!hash) hash = '#dashboard';
+            if (!hash || hash === '#') hash = '#dashboard';
             pageSections.forEach(section => section.classList.add('hidden'));
-            navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === hash);
-            });
+            
             const targetSection = document.querySelector(hash);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
-            if (headerNav.classList.contains('active')) {
-                toggleMobileMenu();
-            }
+            if (targetSection) targetSection.classList.remove('hidden');
+            
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+            if (headerNav.classList.contains('active')) menuToggle.click();
         }
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
+        document.body.addEventListener('click', (e) => {
+            if (e.target.closest('.nav-link')) {
                 e.preventDefault();
-                const hash = e.currentTarget.getAttribute('href');
-                window.location.hash = hash;
-                navigateTo(hash);
-            });
+                const link = e.target.closest('.nav-link');
+                const hash = link.getAttribute('href');
+                if (window.location.hash !== hash) window.location.hash = hash;
+                else navigateTo(hash);
+            }
+        });
+        
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        menuToggle.addEventListener('click', () => headerNav.classList.toggle('active'));
+
+        // FAB Chatbot Logic
+        const fabChatbot = document.querySelector('.fab-chatbot');
+        const chatbotWindow = document.querySelector('.chatbot-window');
+        fabChatbot.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
         });
 
-        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        // Notifications Logic
+        const notificationBell = document.querySelector('.notification-bell');
+        const notificationsPanel = document.querySelector('.notifications-panel');
+        notificationBell.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsPanel.classList.toggle('active');
+        });
+        document.addEventListener('click', () => notificationsPanel.classList.remove('active'));
 
-        function toggleMobileMenu() {
-            headerNav.classList.toggle('active');
-            menuIcon.classList.toggle('fa-bars');
-            menuIcon.classList.toggle('fa-times');
-        }
-        menuToggle.addEventListener('click', toggleMobileMenu);
-
-        // --- COURSES FILTERING LOGIC ---
-        const filterButtons = document.querySelectorAll('.filters .filter-btn');
-        const courseCards = document.querySelectorAll('.courses-grid .course-card');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
-                
-                // Gérer le style du bouton actif
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Appliquer le filtre
-                courseCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-level') === filter) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
+        // Chart.js Initialization
+        let progressChartInstance, skillsChartInstance;
+        function initializeCharts() {
+            const progressCtx = document.getElementById('progressChart');
+            if (progressCtx && !progressChartInstance) {
+                progressChartInstance = new Chart(progressCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+                        datasets: [{ label: 'Progression des notes', data: [12, 13, 12.5, 14, 15, 16], borderColor: 'rgba(74, 144, 226, 1)', tension: 0.1 }]
                     }
                 });
-            });
-        });
+            }
 
-        // --- LIBRARY TABS LOGIC ---
-        const tabButtons = document.querySelectorAll('.tabs .tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tabId = button.getAttribute('data-tab');
-
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                tabContents.forEach(content => {
-                    content.classList.toggle('active', content.id === tabId);
+            const skillsCtx = document.getElementById('skillsChart');
+            if (skillsCtx && !skillsChartInstance) {
+                skillsChartInstance = new Chart(skillsCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Algèbre', 'Analyse', 'Géométrie', 'Probabilités', 'Logique'],
+                        datasets: [{
+                            label: 'Mes Compétences',
+                            data: [85, 70, 60, 75, 90],
+                            fill: true,
+                            backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                            borderColor: 'rgba(74, 144, 226, 1)',
+                        }]
+                    },
+                    options: { scales: { r: { beginAtZero: true, max: 100 } } }
                 });
-            });
-        });
-
+            }
+        }
     });
     </script>
 </body>
