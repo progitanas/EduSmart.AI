@@ -1,4 +1,3 @@
-EduSmart.AI
 EduSmart.AI est une plateforme intelligente d’apprentissage personnalisée, conçue pour révolutionner l’éducation grâce à l’intelligence artificielle. Elle s’adapte au rythme, au style d’apprentissage et aux besoins spécifiques de chaque élève, tout en fournissant aux enseignants des outils avancés d’analyse pédagogique.
 
 🚀 Mission
