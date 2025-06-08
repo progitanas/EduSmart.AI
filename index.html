@@ -39,6 +39,7 @@
         .btn-primary { display: inline-block; background-color: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: var(--border-radius-md); font-weight: 600; border: none; cursor: pointer; text-align: center; text-decoration: none; transition: var(--transition-fast); }
         .btn-primary:hover { background-color: var(--primary-color-dark); transform: translateY(-2px); }
         .btn-secondary { background-color: var(--secondary-color); color: white; padding: 8px 16px; border: none; border-radius: var(--border-radius-md); cursor: pointer; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
 
         /* -- Page d'Authentification -- */
         #auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, var(--primary-color) 0%, #81C784 100%); }
@@ -69,18 +70,26 @@
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(229, 62, 62, 0); } 100% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0); } }
         .notifications-panel { display: none; position: absolute; top: 50px; right: 0; width: 380px; background: var(--surface-color); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg); z-index: 1001; overflow: hidden; max-height: 400px; overflow-y: auto; }
         .notifications-panel.active { display: block; animation: fadeIn 0.3s; }
+        .notification-item { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+        .notification-item.unread { background-color: #f0f9ff; }
+        .notification-time { font-size: 0.8rem; color: var(--text-color-light); margin-top: 5px; }
         .fab-chatbot { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--primary-color); color: white; border-radius: 50%; border: none; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: var(--shadow-lg); cursor: pointer; z-index: 1010; transition: all 0.2s ease-in-out; }
         .fab-chatbot:hover { transform: scale(1.1); }
         .chatbot-window { display: none; position: fixed; bottom: 100px; right: 30px; width: 380px; height: 500px; background: var(--surface-color); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg); z-index: 1009; flex-direction: column; overflow: hidden; }
         .chatbot-window.active { display: flex; animation: fadeIn 0.3s; }
-        .chatbot-header { padding: 1rem; background: var(--primary-color); color: white; font-weight: 600; }
-        .chatbot-display { flex-grow: 1; overflow-y: auto; padding: 1rem; }
+        .chatbot-header { padding: 1rem; background: var(--primary-color); color: white; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .chatbot-display { flex-grow: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 12px; }
+        .chat-message { max-width: 80%; padding: 10px 15px; border-radius: 18px; }
+        .user-message { background-color: #e3f2fd; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .bot-message { background-color: #f0f4f8; align-self: flex-start; border-bottom-left-radius: 4px; }
         .chatbot-input { padding: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        .chatbot-input input { flex-grow: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        .chatbot-input input { flex-grow: 1; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
+        .chatbot-typing { font-size: 0.9rem; color: var(--text-color-light); padding: 0 1rem; }
 
         /* -- Styles des Sections & Widgets -- */
         .dashboard-grid, .teacher-dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: flex-start; }
         .three-column-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+        .two-column-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .path-step { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 1rem; transition: var(--transition-fast); }
         .path-step:hover { transform: translateX(5px); }
         .path-step.done { background: #e8f5e9; border-left: 5px solid var(--success-color); }
@@ -104,11 +113,17 @@
         .badge-item { text-align: center; padding: 1rem; border: 2px solid var(--border-color); border-radius: var(--border-radius-lg); transition: var(--transition-fast); }
         .badge-item.earned { border-color: var(--success-color); background: linear-gradient(135deg, #e8f5e9, #fff); }
         .badge-item:hover { transform: scale(1.05); }
+        .badge-icon { font-size: 3rem; margin-bottom: 10px; color: var(--primary-color); }
+        .badge-item.earned .badge-icon { color: var(--success-color); }
         .level-display { text-align: center; padding: 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: var(--border-radius-lg); }
         .leaderboard { background: var(--surface-color); border-radius: var(--border-radius-lg); overflow: hidden; }
         .leaderboard-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border-color); }
         .leaderboard-item:last-child { border-bottom: none; }
         .leaderboard-item.me { background: var(--background-color); font-weight: 600; }
+        .leaderboard-position { font-weight: 700; width: 30px; }
+        .xp-progress { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+        .xp-bar { flex-grow: 1; height: 8px; background: var(--border-color); border-radius: 99px; overflow: hidden; }
+        .xp-fill { height: 100%; background: var(--secondary-color); }
 
         /* -- Quiz Creator & Interactive Elements -- */
         .quiz-question { margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
@@ -119,30 +134,41 @@
         .quiz-result { padding: 1rem; margin-top: 1rem; border-radius: var(--border-radius-md); }
         .quiz-result.correct { background: var(--success-color); color: white; }
         .quiz-result.incorrect { background: var(--error-color); color: white; }
+        .quiz-creator-form { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); }
 
         /* -- Library & Resources -- */
         .resource-filter { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .filter-btn { padding: 0.5rem 1rem; border: 1px solid var(--border-color); background: white; border-radius: var(--border-radius-md); cursor: pointer; }
         .filter-btn.active { background: var(--primary-color); color: white; }
         .resource-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 1rem; }
+        .resource-icon { font-size: 1.5rem; color: var(--primary-color); }
         .resource-meta { color: var(--text-color-light); font-size: 0.9rem; }
 
         /* -- Study Rooms -- */
         .study-room { background: var(--surface-color); border-radius: var(--border-radius-lg); padding: 1.5rem; border: 1px solid var(--border-color); }
+        .study-room.active { border-color: var(--primary-color); box-shadow: var(--shadow-md); }
         .room-participants { display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; }
         .participant-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .room-actions { margin-top: 1rem; display: flex; gap: 10px; }
 
         /* -- Performance Reports -- */
         .report-card { background: var(--surface-color); padding: 1.5rem; border-radius: var(--border-radius-lg); border-left: 5px solid var(--info-color); }
         .metric { text-align: center; }
         .metric-value { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
         .metric-label { color: var(--text-color-light); }
+        .chart-container { height: 300px; margin-top: 1.5rem; }
 
         /* -- Virtual Classroom -- */
         .classroom-controls { display: flex; gap: 1rem; margin-bottom: 1rem; }
         .classroom-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
         .classroom-main { background: var(--surface-color); border-radius: var(--border-radius-lg); padding: 1.5rem; }
         .classroom-sidebar { background: var(--surface-color); border-radius: var(--border-radius-lg); padding: 1.5rem; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .video-item { background: #333; border-radius: 8px; height: 150px; position: relative; }
+        .video-name { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); color: white; padding: 5px; font-size: 0.8rem; }
 
         /* -- Offline Mode Indicator -- */
         .offline-indicator { position: fixed; top: var(--header-height); left: 0; width: 100%; background: var(--warning-color); color: white; text-align: center; padding: 0.5rem; z-index: 999; display: none; }
@@ -150,15 +176,19 @@
 
         /* -- Export & Integration -- */
         .export-options { display: flex; gap: 1rem; margin-top: 1rem; }
-        .integration-card { padding: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); text-align: center; }
+        .integration-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+        .integration-card { padding: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); text-align: center; transition: var(--transition-fast); }
+        .integration-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-sm); }
         .integration-card.connected { border-color: var(--success-color); background: #e8f5e9; }
+        .integration-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary-color); }
 
         /* -- Soft Skills Tracking -- */
         .skill-category { margin-bottom: 2rem; }
         .skill-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; border-bottom: 1px solid var(--border-color); }
         .skill-level { display: flex; gap: 3px; }
-        .skill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); }
+        .skill-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border-color); }
         .skill-dot.filled { background: var(--secondary-color); }
+        .skill-chart { height: 250px; margin-top: 1.5rem; }
 
         /* -- Language Selector Enhanced -- */
         .language-selector { position: relative; }
@@ -166,6 +196,11 @@
         .language-dropdown.active { display: block; }
         .language-option { padding: 0.8rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
         .language-option:hover { background: var(--background-color); }
+
+        /* -- Profile Section -- */
+        .profile-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; }
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .profile-info h2 { margin-bottom: 0.5rem; }
 
         /* -- Design Réactif -- */
         @media (max-width: 1024px) {
@@ -223,7 +258,23 @@
                     <div class="notification-bell">
                         <i class="fas fa-bell"></i>
                         <div class="notification-dot"></div>
-                        <div class="notifications-panel"></div>
+                        <div class="notifications-panel">
+                            <div class="notification-item unread">
+                                <strong>Nouveau quiz disponible</strong>
+                                <p>Quiz sur les dérivées a été ajouté à votre parcours</p>
+                                <div class="notification-time">Il y a 5 min</div>
+                            </div>
+                            <div class="notification-item">
+                                <strong>Rappel: Webinaire demain</strong>
+                                <p>Méthodologie pour le BAC de mathématiques à 16h</p>
+                                <div class="notification-time">Il y a 1 heure</div>
+                            </div>
+                            <div class="notification-item">
+                                <strong>Nouveau badge débloqué</strong>
+                                <p>Vous avez obtenu le badge "Maître de l'Algèbre"</p>
+                                <div class="notification-time">Il y a 1 jour</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="language-selector">
                         <button class="btn-secondary" id="language-toggle">🇫🇷 FR</button>
@@ -269,6 +320,13 @@
                                         <p>Se débloquera après validation du quiz</p>
                                     </div>
                                 </div>
+                                <div class="path-step">
+                                    <i class="fas fa-video"></i>
+                                    <div>
+                                        <strong>Vidéo : Applications des dérivées</strong>
+                                        <p>Recommandée pour approfondir</p>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="widget">
@@ -286,6 +344,13 @@
                                     <div>
                                         <strong>Simulation 3D :</strong> L'aire sous la courbe
                                         <p>Pour renforcer votre compréhension géométrique</p>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="fas fa-book"></i>
+                                    <div>
+                                        <strong>Exercices pratiques :</strong> Problèmes concrets de dérivées
+                                        <p>Pour appliquer vos connaissances</p>
                                     </div>
                                 </div>
                             </div>
@@ -314,6 +379,9 @@
                                 </div>
                                 <p><strong>Points forts détectés :</strong> Algèbre, Raisonnement logique</p>
                                 <p><strong>Lacunes identifiées :</strong> Géométrie dans l'espace - Programme de rattrapage personnalisé généré</p>
+                                <div class="chart-container">
+                                    <canvas id="performance-chart"></canvas>
+                                </div>
                             </div>
                         </div>
                         
@@ -334,6 +402,13 @@
                                         <p>Inscription confirmée</p>
                                     </div>
                                 </div>
+                                <div class="path-step">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <strong>Vendredi 18h :</strong> Session d'étude de groupe
+                                        <p>Salle : Mathématiques Avancées</p>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="widget">
@@ -342,7 +417,21 @@
                                     <div class="progress-bar" style="width: 78%;"></div>
                                 </div>
                                 <p>78% de vos objectifs atteints cette semaine</p>
+                                <div class="xp-progress">
+                                    <div>XP : 850/1000</div>
+                                    <div class="xp-bar">
+                                        <div class="xp-fill" style="width: 85%;"></div>
+                                    </div>
+                                </div>
                                 <button class="btn-primary" style="margin-top: 1rem;">Voir détails</button>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-robot"></i> EduBot - Votre Assistant IA</h3>
+                                <p>Posez vos questions sur les cours, exercices ou méthodologie.</p>
+                                <button class="btn-secondary" id="open-chatbot">
+                                    <i class="fas fa-comment"></i> Ouvrir le Chatbot
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -357,26 +446,703 @@
                             <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
                             <div class="course-card-content">
                                 <h3>Mathématiques - Analyse (Prépa)</h3>
+                                <p>Dérivées, intégrales, fonctions exponentielles</p>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar" style="width: 75%;"></div>
                                 </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                                    <span>Progression: 75%</span>
+                                    <span>Difficulté: Avancé</span>
+                                </div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 15px;">Continuer</button>
                             </div>
                         </div>
                         <div class="course-card">
                             <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1582079070932-4d2c803456e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
                             <div class="course-card-content">
                                 <h3>Physique - Mécanique (Lycée)</h3>
+                                <p>Cinématique, dynamique, énergie</p>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar" style="width: 40%;"></div>
                                 </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                                    <span>Progression: 40%</span>
+                                    <span>Difficulté: Intermédiaire</span>
+                                </div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 15px;">Continuer</button>
                             </div>
                         </div>
                         <div class="course-card">
                             <div class="course-card-banner" style="background-image: url('https://images.unsplash.com/photo-1524995723223-b42f852b75de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
                             <div class="course-card-content">
                                 <h3>Histoire - XIXe siècle (Lycée)</h3>
+                                <p>Révolutions industrielles, impérialisme</p>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar" style="width: 90%;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                                    <span>Progression: 90%</span>
+                                    <span>Difficulté: Débutant</span>
+                                </div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 15px;">Révision</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="library" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-books"></i> Bibliothèque Intelligente</h2>
+                    <div class="resource-filter">
+                        <button class="filter-btn active">Tous</button>
+                        <button class="filter-btn">Mathématiques</button>
+                        <button class="filter-btn">Physique</button>
+                        <button class="filter-btn">Histoire</button>
+                        <button class="filter-btn">Vidéos</button>
+                        <button class="filter-btn">PDF</button>
+                        <button class="filter-btn">Exercices</button>
+                    </div>
+                    
+                    <div class="resource-grid">
+                        <div class="resource-item">
+                            <div class="resource-icon"><i class="fas fa-file-pdf"></i></div>
+                            <div>
+                                <h3>Cours complet sur les dérivées</h3>
+                                <p>PDF - Mathématiques - Niveau Prépa</p>
+                                <div class="resource-meta">Recommandé par l'IA - 25 pages</div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon"><i class="fas fa-video"></i></div>
+                            <div>
+                                <h3>Les lois de Newton expliquées</h3>
+                                <p>Vidéo - Physique - 15 min</p>
+                                <div class="resource-meta">Adapté à votre niveau - IA: 92% de pertinence</div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon"><i class="fas fa-file-alt"></i></div>
+                            <div>
+                                <h3>Exercices corrigés: Intégrales</h3>
+                                <p>PDF - Mathématiques - 12 exercices</p>
+                                <div class="resource-meta">Difficulté progressive - IA: 87% de pertinence</div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-icon"><i class="fas fa-book"></i></div>
+                            <div>
+                                <h3>La révolution industrielle</h3>
+                                <p>Résumé - Histoire - 8 pages</p>
+                                <div class="resource-meta">Synthèse pour révision - IA: 78% de pertinence</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="quiz-creator" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-question-circle"></i> Créateur de Quiz</h2>
+                    <div class="two-column-grid">
+                        <div class="quiz-creator-form">
+                            <h3>Créer un nouveau quiz</h3>
+                            <div class="form-group">
+                                <label>Titre du quiz</label>
+                                <input type="text" placeholder="Ex: Quiz sur les dérivées">
+                            </div>
+                            <div class="form-group">
+                                <label>Matière</label>
+                                <select>
+                                    <option>Mathématiques</option>
+                                    <option>Physique</option>
+                                    <option>Histoire</option>
+                                    <option>Chimie</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Niveau de difficulté</label>
+                                <select>
+                                    <option>Débutant</option>
+                                    <option>Intermédiaire</option>
+                                    <option>Avancé</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary">Créer le quiz</button>
+                            
+                            <h3 style="margin-top: 2rem;">Ajouter une question</h3>
+                            <div class="form-group">
+                                <label>Question</label>
+                                <textarea placeholder="Posez votre question ici..." rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Type de question</label>
+                                <select>
+                                    <option>Choix multiple</option>
+                                    <option>Vrai/Faux</option>
+                                    <option>Réponse courte</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Options (séparées par des virgules)</label>
+                                <input type="text" placeholder="Option 1, Option 2, Option 3...">
+                            </div>
+                            <div class="form-group">
+                                <label>Réponse correcte</label>
+                                <input type="text" placeholder="Réponse correcte">
+                            </div>
+                            <button class="btn-secondary">Ajouter la question</button>
+                        </div>
+                        
+                        <div class="quiz-preview">
+                            <h3>Prévisualisation du quiz</h3>
+                            <div class="quiz-question">
+                                <p>Quelle est la dérivée de f(x) = 3x² + 2x - 5 ?</p>
+                                <div class="quiz-options">
+                                    <div class="quiz-option">f'(x) = 6x + 2</div>
+                                    <div class="quiz-option">f'(x) = 3x + 2</div>
+                                    <div class="quiz-option">f'(x) = 6x² + 2</div>
+                                    <div class="quiz-option">f'(x) = 3x² + 2</div>
+                                </div>
+                            </div>
+                            <div class="quiz-question">
+                                <p>La dérivée seconde représente :</p>
+                                <div class="quiz-options">
+                                    <div class="quiz-option">La pente de la tangente</div>
+                                    <div class="quiz-option">La concavité de la courbe</div>
+                                    <div class="quiz-option">L'aire sous la courbe</div>
+                                    <div class="quiz-option">Le point d'inflexion</div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" style="width: 100%;">Publier le quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="gamification" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-gamepad"></i> Gamification</h2>
+                    <div class="dashboard-grid">
+                        <div class="main-column">
+                            <div class="widget">
+                                <div class="level-display">
+                                    <h3>Niveau 7 - Maître de l'Algèbre</h3>
+                                    <div class="progress-bar-container" style="background: rgba(255,255,255,0.3); margin: 1rem auto; width: 80%;">
+                                        <div class="progress-bar" style="width: 65%; background: white;"></div>
+                                    </div>
+                                    <p>850/1000 XP pour le niveau suivant</p>
+                                </div>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-medal"></i> Mes Badges</h3>
+                                <div class="gamification-badges-grid">
+                                    <div class="badge-item earned">
+                                        <div class="badge-icon"><i class="fas fa-calculator"></i></div>
+                                        <h4>Maître du Calcul</h4>
+                                        <p>Compléter 50 exercices de mathématiques</p>
+                                    </div>
+                                    <div class="badge-item earned">
+                                        <div class="badge-icon"><i class="fas fa-lightbulb"></i></div>
+                                        <h4>Esprit Vif</h4>
+                                        <p>Résoudre 10 problèmes difficiles</p>
+                                    </div>
+                                    <div class="badge-item">
+                                        <div class="badge-icon"><i class="fas fa-infinity"></i></div>
+                                        <h4>Persévérant</h4>
+                                        <p>Apprendre 30 jours consécutifs</p>
+                                    </div>
+                                    <div class="badge-item">
+                                        <div class="badge-icon"><i class="fas fa-rocket"></i></div>
+                                        <h4>Apprenant Rapide</h4>
+                                        <p>Terminer un cours en moins d'une semaine</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-column">
+                            <div class="widget">
+                                <h3><i class="fas fa-trophy"></i> Classement</h3>
+                                <div class="leaderboard">
+                                    <div class="leaderboard-item me">
+                                        <div class="leaderboard-position">1</div>
+                                        <div>Marie Dupont</div>
+                                        <div>1250 XP</div>
+                                    </div>
+                                    <div class="leaderboard-item">
+                                        <div class="leaderboard-position">2</div>
+                                        <div>Thomas Martin</div>
+                                        <div>1100 XP</div>
+                                    </div>
+                                    <div class="leaderboard-item">
+                                        <div class="leaderboard-position">3</div>
+                                        <div>Jean Petit</div>
+                                        <div>980 XP</div>
+                                    </div>
+                                    <div class="leaderboard-item me">
+                                        <div class="leaderboard-position">4</div>
+                                        <div>Vous</div>
+                                        <div>850 XP</div>
+                                    </div>
+                                    <div class="leaderboard-item">
+                                        <div class="leaderboard-position">5</div>
+                                        <div>Sophie Leroy</div>
+                                        <div>780 XP</div>
+                                    </div>
+                                </div>
+                                <button class="btn-primary" style="width: 100%; margin-top: 1rem;">Voir le classement complet</button>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-star"></i> Défis du Jour</h3>
+                                <div class="path-step">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Compléter 5 exercices</strong>
+                                        <p>+50 XP - Terminé</p>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <strong>Revoir une leçon difficile</strong>
+                                        <p>+30 XP - En cours</p>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="far fa-circle"></i>
+                                    <div>
+                                        <strong>Participer à une salle d'étude</strong>
+                                        <p>+40 XP - À faire</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="collaboration" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-comments"></i> Communauté</h2>
+                    <div class="collaboration-layout">
+                        <div class="groups-column">
+                            <div class="column-header">Groupes d'Étude</div>
+                            <ul class="groups-list">
+                                <li class="active">Mathématiques Avancées</li>
+                                <li>Physique Prépa</li>
+                                <li>Histoire BAC</li>
+                                <li>Chimie Terminale</li>
+                                <li>Philosophie</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="threads-column">
+                            <div class="column-header">Fils de Discussion</div>
+                            <ul class="threads-list">
+                                <li class="active">Problème avec les dérivées partielles</li>
+                                <li>Exercice 5 page 72 - Correction</li>
+                                <li>Demande d'aide: Mécanique des fluides</li>
+                                <li>Révision pour le contrôle</li>
+                                <li>Partage de ressources</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="messages-column">
+                            <div class="column-header">Messages</div>
+                            <div class="thread-message-content">
+                                <div class="chat-message bot-message">
+                                    <strong>Marie Dupont:</strong> Salut tout le monde, je bloque sur cet exercice de dérivées partielles. Quelqu'un pourrait m'aider?
+                                </div>
+                                <div class="chat-message user-message">
+                                    <strong>Thomas Martin:</strong> Oui, montre-nous l'exercice!
+                                </div>
+                                <div class="chat-message bot-message">
+                                    <strong>Marie Dupont:</strong> Voici l'énoncé: Calculer ∂f/∂x et ∂f/∂y pour f(x,y) = x²y + sin(xy)
+                                </div>
+                                <div class="chat-message user-message">
+                                    <strong>Vous:</strong> Pour ∂f/∂x, tu dois dériver par rapport à x en considérant y constant. Donc ∂f/∂x = 2xy + y*cos(xy)
+                                </div>
+                                <div class="chat-message bot-message">
+                                    <strong>Thomas Martin:</strong> Exact! Et pour ∂f/∂y, ce serait x² + x*cos(xy)
+                                </div>
+                                <div class="chat-message bot-message">
+                                    <strong>Marie Dupont:</strong> Merci beaucoup! C'est plus clair maintenant.
+                                </div>
+                            </div>
+                            <div class="chatbot-input" style="border-top: 1px solid var(--border-color);">
+                                <input type="text" placeholder="Écrire un message...">
+                                <button class="btn-primary"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="study-rooms" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-users"></i> Salles d'Étude</h2>
+                    <div class="study-rooms-grid">
+                        <div class="study-room active">
+                            <h3>Mathématiques Avancées</h3>
+                            <p>Dérivées partielles, intégrales multiples, analyse vectorielle</p>
+                            <div class="room-participants">
+                                <div class="participant-avatar">MD</div>
+                                <div class="participant-avatar">TM</div>
+                                <div class="participant-avatar">JP</div>
+                                <div class="participant-avatar">SL</div>
+                                <div class="participant-avatar">VO</div>
+                                <span>+3 autres</span>
+                            </div>
+                            <div class="room-actions">
+                                <button class="btn-primary"><i class="fas fa-door-open"></i> Rejoindre</button>
+                                <button class="btn-outline"><i class="fas fa-info-circle"></i> Détails</button>
+                            </div>
+                        </div>
+                        
+                        <div class="study-room">
+                            <h3>Physique Prépa</h3>
+                            <p>Mécanique des fluides, thermodynamique, électromagnétisme</p>
+                            <div class="room-participants">
+                                <div class="participant-avatar">TM</div>
+                                <div class="participant-avatar">JP</div>
+                                <div class="participant-avatar">VO</div>
+                                <span>+1 autre</span>
+                            </div>
+                            <div class="room-actions">
+                                <button class="btn-primary"><i class="fas fa-door-open"></i> Rejoindre</button>
+                                <button class="btn-outline"><i class="fas fa-info-circle"></i> Détails</button>
+                            </div>
+                        </div>
+                        
+                        <div class="study-room">
+                            <h3>Révision Histoire BAC</h3>
+                            <p>Révision des chapitres clés pour l'examen final</p>
+                            <div class="room-participants">
+                                <div class="participant-avatar">SL</div>
+                                <div class="participant-avatar">MD</div>
+                                <span>+5 autres</span>
+                            </div>
+                            <div class="room-actions">
+                                <button class="btn-primary"><i class="fas fa-door-open"></i> Rejoindre</button>
+                                <button class="btn-outline"><i class="fas fa-info-circle"></i> Détails</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" style="margin-top: 2rem;">
+                        <i class="fas fa-plus"></i> Créer une nouvelle salle
+                    </button>
+                </div>
+            </section>
+            
+            <section id="webinars" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-video"></i> Webinaires</h2>
+                    <div class="webinar-grid">
+                        <div class="webinar-card">
+                            <div class="webinar-banner" style="background-image: url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="webinar-content">
+                                <h3>Méthodologie BAC Mathématiques</h3>
+                                <p><i class="far fa-calendar"></i> Mercredi 15 Juin, 16h-17h30</p>
+                                <p><i class="fas fa-chalkboard-teacher"></i> Prof. Martin Dubois</p>
+                                <p>Stratégies pour résoudre les problèmes complexes et gérer son temps</p>
+                                <button class="btn-primary" style="width: 100%; margin-top: 10px;">
+                                    <i class="fas fa-check"></i> Inscrit
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="webinar-card">
+                            <div class="webinar-banner" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="webinar-content">
+                                <h3>Physique Quantique: Introduction</h3>
+                                <p><i class="far fa-calendar"></i> Vendredi 17 Juin, 18h-19h</p>
+                                <p><i class="fas fa-chalkboard-teacher"></i> Dr. Sophie Leroy</p>
+                                <p>Découverte des concepts fondamentaux de la physique quantique</p>
+                                <button class="btn-primary" style="width: 100%; margin-top: 10px;">
+                                    S'inscrire
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="webinar-card">
+                            <div class="webinar-banner" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="webinar-content">
+                                <h3>Techniques de Révision Efficaces</h3>
+                                <p><i class="far fa-calendar"></i> Lundi 20 Juin, 17h-18h</p>
+                                <p><i class="fas fa-chalkboard-teacher"></i> Coach Éducatif Jean Petit</p>
+                                <p>Méthodes scientifiques pour optimiser vos révisions</p>
+                                <button class="btn-primary" style="width: 100%; margin-top: 10px;">
+                                    S'inscrire
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="teachers-ai" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Espace Enseignants</h2>
+                    <div class="teacher-dashboard-grid">
+                        <div class="main-column">
+                            <div class="widget">
+                                <h3><i class="fas fa-user-graduate"></i> Suivi des Élèves</h3>
+                                <div class="chart-container">
+                                    <canvas id="students-chart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Alertes IA</h3>
+                                <div class="path-step">
+                                    <i class="fas fa-user"></i>
+                                    <div>
+                                        <strong>Thomas Martin</strong>
+                                        <p>Difficultés en géométrie dans l'espace - Taux de réussite: 42%</p>
+                                        <button class="btn-secondary">Proposer un parcours de rattrapage</button>
+                                    </div>
+                                </div>
+                                <div class="path-step">
+                                    <i class="fas fa-user"></i>
+                                    <div>
+                                        <strong>Sophie Leroy</strong>
+                                        <p>Progression ralentie en physique - -15% ce mois</p>
+                                        <button class="btn-secondary">Analyser le parcours</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-column">
+                            <div class="widget">
+                                <h3><i class="fas fa-tasks"></i> Actions Rapides</h3>
+                                <button class="btn-primary" style="width: 100%; margin-bottom: 10px;">
+                                    <i class="fas fa-plus"></i> Créer un nouveau cours
+                                </button>
+                                <button class="btn-primary" style="width: 100%; margin-bottom: 10px;">
+                                    <i class="fas fa-question-circle"></i> Créer un quiz
+                                </button>
+                                <button class="btn-primary" style="width: 100%; margin-bottom: 10px;">
+                                    <i class="fas fa-video"></i> Planifier un webinaire
+                                </button>
+                                <button class="btn-primary" style="width: 100%;">
+                                    <i class="fas fa-users"></i> Créer une salle d'étude
+                                </button>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-chart-line"></i> Statistiques de Classe</h3>
+                                <div class="three-column-grid">
+                                    <div class="report-card">
+                                        <div class="metric">
+                                            <div class="metric-value">78%</div>
+                                            <div class="metric-label">Moyenne Générale</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-card">
+                                        <div class="metric">
+                                            <div class="metric-value">+12%</div>
+                                            <div class="metric-label">Progression Mois</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-card">
+                                        <div class="metric">
+                                            <div class="metric-value">3</div>
+                                            <div class="metric-label">Élèves en difficulté</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="virtual-classroom" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <h2><i class="fas fa-school"></i> Classe Virtuelle</h2>
+                    <div class="classroom-controls">
+                        <button class="btn-primary"><i class="fas fa-video"></i> Démarrer la vidéo</button>
+                        <button class="btn-primary"><i class="fas fa-microphone"></i> Activer le micro</button>
+                        <button class="btn-primary"><i class="fas fa-desktop"></i> Partager l'écran</button>
+                        <button class="btn-primary"><i class="fas fa-comments"></i> Ouvrir le chat</button>
+                        <button class="btn-secondary"><i class="fas fa-record-vinyl"></i> Enregistrer</button>
+                    </div>
+                    
+                    <div class="classroom-grid">
+                        <div class="classroom-main">
+                            <h3>Vidéos des Participants</h3>
+                            <div class="video-grid">
+                                <div class="video-item">
+                                    <div class="video-name">Prof. Martin Dubois</div>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-name">Marie Dupont</div>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-name">Thomas Martin</div>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-name">Vous</div>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-name">Jean Petit</div>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-name">Sophie Leroy</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="classroom-sidebar">
+                            <h3>Documents Partagés</h3>
+                            <div class="resource-item">
+                                <div class="resource-icon"><i class="fas fa-file-pdf"></i></div>
+                                <div>
+                                    <h3>Cours - Dérivées Partielles</h3>
+                                    <p>PDF - 12 pages</p>
+                                </div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon"><i class="fas fa-file-alt"></i></div>
+                                <div>
+                                    <h3>Exercices pratiques</h3>
+                                    <p>Document - 5 exercices</p>
+                                </div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon"><i class="fas fa-chart-bar"></i></div>
+                                <div>
+                                    <h3>Graphiques - Applications</h3>
+                                    <p>Image - Visualisation</p>
+                                </div>
+                            </div>
+                            
+                            <h3 style="margin-top: 1.5rem;">Chat de la Classe</h3>
+                            <div class="chatbot-display" style="height: 200px;">
+                                <div class="chat-message bot-message">
+                                    <strong>Prof. Dubois:</strong> Bonjour à tous, nous commençons le cours sur les dérivées partielles.
+                                </div>
+                                <div class="chat-message user-message">
+                                    <strong>Marie:</strong> Bonjour professeur!
+                                </div>
+                            </div>
+                            <div class="chatbot-input">
+                                <input type="text" placeholder="Écrire un message...">
+                                <button class="btn-primary"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="profile" class="page-section hidden">
+                <div class="container content-wrapper">
+                    <div class="profile-header">
+                        <div class="profile-avatar">JD</div>
+                        <div class="profile-info">
+                            <h2>Jean Dupont</h2>
+                            <p><i class="fas fa-graduation-cap"></i> Étudiant en Prépa Scientifique</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="main-column">
+                            <div class="widget">
+                                <h3><i class="fas fa-chart-pie"></i> Compétences Transversales</h3>
+                                <div class="skill-category">
+                                    <h4>Collaboration</h4>
+                                    <div class="skill-item">
+                                        <span>Travail d'équipe</span>
+                                        <div class="skill-level">
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot"></div>
+                                            <div class="skill-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span>Communication</span>
+                                        <div class="skill-level">
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-category">
+                                    <h4>Résolution de Problèmes</h4>
+                                    <div class="skill-item">
+                                        <span>Pensée critique</span>
+                                        <div class="skill-level">
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span>Créativité</span>
+                                        <div class="skill-level">
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot filled"></div>
+                                            <div class="skill-dot"></div>
+                                            <div class="skill-dot"></div>
+                                            <div class="skill-dot"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="skill-chart">
+                                    <canvas id="skills-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-column">
+                            <div class="widget">
+                                <h3><i class="fas fa-download"></i> Export des Données</h3>
+                                <p>Exportez vos données d'apprentissage pour les sauvegarder ou les partager.</p>
+                                <div class="export-options">
+                                    <button class="btn-primary"><i class="fas fa-file-pdf"></i> PDF</button>
+                                    <button class="btn-primary"><i class="fas fa-file-excel"></i> Excel</button>
+                                    <button class="btn-primary"><i class="fas fa-file-csv"></i> CSV</button>
+                                </div>
+                            </div>
+                            
+                            <div class="widget">
+                                <h3><i class="fas fa-plug"></i> Intégrations</h3>
+                                <div class="integration-grid">
+                                    <div class="integration-card connected">
+                                        <div class="integration-icon"><i class="fab fa-google"></i></div>
+                                        <h4>Google Classroom</h4>
+                                        <p>Connecté</p>
+                                    </div>
+                                    <div class="integration-card">
+                                        <div class="integration-icon"><i class="fas fa-graduation-cap"></i></div>
+                                        <h4>Moodle</h4>
+                                        <p>Non connecté</p>
+                                    </div>
+                                    <div class="integration-card">
+                                        <div class="integration-icon"><i class="fab fa-microsoft"></i></div>
+                                        <h4>Teams</h4>
+                                        <p>Non connecté</p>
+                                    </div>
+                                    <div class="integration-card connected">
+                                        <div class="integration-icon"><i class="fab fa-zoom"></i></div>
+                                        <h4>Zoom</h4>
+                                        <p>Connecté</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -387,11 +1153,28 @@
 
         <button class="fab-chatbot"><i class="fas fa-robot"></i></button>
         <div class="chatbot-window">
-            <div class="chatbot-header">EduBot - Votre Assistant IA</div>
-            <div class="chatbot-display"></div>
+            <div class="chatbot-header">
+                <span>EduBot - Votre Assistant IA</span>
+                <button class="btn-secondary" style="padding: 5px 10px;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-display">
+                <div class="chat-message bot-message">
+                    Bonjour! Je suis EduBot, votre assistant IA. Comment puis-je vous aider aujourd'hui?
+                </div>
+                <div class="chat-message bot-message">
+                    Voici quelques exemples de ce que je peux faire:
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Expliquer des concepts difficiles</li>
+                        <li>Vous aider à résoudre des exercices</li>
+                        <li>Recommander des ressources adaptées</li>
+                        <li>Répondre à vos questions sur la plateforme</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbot-typing" id="typing-indicator">EduBot écrit...</div>
             <div class="chatbot-input">
-                <input type="text" placeholder="Posez une question...">
-                <button class="btn-primary"><i class="fas fa-paper-plane"></i></button>
+                <input type="text" id="chat-input" placeholder="Posez une question...">
+                <button class="btn-primary" id="send-message"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
@@ -411,13 +1194,19 @@
             const notificationsPanel = document.querySelector('.notifications-panel');
             const languageToggle = document.getElementById('language-toggle');
             const languageDropdown = document.getElementById('language-dropdown');
-
+            const chatInput = document.getElementById('chat-input');
+            const sendMessage = document.getElementById('send-message');
+            const typingIndicator = document.getElementById('typing-indicator');
+            const offlineIndicator = document.getElementById('offline-indicator');
+            const openChatbotBtn = document.getElementById('open-chatbot');
+            
             // --- Authentication ---
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 authPage.style.display = 'none';
                 mainApp.classList.remove('hidden');
                 navigateTo(window.location.hash || '#dashboard');
+                initCharts();
             });
 
             // --- Navigation ---
@@ -436,6 +1225,9 @@
                     link.classList.toggle('active', link.getAttribute('href') === hash);
                 });
                 headerNav.classList.remove('active');
+                
+                // Réinitialiser le défilement en haut de la section
+                window.scrollTo(0, 0);
             }
 
             navLinks.forEach(link => {
@@ -458,6 +1250,65 @@
             fabChatbot.addEventListener('click', () => {
                 chatbotWindow.classList.toggle('active');
             });
+            
+            if (openChatbotBtn) {
+                openChatbotBtn.addEventListener('click', () => {
+                    chatbotWindow.classList.add('active');
+                });
+            }
+
+            // Gestion des messages du chatbot
+            sendMessage.addEventListener('click', sendChatMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+            
+            function sendChatMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Afficher le message de l'utilisateur
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'chat-message user-message';
+                    userMessage.textContent = message;
+                    document.querySelector('.chatbot-display').appendChild(userMessage);
+                    
+                    // Réinitialiser l'input
+                    chatInput.value = '';
+                    
+                    // Simuler une réponse du bot
+                    typingIndicator.style.display = 'block';
+                    setTimeout(() => {
+                        typingIndicator.style.display = 'none';
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'chat-message bot-message';
+                        
+                        // Réponses préprogrammées
+                        if (message.toLowerCase().includes('dérivée') || message.toLowerCase().includes('dérivé')) {
+                            botMessage.innerHTML = `
+                                <p>Je vois que vous travaillez sur les dérivées! Voici quelques explications :</p>
+                                <p>La dérivée d'une fonction mesure la sensibilité au changement de la valeur de la fonction par rapport à un changement de son argument.</p>
+                                <p>Par exemple, la dérivée de f(x) = x² est f'(x) = 2x.</p>
+                                <p>Je vous recommande de consulter le cours "Dérivées" dans votre bibliothèque ou de faire le quiz adaptatif.</p>
+                            `;
+                        } else if (message.toLowerCase().includes('quiz')) {
+                            botMessage.textContent = 'Vous pouvez accéder aux quiz dans la section "Quiz Creator". Je peux vous recommander un quiz sur les dérivées si vous le souhaitez.';
+                        } else {
+                            const responses = [
+                                "Je comprends votre question. Je vais chercher les meilleures ressources pour vous.",
+                                "Excellente question! Voici ce que je peux vous dire à ce sujet...",
+                                "Je peux vous aider avec cela. Consultez la section correspondante dans votre parcours d'apprentissage.",
+                                "Je vous recommande de revoir la leçon sur ce sujet et de pratiquer avec les exercices associés."
+                            ];
+                            botMessage.textContent = responses[Math.floor(Math.random() * responses.length)];
+                        }
+                        
+                        document.querySelector('.chatbot-display').appendChild(botMessage);
+                        document.querySelector('.chatbot-display').scrollTop = document.querySelector('.chatbot-display').scrollHeight;
+                    }, 1500);
+                }
+            }
 
             // --- Notifications ---
             notificationBell.addEventListener('click', (e) => {
@@ -477,18 +1328,122 @@
                 languageDropdown.classList.toggle('active');
             });
 
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const lang = option.getAttribute('data-lang');
+                    languageToggle.innerHTML = option.innerHTML;
+                    languageDropdown.classList.remove('active');
+                    
+                    // Simuler le changement de langue
+                    alert(`Langue changée en ${option.textContent.trim()}. En production, toute l'interface serait traduite.`);
+                });
+            });
+
             document.addEventListener('click', (e) => {
                 if (!languageDropdown.contains(e.target) && !languageToggle.contains(e.target)) {
                     languageDropdown.classList.remove('active');
                 }
             });
 
+            // --- Mode Hors-ligne ---
+            function checkOnlineStatus() {
+                const isOnline = Math.random() > 0.2; // 80% de chance d'être en ligne
+                if (isOnline) {
+                    offlineIndicator.classList.remove('active');
+                } else {
+                    offlineIndicator.classList.add('active');
+                }
+            }
+            
+            // Vérifier le statut toutes les 30 secondes
+            setInterval(checkOnlineStatus, 30000);
+            checkOnlineStatus();
+            
+            // --- Initialisation des graphiques ---
+            function initCharts() {
+                // Graphique de performance
+                const performanceCtx = document.getElementById('performance-chart').getContext('2d');
+                new Chart(performanceCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+                        datasets: [{
+                            label: 'Moyenne générale',
+                            data: [6.5, 7.0, 7.5, 8.0, 8.2, 8.5],
+                            borderColor: '#4A90E2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+                
+                // Graphique des compétences
+                const skillsCtx = document.getElementById('skills-chart').getContext('2d');
+                new Chart(skillsCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Collaboration', 'Communication', 'Pensée critique', 'Créativité', 'Résolution problèmes', 'Autonomie'],
+                        datasets: [{
+                            label: 'Vos compétences',
+                            data: [7, 8, 9, 6, 8, 7],
+                            backgroundColor: 'rgba(80, 227, 194, 0.2)',
+                            borderColor: '#50E3C2',
+                            pointBackgroundColor: '#50E3C2'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: {
+                                angleLines: { display: true },
+                                suggestedMin: 0,
+                                suggestedMax: 10
+                            }
+                        }
+                    }
+                });
+                
+                // Graphique des élèves (espace profs)
+                const studentsCtx = document.getElementById('students-chart').getContext('2d');
+                new Chart(studentsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Thomas', 'Marie', 'Jean', 'Sophie', 'Lucie', 'Pierre'],
+                        datasets: [{
+                            label: 'Progression mensuelle (%)',
+                            data: [12, 15, 8, -5, 10, 7],
+                            backgroundColor: [
+                                '#4A90E2', '#50E3C2', '#4A90E2', 
+                                '#E53E3E', '#4A90E2', '#4A90E2'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+            
             // --- Initial Load ---
             if (window.location.hash) {
                 navigateTo(window.location.hash);
             } else {
                 navigateTo('#dashboard');
             }
+            
+            // Simuler des notifications
+            setTimeout(() => {
+                const notificationDot = document.querySelector('.notification-dot');
+                notificationDot.style.animation = 'none';
+                setTimeout(() => {
+                    notificationDot.style.animation = 'pulse 2s infinite';
+                }, 10);
+            }, 5000);
         });
     </script>
 </body>
